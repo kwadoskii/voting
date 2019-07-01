@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-10">
                             <h5>Welcome please login to your account to proceed.</h5>
-                            <form action="">
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <label for="vin">VIN</label>
                                     <input type="text" class="form-control" placeholder="1234567890" name="vin">
@@ -21,10 +21,10 @@
 
                                 <div class="form-group">
                                     <label for="vin">Password</label>
-                                    <input type="password" class="form-control" placeholder="1234567890" name="vin">
+                                    <input type="password" class="form-control" placeholder="********" name="vin">
                                 </div>
                                 <input type="hidden" value="{{ Session::token() }}" name="_token">
-                                <button type="submit" class="btn btn-info">Sign in</button>
+                                <button type="submit" class="btn btn-info btn-block">Sign in</button>
                             </form>
                         </div>
                     </div>
