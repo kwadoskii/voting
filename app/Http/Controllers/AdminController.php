@@ -2,21 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function postAdminlogin(Request $request)
     {
-        return redirect()->route('admindashboard');
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])){
+            return redirect()->route('admindashboard');
+        }
+
+        $message = 'Invalid Sign In details';
+        return redirect()->back()->with(['message'=>$message]);
+
     }
 
     public function getAdmindashboard()
     {
         return view('dashboard');
+    }
+
+    public function getAdminLogout()
+    {
+        Auth::Logout();
+        return redirect()->route('admin');
     }
 }

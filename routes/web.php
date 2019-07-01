@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/admin', function () {
     return view('admin');
@@ -29,6 +29,19 @@ Route::post('/adminlogin',
 Route::get('/admin/dashboard',[
     'name' => 'admindashboard',
     'uses' => 'AdminController@getAdmindashboard',
-    'as' => 'admindashboard'
-//    'middleware' => 'auth'
+    'as' => 'admindashboard',
+    'middleware' => 'auth'
 ]);
+
+Route::get('admin/signout', [
+   'name' => 'adminlogout',
+   'uses' => 'AdminController@getAdminLogout',
+   'as' => 'adminlogout'
+]);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

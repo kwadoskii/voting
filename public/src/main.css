@@ -17,8 +17,9 @@ body{
     max-width: 450px;
     padding: 50px 40px;
     margin: auto;
-    background: #FFEFDD;
+    background: #343a40;
     border-radius: 30px;
+    color: #fff;
 }
 
 .form-label-group {

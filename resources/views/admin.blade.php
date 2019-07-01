@@ -5,6 +5,7 @@
 @endsection
 
 @section('section')
+    @include('includes.message')
     <form class="form-signin" method="post" action="{{ route('adminlogin') }}">
         <div class="text-center mb-4">
             <img class="mb-4" src="images/ballot.png" alt="" width="72" height="72">
@@ -13,13 +14,13 @@
         </div>
 
         <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required=""
+            <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required=""
                    autofocus="">
             <label for="inputEmail">Email address</label>
         </div>
 
         <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
             <label for="inputPassword">Password</label>
         </div>
         <input type="hidden" name="_token" value="{{ Session::token() }}">
@@ -29,4 +30,8 @@
             <small>&copy; 2019 Kwadoskii</small>
         </div>
     </form>
+
+    <script>
+        $('.toast').toast('show');
+    </script>
 @endsection
