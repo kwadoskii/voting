@@ -11,11 +11,14 @@ body{
     padding: 40px 0;
 }
 
+/*for Admin CSS start*/
 .form-signin {
     width: 100%;
-    max-width: 420px;
-    padding: 15px;
+    max-width: 450px;
+    padding: 50px 40px;
     margin: auto;
+    background: #FFEFDD;
+    border-radius: 30px;
 }
 
 .form-label-group {
@@ -97,4 +100,10 @@ body{
     .form-label-group input:-ms-input-placeholder {
         color: #777;
     }
+}
+
+/*for Admin CSS stop*/
+
+a{
+    text-decoration: none !important;
 }
