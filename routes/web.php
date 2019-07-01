@@ -17,4 +17,18 @@ Route::get('/', function () {
 
 Route::get('/admin', function () {
     return view('admin');
-});
+})->name('admin');
+
+Route::post('/adminlogin',
+    [
+        'uses' => 'AdminController@postAdminlogin',
+        'as' => 'adminlogin',
+    ]
+);
+
+Route::get('/admin/dashboard',[
+    'name' => 'admindashboard',
+    'uses' => 'AdminController@getAdmindashboard',
+    'as' => 'admindashboard'
+//    'middleware' => 'auth'
+]);
