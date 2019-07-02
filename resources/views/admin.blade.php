@@ -12,17 +12,20 @@
         <div class="text-center mb-4">
             <img class="mb-4" src="images/ballot.png" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Admin Portal</h1>
-            <p>This portal is strictly for Administrators only. <br>If you are a voter please click <a href="#">Here </a> to login to the Voting portal.</a></p>
+            <p>This portal is strictly for Administrators only. <br>If you are a voter please click <a
+                        href="#">Here </a> to login to the Voting portal.</p>
         </div>
 
         <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required=""
+            <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address"
+                   required=""
                    autofocus="">
             <label for="inputEmail">Email address</label>
         </div>
 
         <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password"
+                   required="">
             <label for="inputPassword">Password</label>
         </div>
         <input type="hidden" name="_token" value="{{ Session::token() }}">
