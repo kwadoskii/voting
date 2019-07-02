@@ -4,6 +4,9 @@
     Admin Dashboard
 @endsection
 
+@section('css')../src/dashboard.css @endsection
+@section('fav')../@endsection
+
 @section('section')
 {{--    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">--}}
 {{--        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"></a>--}}
@@ -14,8 +17,8 @@
 {{--        </ul>--}}
 {{--    </nav>--}}
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="{{ route('admindashboard') }}">Admin Panel</a>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('admindashboard') }}">Admin Panel</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

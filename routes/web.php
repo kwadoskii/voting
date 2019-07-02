@@ -22,7 +22,7 @@ Route::get('/admin', function () {
 Route::post('/adminlogin',
     [
         'uses' => 'AdminController@postAdminlogin',
-        'as' => 'adminlogin',
+        'as' => 'adminlogin'
     ]
 );
 
@@ -30,7 +30,7 @@ Route::get('/admin/dashboard',[
     'name' => 'admindashboard',
     'uses' => 'AdminController@getAdmindashboard',
     'as' => 'admindashboard',
-    'middleware' => 'auth'
+    'middleware' => 'admin'
 ]);
 
 Route::get('admin/signout', [
@@ -38,10 +38,3 @@ Route::get('admin/signout', [
    'uses' => 'AdminController@getAdminLogout',
    'as' => 'adminlogout'
 ]);
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

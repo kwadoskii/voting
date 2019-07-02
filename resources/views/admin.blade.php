@@ -1,8 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-    Admin
+    Admin Login
 @endsection
+
+@section('css')src/main.css @endsection
 
 @section('section')
     @include('includes.message')
