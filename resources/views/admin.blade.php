@@ -13,7 +13,7 @@
             <img class="mb-4" src="images/ballot.png" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Admin Portal</h1>
             <p>This portal is strictly for Administrators only. <br>If you are a voter please click <a
-                        href="#">Here </a> to login to the Voting portal.</p>
+                        href="{{ route('welcome') }}">Here </a>to login to Voters portal.</p>
         </div>
 
         <div class="form-label-group">

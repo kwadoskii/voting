@@ -38,3 +38,9 @@ Route::get('admin/signout', [
    'uses' => 'AdminController@getAdminLogout',
    'as' => 'adminlogout'
 ]);
+
+Route::get('admin/addadmin', [
+    'name' => 'addadmin',
+    'uses' => 'AdminController@getAdminDisplay'
+]
+);

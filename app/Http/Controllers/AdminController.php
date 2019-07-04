@@ -26,7 +26,14 @@ class AdminController extends Controller
 
     public function getAdmindashboard()
     {
-        return view('dashboard');
+        function getAdminDisplay()
+        {
+            return 'layouts.maindashboard';
+        }
+
+        return view('dashboard', [
+            'getAdminDisplay' => getAdminDisplay()
+        ]);
     }
 
     public function getAdminLogout()

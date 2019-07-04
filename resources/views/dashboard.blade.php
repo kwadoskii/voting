@@ -24,7 +24,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-            <ul class="navbar-nav px-3">
+            <ul class="navbar-nav px-3 ml-md-auto">
                 <li class="nav-item text-nowrap">
                     <a class="nav-link" href="{{ route('adminlogout') }}">Sign out</a>
                 </li>
@@ -45,10 +45,10 @@
                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                 </svg>
-                                Home<span class="sr-only">(current)</span>
+                                Home
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" data-mycontent="addadmin">
                             <a class="nav-link" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -169,35 +169,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="card text-white bg-secondary m-2 col-lg-3" style="min-width: 46%;">
-                            <div class="card-header text-center">Registered Voters</div>
-                            <div class="card-body">
-                                <h5 class="card-title p-4 text-center" style="font-size: 3em;">404005</h5>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-secondary m-2 col-lg-3" style="min-width: 46%;">
-                            <div class="card-header text-center">No. of Candidates</div>
-                            <div class="card-body">
-                                <h5 class="card-title p-4 text-center" style="font-size: 3em;">305</h5>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-secondary m-2 col-lg-3" style="min-width: 46%;">
-                            <div class="card-header text-center">No. of Pol Parties</div>
-                            <div class="card-body">
-                                <h5 class="card-title p-4 text-center" style="font-size: 3em;">40</h5>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-secondary m-2 col-lg-3" style="min-width: 46%;">
-                            <div class="card-header text-center">No. of States</div>
-                            <div class="card-body">
-                                <h5 class="card-title p-4 text-center" style="font-size: 3em;">36</h5>
-                            </div>
-                        </div>
-                    </div>
+                    @include($getAdminDisplay)
                 </div>
             </main>
         </div>
@@ -212,5 +184,6 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="../src/main.js"></script>
 @endsection
 
