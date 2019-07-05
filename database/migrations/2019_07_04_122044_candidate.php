@@ -19,6 +19,7 @@ class Candidate extends Migration
             $table->integer('party_id');
             $table->integer('office_id');
             $table->integer('constituency_id')->nullable();
+            $table->integer('state_id')->nullable();
             $table->timestamps();
         });
     }
