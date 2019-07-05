@@ -30,11 +30,8 @@ class AdminController extends Controller
         {
             return 'layouts.maindashboard';
         }
-
-
-
         return response()->view('dashboard', [
-            'ab' => 'maindashboard'
+            'ab' => 'layouts.maindashboard'
         ], 200);
     }
 
@@ -46,8 +43,19 @@ class AdminController extends Controller
 
     public function postGetDashDisplay(Request $request)
     {
-        $ab = $request['display'];
-        return response()->view('dashboard', [
-            'ab' => $ab], 200);
+        $abc = '';
+        function test()
+        {
+            global $abc ;
+            global $request ;
+            $abc = $request['display'];
+
+            return "layouts.$abc";
+        }
+        $ab = test();
+//        $go = "layouts.addadmin";
+
+        return response()->view("$ab", [
+            'ab' => "$ab"], 200);
     }
 }

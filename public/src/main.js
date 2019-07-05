@@ -4,14 +4,15 @@ $('.nav-link').on('click', function (e) {
         e.preventDefault();
 
         let url = e.target.dataset['mycontent'];
-        console.log(e);
+        console.log(url);
         $.ajax({
             method: 'POST',
             url: 'getdashdisplay',
             data: {display: url, _token: token}
         }).done(function (msg) {
-            e.target.classList.add('active');
-            $('body').html(msg);
+            // e.target.classList.add('active');
+            $('#mycontainer').html(msg);
+            console.log(msg);
         });
     }
 });
