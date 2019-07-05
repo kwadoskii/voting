@@ -26,7 +26,7 @@ Route::post('/adminlogin',
     ]
 );
 
-Route::get('/admin/dashboard',[
+Route::get('/admin/dashboard', [
     'name' => 'admindashboard',
     'uses' => 'AdminController@getAdmindashboard',
     'as' => 'admindashboard',
@@ -34,13 +34,17 @@ Route::get('/admin/dashboard',[
 ]);
 
 Route::get('admin/signout', [
-   'name' => 'adminlogout',
-   'uses' => 'AdminController@getAdminLogout',
-   'as' => 'adminlogout'
+    'name' => 'adminlogout',
+    'uses' => 'AdminController@getAdminLogout',
+    'as' => 'adminlogout'
 ]);
 
 Route::get('admin/addadmin', [
     'name' => 'addadmin',
     'uses' => 'AdminController@getAdminDisplay'
-]
-);
+]);
+
+Route::post('admin/getdashdisplay', [
+    'name' => 'dashdisplay',
+    'uses' => 'AdminController@postGetDashDisplay'
+]);

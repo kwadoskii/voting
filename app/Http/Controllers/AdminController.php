@@ -19,7 +19,7 @@ class AdminController extends Controller
             return redirect()->route('admindashboard');
         }
 
-        $message = 'Invalid Sign In details';
+        $message = 'Invalid Email or Password';
         return redirect()->back()->with(['message'=>$message]);
 
     }
@@ -31,14 +31,23 @@ class AdminController extends Controller
             return 'layouts.maindashboard';
         }
 
-        return view('dashboard', [
-            'getAdminDisplay' => getAdminDisplay()
-        ]);
+
+
+        return response()->view('dashboard', [
+            'ab' => 'maindashboard'
+        ], 200);
     }
 
     public function getAdminLogout()
     {
         Auth::guard('admin')->Logout();
         return redirect()->route('admin');
+    }
+
+    public function postGetDashDisplay(Request $request)
+    {
+        $ab = $request['display'];
+        return response()->view('dashboard', [
+            'ab' => $ab], 200);
     }
 }
