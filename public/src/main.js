@@ -4,7 +4,7 @@ $('.nav-link').on('click', function (e) {
         e.preventDefault();
 
         let url = e.target.dataset['mycontent'];
-        console.log(url);
+        // console.log(url);
         $.ajax({
             method: 'POST',
             url: 'getdashdisplay',
@@ -12,7 +12,12 @@ $('.nav-link').on('click', function (e) {
         }).done(function (msg) {
             // e.target.classList.add('active');
             $('#mycontainer').html(msg);
-            console.log(msg);
+            // console.log(msg);
         });
     }
+});
+
+$('#new-btn').on('click', function(e) {
+    e.preventDefault();
+    console.log('Success');
 });
