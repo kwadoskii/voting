@@ -83,7 +83,7 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return response()->json(['message' => 'Admin Created Successfully!'], 200);
+        return response()->json(['message' => 'Admin Created Successfully!', 'id' => $admin->id], 200);
 
     }
 

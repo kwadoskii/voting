@@ -2,7 +2,7 @@
 
 <div class="navbar">
     <h1 class="h3 mb-3">Administrators</h1>
-    <div class="btn btn-dark ml-md-auto rounded mouse test" data-toggle="modal">&plus; New Admin</div>
+    <div class="btn btn-dark ml-md-auto rounded mouse mymodal" data-toggle="modal">&plus; New Admin</div>
 </div>
 
 <div class="row">
@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Registered Admins</h5>
-                <h6 class="card-subtitle text-muted">Below are the list of registered administrators</h6>
+                <h6 class="card-subtitle text-muted">Below are the list of administrators</h6>
             </div>
         </div>
         <table class="table table-striped table-hover small">
@@ -30,12 +30,15 @@
                     <td>{{$admin->last_name}}</td>
                     <td>{{$admin->email}}</td>
                     <td>{{($admin->created_at)->format('d-M-Y')}}</td>
-                    <td class="table-action"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="align-middle mr-1">
+                    <td class="table-action">
+                        <a href="#" id="edit" class="link"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="align-middle mr-3">
                             <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
-                        </svg><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="align-middle">
+                        </svg></a>
+                        <a href="#" id="delete" class="link"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="align-middle">
                             <polyline points="3 6 5 6 21 6"></polyline>
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg></td>
+                        </svg></a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

@@ -49,3 +49,9 @@ Route::post('admin/addadmin', [
     'uses' => 'AdminController@postAddAdmin',
     'as' => 'addadmin'
 ]);
+
+Route::post('admin/addstate', [
+    'name' => 'addstate',
+    'uses' => 'StateController@postAddState',
+    'as' => 'addstate'
+]);

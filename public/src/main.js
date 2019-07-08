@@ -4,30 +4,21 @@ $('.nav-link').on('click', function (e) {
         e.preventDefault();
 
         let url = e.target.dataset['mycontent'];
-        $.ajax({
-            method: 'POST',
-            url: 'getdashdisplay',
-            data: {display: url, _token: token}
-        }).done(function (msg) {
-            // e.target.classList.add('active');
-            //remember to change the color of the sidebar
-            $('#mycontainer').html(msg);
-            // console.log(msg);
-        });
+        getpage(url);
+        // e.target.classList.add('active');
+        //remember to change the color of the sidebar
     }
 });
 
-$(document).on('click', '.test', function(e){
+$(document).on('click', '.mymodal', function(e){
     $('#new-modal').modal();
 });
 
 $(document).on('click', '#modal-save-admin', function(e){
     e.preventDefault();
-    // let fir = $('#firstname').val();
-    // console.log(fir);
 
-    // if($('#cpassword').val() === $('#password').val())
-    // {
+    if($('#cpassword').val() === $('#password').val())
+    {
         $.ajax({
             method: 'POST',
             url: urlAddAdmin,
@@ -45,9 +36,36 @@ $(document).on('click', '#modal-save-admin', function(e){
         }).done(function(response){
             console.log(response['message']);
             $('#new-modal').modal('hide');
+
+            getpage('addadmin');
         });
-    // }
-    // else{
-    //     console.log('check your password');
-    // }
+    }
+    else{
+        console.log('check your password');
+    }
 });
+
+$(document).on('click', '#modal-save-state', function(e){
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: urlAddState,
+        data: {state: $('#state').val(), _token: token}
+    }).done(function(response){
+        $('#new-modal').modal('hide');
+        getpage('addstate');
+        //remember to display the success notification using toast
+    });
+});
+
+
+function getpage(pagename){
+    $.ajax({
+        method: 'POST',
+        url: 'getdashdisplay',
+        data: {display: pagename, _token: token}
+    }).done(function (page) {
+        $('#mycontainer').html(page);
+    });
+}
