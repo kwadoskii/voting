@@ -39,12 +39,13 @@ Route::get('admin/signout', [
     'as' => 'adminlogout'
 ]);
 
-Route::get('admin/addadmin', [
-    'name' => 'addadmin',
-    'uses' => 'AdminController@getAdminDisplay'
-]);
-
 Route::post('admin/getdashdisplay', [
     'name' => 'dashdisplay',
     'uses' => 'AdminController@postGetDashDisplay'
+]);
+
+Route::post('admin/addadmin', [
+    'name' => 'addadmin',
+    'uses' => 'AdminController@postAddAdmin',
+    'as' => 'addadmin'
 ]);

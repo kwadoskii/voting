@@ -7,6 +7,8 @@
 @section('css')../src/dashboard.css @endsection
 @section('fav')../@endsection
 
+@inject('AdminController', 'App\Http\Controllers\AdminController')
+
 @section('section')
     {{--    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">--}}
     {{--        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"></a>--}}
@@ -18,13 +20,14 @@
     {{--    </nav>--}}
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0 pt-2 pb-2" href="{{ route('admindashboard') }}">Admin Panel</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 pt-1 pb-1" href="{{ route('admindashboard') }}">Admin Panel</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+        <div class="navbar-collapse collapse pt-1 pb-1" id="navbarCollapse" style="">
             <ul class="navbar-nav px-3 ml-md-auto">
+            <li class="btn"><p class="btn btn-success">{{ Auth::guard('admin')->user()->first_name}}</p></li>
                 <li class="nav-item text-nowrap">
                     <a class="nav-link" href="{{ route('adminlogout') }}">Sign out</a>
                 </li>
@@ -191,6 +194,7 @@
             crossorigin="anonymous"></script>
     <script>
         var token = '{{ Session::token() }}';
+        var urlAddAdmin = '{{ route('addadmin') }}';
     </script>
 @endsection
 

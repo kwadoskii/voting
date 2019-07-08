@@ -4,20 +4,50 @@ $('.nav-link').on('click', function (e) {
         e.preventDefault();
 
         let url = e.target.dataset['mycontent'];
-        // console.log(url);
         $.ajax({
             method: 'POST',
             url: 'getdashdisplay',
             data: {display: url, _token: token}
         }).done(function (msg) {
             // e.target.classList.add('active');
+            //remember to change the color of the sidebar
             $('#mycontainer').html(msg);
             // console.log(msg);
         });
     }
 });
 
-$('#new-btn').on('click', function(e) {
+$(document).on('click', '.test', function(e){
+    $('#new-modal').modal();
+});
+
+$(document).on('click', '#modal-save-admin', function(e){
     e.preventDefault();
-    console.log('Success');
+    // let fir = $('#firstname').val();
+    // console.log(fir);
+
+    // if($('#cpassword').val() === $('#password').val())
+    // {
+        $.ajax({
+            method: 'POST',
+            url: urlAddAdmin,
+            data: {
+                firstname: $('#firstname').val(),
+                middlename: $('#middlename').val(),
+                lastname: $('#lastname').val(),
+                gender: $('#gender').val(),
+                dob: $('#dob').val(),
+                phone: $('#phone').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                _token: token
+            }
+        }).done(function(response){
+            console.log(response['message']);
+            $('#new-modal').modal('hide');
+        });
+    // }
+    // else{
+    //     console.log('check your password');
+    // }
 });

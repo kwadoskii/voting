@@ -9,5 +9,5 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserController extends Controller
 {
-
+    
 }
