@@ -3,7 +3,7 @@
 
 <div class="navbar">
     <h1 class="h3 mb-3">States</h1>
-    <div class="btn btn-dark ml-md-auto rounded mouse mymodal" data-toggle="modal">&plus; New State</div>
+    <div class="btn btn-dark ml-md-auto rounded mouse mymodal">&plus; New State</div>
 </div>
 
 <div class="row">
@@ -45,7 +45,7 @@
 </div>
 
 {{--add new state modal--}}
-<div class="modal fade" tabindex="-1" role="dialog" id="new-modal">
+<div class="modal fade" tabindex="-1" role="dialog" id="new-modal" data-dismiss="modal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header mb-3">

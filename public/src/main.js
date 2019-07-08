@@ -36,7 +36,6 @@ $(document).on('click', '#modal-save-admin', function(e){
         }).done(function(response){
             console.log(response['message']);
             $('#new-modal').modal('hide');
-
             getpage('addadmin');
         });
     }
