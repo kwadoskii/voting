@@ -11,7 +11,8 @@ $('.nav-link').on('click', function (e) {
 });
 
 $(document).on('click', '.mymodal', function(e){
-    $('#new-modal').modal();
+    $('#new-modal').modal('show');
+    // $('#new-modal').modal({keyboard: false, backdrop: 'static'});
 });
 
 $(document).on('click', '#modal-save-admin', function(e){
@@ -36,6 +37,9 @@ $(document).on('click', '#modal-save-admin', function(e){
         }).done(function(response){
             console.log(response['message']);
             $('#new-modal').modal('hide');
+
+            $('body').removeClass('modal-open');
+            $(".modal-backdrop").remove();
             getpage('addadmin');
         });
     }
@@ -53,11 +57,30 @@ $(document).on('click', '#modal-save-state', function(e){
         data: {state: $('#state').val(), _token: token}
     }).done(function(response){
         $('#new-modal').modal('hide');
+
+        $('body').removeClass('modal-open');
+        $(".modal-backdrop").remove();
         getpage('addstate');
         //remember to display the success notification using toast
     });
 });
 
+$(document).on('click', '#modal-save-lga', function(e){
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: urlAddLga,
+        data: {lga: $('#lga').val(), state: $('#state').val(), _token: token}
+    }).done(function(response){
+        $('#new-modal').modal('hide');
+
+        $('body').removeClass('modal-open');
+        $(".modal-backdrop").remove();
+        getpage('addlga');
+        //remember to display the success notification using toast
+    });
+});
 
 function getpage(pagename){
     $.ajax({

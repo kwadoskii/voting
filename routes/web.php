@@ -41,17 +41,27 @@ Route::get('admin/signout', [
 
 Route::post('admin/getdashdisplay', [
     'name' => 'dashdisplay',
-    'uses' => 'AdminController@postGetDashDisplay'
+    'uses' => 'AdminController@postGetDashDisplay',
+    'middleware' => 'admin'
 ]);
 
 Route::post('admin/addadmin', [
     'name' => 'addadmin',
     'uses' => 'AdminController@postAddAdmin',
-    'as' => 'addadmin'
+    'as' => 'addadmin',
+    'middleware' => 'admin'
 ]);
 
 Route::post('admin/addstate', [
     'name' => 'addstate',
     'uses' => 'StateController@postAddState',
-    'as' => 'addstate'
+    'as' => 'addstate',
+    'middleware' => 'admin'
+]);
+
+Route::post('admin/addlga', [
+    'name' => 'addlga',
+    'uses' => 'StateController@postAddLga',
+    'as' => 'addlga',
+    'middleware' => 'admin'
 ]);
