@@ -82,6 +82,29 @@ $(document).on('click', '#modal-save-lga', function(e){
     });
 });
 
+$(document).on('click', '#modal-save-party', function(e){
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: urlAddParty,
+        data: {
+            acronym: $('#acronym').val(),
+            name: $('#name').val(),
+            desc: $('#desc').val(),
+             _token: token
+            }
+    }).done(function(response){
+        $('#new-modal').modal('hide');
+
+        $('body').removeClass('modal-open');
+        $(".modal-backdrop").remove();
+        getpage('addparty');
+        console.log(response['message']);
+        //remember to display the success notification using toast
+    });
+});
+
 function getpage(pagename){
     $.ajax({
         method: 'POST',

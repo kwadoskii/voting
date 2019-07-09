@@ -11,9 +11,24 @@ class PartyController extends Controller
 {
     public function postAddParty(Request $request)
     {
-        $this->validate($request, [
+        // $this->validate($request, [
+        //     'acronym' => 'required | max: 10',
+        //     'name' => 'required'
+        // ]);
 
-        ]);
+        $name = $request->name;
+        $acronym = $request->acronym;
+        $desc = $request->desc;
+
+        $party = New Party();
+
+        $party->name = $name;
+        $party->acronym = $acronym;
+        $party->desc = $desc;
+
+        $party->save();
+
+        return response()->json(['message' => $party->name]);
     }
 
     public static function varPartyList()
