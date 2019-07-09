@@ -65,3 +65,10 @@ Route::post('admin/addlga', [
     'as' => 'addlga',
     'middleware' => 'admin'
 ]);
+
+Route::post('admin/addparty', [
+    'name' => 'addparty',
+    'uses' => 'PartyController@postAddParty',
+    'as' => 'addparty',
+    'middleware' => 'admin'
+]);

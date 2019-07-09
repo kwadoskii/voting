@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Participating states</h5>
-                <h6 class="card-subtitle text-muted">Below are the list of participating local government areas.</h6>
+                <h6 class="card-subtitle text-muted">Below is the list of participating local government areas.</h6>
             </div>
         </div>
         <table class="table table-striped table-hover small">
@@ -81,7 +81,7 @@
 
                         <div class="col-md-6 mb-2">
                             <small><label for="lga">LGA State</label></small>
-                            <select class="custom-select" name="state" id="state" required>                                
+                            <select class="custom-select" name="state" id="state" required>
                                 <option selected>Select State</option>
                                 @foreach ($StateController->varStateList() as $state)
                                     <option value="{{$state->id}}">{{$state->name}}</option>

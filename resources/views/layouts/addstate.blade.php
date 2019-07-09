@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Participating states</h5>
-                <h6 class="card-subtitle text-muted">Below are the list of participating states</h6>
+                <h6 class="card-subtitle text-muted">Below is the list of participating states</h6>
             </div>
         </div>
         <table class="table table-striped table-hover small">

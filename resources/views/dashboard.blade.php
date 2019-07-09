@@ -137,7 +137,7 @@ Admin Dashboard
                                         <polyline points="2 17 12 22 22 17"></polyline>
                                         <polyline points="2 12 12 17 22 12"></polyline>
                                     </svg>
-                                    Constituencies.
+                                    Constituencies
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -149,7 +149,7 @@ Admin Dashboard
                                         <polyline points="2 17 12 22 22 17"></polyline>
                                         <polyline points="2 12 12 17 22 12"></polyline>
                                     </svg>
-                                    Parties.
+                                    Parties
                                 </a>
                             </li>
                         </ul>
@@ -207,5 +207,6 @@ Admin Dashboard
         var urlAddAdmin = '{{ route('addadmin') }}';
         var urlAddState = '{{ route('addstate') }}';
         var urlAddLga = '{{ route('addlga') }}';
+        var urlAddParty = '{{ route('addparty') }}';
 </script>
 @endsection
