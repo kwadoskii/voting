@@ -72,3 +72,10 @@ Route::post('admin/addparty', [
     'as' => 'addparty',
     'middleware' => 'admin'
 ]);
+
+Route::post('admin/id', [
+    'name' => 'id',
+    'uses' => 'StateController@getid',
+    'as' => 'id',
+    'middleware' => 'admin'
+]);

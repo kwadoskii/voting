@@ -208,5 +208,6 @@ Admin Dashboard
         var urlAddState = '{{ route('addstate') }}';
         var urlAddLga = '{{ route('addlga') }}';
         var urlAddParty = '{{ route('addparty') }}';
+        var urlid = '{{ route('id') }}';
 </script>
 @endsection

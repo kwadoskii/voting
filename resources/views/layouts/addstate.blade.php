@@ -38,17 +38,17 @@
 @extends('includes.addmodal')
 
 @section('new')
-    State
+State
 @endsection
 
 @section('modalbody')
-    <div class="col-md-10 offset-md-1 mb-2">
-        <small><label for="state">State Name</label></small>
-        <input type="text" class="form-control" id="state" name="state" required>
-        <div class="valid-tooltip">
-            Looks good!
-        </div>
+<div class="col-md-10 offset-md-1 mb-2">
+    <small><label for="state">State Name</label></small>
+    <input type="text" class="form-control" id="state" name="state" required>
+    <div class="valid-tooltip">
+        Looks good!
     </div>
+</div>
 @endsection
 
 @section('link')"modal-save-state"@endsection
@@ -58,8 +58,9 @@
 @extends('includes.viewmodal')
 
 @section('viewmodalbody')
-    <div class="col-md-10 offset-md-1 mb-2">
-        <small><label for="state">State Name</label></small>
-        <input type="text" class="form-control" id="vname" disabled>
-    </div>
+<div class="col-md-10 offset-md-1 mb-2">
+    <small><label for="state">State Name</label></small>
+    <input type="text" class="form-control" id="vname" disabled
+        {{-- value="{{ $StateController->varStateList()->find($StateController->$this->id)->name }}" --}}>
+</div>
 @endsection

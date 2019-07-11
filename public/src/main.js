@@ -23,6 +23,14 @@ $(document).on('click', '.viewmodal', function(e){
     e.preventDefault();
     $('#view-modal').modal('show');
 
+    let id = e.target.parentNode.childNodes["0"].parentNode.parentElement.parentElement.dataset['id'];
+    // console.log(id);
+    // $.ajax({
+    //     method: 'POST',
+    //     url: urlid,
+    //     data: {id: id, _token: token}
+    // });
+
     let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
     $('#vname').val(statename);
 });
