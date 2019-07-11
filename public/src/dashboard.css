@@ -118,3 +118,16 @@ body {
 .ho:hover{
     cursor: pointer;
 }
+
+.table-action{
+    text-align: right;
+}
+
+#edit, #view, #delete{
+    font-size: 1.3em;
+    margin-right: 20px;
+}
+
+#delete{
+    margin-right: 0;
+}

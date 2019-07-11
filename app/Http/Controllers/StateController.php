@@ -50,6 +50,11 @@ class StateController extends Controller
         return $statelist;
     }
 
+    public static function varstate($id)
+    {
+        return State::find($id);
+    }
+
     public static function varLgaList()
     {
         $lgalist = Lga::orderBy('state_id', 'asc')->get();

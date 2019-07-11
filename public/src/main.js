@@ -1,3 +1,7 @@
+// use this to get the id from the icon click
+// let id = e.target.parentNode.childNodes["0"].parentNode.parentElement.parentElement.dataset['id'];
+
+
 $('.nav-link').on('click', function (e) {
 
     if (e.target.dataset['mycontent'] !== undefined && e.target.dataset['mycontent'] !== 'home') {
@@ -13,6 +17,14 @@ $('.nav-link').on('click', function (e) {
 $(document).on('click', '.mymodal', function(e){
     $('#new-modal').modal('show');
     // $('#new-modal').modal({keyboard: false, backdrop: 'static'});
+});
+
+$(document).on('click', '.viewmodal', function(e){
+    e.preventDefault();
+    $('#view-modal').modal('show');
+
+    let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
+    $('#vname').val(statename);
 });
 
 $(document).on('click', '#modal-save-admin', function(e){
@@ -104,6 +116,14 @@ $(document).on('click', '#modal-save-party', function(e){
         //remember to display the success notification using toast
     });
 });
+
+// $(document).on('click', '#edit, #view, #delete', function(e){
+// $(document).on('click', '#view', function(e){
+//     e.preventDefault();
+
+
+//     console.log(id);
+// });
 
 function getpage(pagename){
     $.ajax({
