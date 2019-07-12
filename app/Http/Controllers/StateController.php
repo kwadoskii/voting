@@ -50,13 +50,21 @@ class StateController extends Controller
         return $statelist;
     }
 
-    public $id = "";
+    public $idd = "";
+
+    public static function getid(Request $request)
+    {
+        global $idd;
+        $id = $request['id'];
+        $idd = $id;
+        return response()->json(['message' => $idd], 200);
+    }
 
     public static function varstate(Request $id)
     {
-        global $id;
-        $this->id = State::find($id);
-        return respnse()->json([], 200);
+        // global $id;
+        // $id = State::find($id);
+        // return respnse()->json([], 200);
     }
 
     public static function varLgaList()

@@ -24,15 +24,17 @@ $(document).on('click', '.viewmodal', function(e){
     $('#view-modal').modal('show');
 
     let id = e.target.parentNode.childNodes["0"].parentNode.parentElement.parentElement.dataset['id'];
-    // console.log(id);
-    // $.ajax({
-    //     method: 'POST',
-    //     url: urlid,
-    //     data: {id: id, _token: token}
-    // });
+    console.log(id);
+    $.ajax({
+        method: 'POST',
+        url: urlid,
+        data: {id: id, _token: token}
+    }).done(function(response){
+        console.log(response['message']);
+    });
 
-    let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
-    $('#vname').val(statename);
+    // let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
+    // $('#vname').val(statename);
 });
 
 $(document).on('click', '#modal-save-admin', function(e){
