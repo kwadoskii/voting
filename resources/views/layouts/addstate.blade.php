@@ -58,13 +58,13 @@ State
 @extends('includes.viewmodal')
 
 
-@if (($StateController)->idd != null)
+{{-- @if ($StateController->getid2() != null) --}}
 @section('viewmodalbody')
 <div class="col-md-10 offset-md-1 mb-2">
     <small><label for="state">State Name</label></small>
     <input type="text" class="form-control" id="vname" disabled
         {{-- value="{{ $StateController->varStateList()->find($StateController->$this->id)->name }}"> --}}
-        value="{{ $StateController->varStateList()->find($StateController->idd)->name }}">
+        value="{{ $StateController->varStateList()->find($StateController->getid2())->name }}">
     </div>
     @endsection
-    @endif
+    {{-- @endif --}}
