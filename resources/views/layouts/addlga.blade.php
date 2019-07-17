@@ -13,7 +13,7 @@
                 <h6 class="card-subtitle text-muted">Below is the list of participating local government areas.</h6>
             </div>
         </div>
-        <table class="table table-striped table-hover small">
+        <table class="table table-striped table-hover small" data-identifier="lga">
             <thead>
                 <tr class="d-flex">
                     <th class="col-md-5">Name</th>
@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 @foreach ($StateController->varLgaList() as $lga)
-                <tr class="d-flex">
+                <tr class="d-flex" data-id="{{ $lga->id }}">
                     <td class="col-md-5">{{$lga->name}}</td>
                     <td class="col-md-4">{{$lga->state->name}}</td>
                     <td class="table-action col-md-3">
@@ -73,16 +73,21 @@
 {{-- view state modal --}}
 @extends('includes.viewmodal')
 
+@section('viewmodalid')"lga-view-modal"@endsection
+
 @section('viewmodalbody')
-    <div class="form-row">
-        <div class="col-md-6 mb-2">
-            <small><label for="vlga">LGA Name</label></small>
-            <input type="text" class="form-control" id="vlga" name="lga" disabled>
-        </div>
+<div class="form-row">
+    <div class="col-md-6 mb-2">
+        <small><label for="vlga">LGA Name</label></small>
+        <input type="text" class="form-control" id="vlga" disabled>
+    </div>
 
         <div class="col-md-6 mb-2">
             <small><label for="vstate">LGA State</label></small>
-            <input type="text" class="form-control" id="vstate" name="lga" disabled>
+            <input type="text" class="form-control" id="vstate" disabled>
         </div>
     </div>
-@endsection
+    @endsection
+
+{{-- Delete modal --}}
+@extends('includes.deletemodal')

@@ -13,7 +13,7 @@
                 <h6 class="card-subtitle text-muted">Below is the list of participating states</h6>
             </div>
         </div>
-        <table class="table table-striped table-hover small">
+        <table class="table table-striped table-hover small" data-identifier="state">
             <thead>
                 <tr class="d-flex">
                     <th class="col-md-8">Name</th>
@@ -57,14 +57,19 @@ State
 {{-- view state modal --}}
 @extends('includes.viewmodal')
 
+@section('viewmodalid')"state-view-modal"@endsection
 
+{{-- @if ($StateController->idd = null) --}}
 {{-- @if ($StateController->getid2() != null) --}}
 @section('viewmodalbody')
 <div class="col-md-10 offset-md-1 mb-2">
     <small><label for="state">State Name</label></small>
     <input type="text" class="form-control" id="vname" disabled
         {{-- value="{{ $StateController->varStateList()->find($StateController->$this->id)->name }}"> --}}
-        value="{{ $StateController->varStateList()->find($StateController->getid2())->name }}">
-    </div>
-    @endsection
-    {{-- @endif --}}
+    {{-- value="{{ $StateController->varStateList()->find(2)->name }}"> --}}
+</div>
+@endsection
+
+{{-- Delete modal --}}
+@extends('includes.deletemodal')
+

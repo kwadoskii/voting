@@ -13,7 +13,7 @@
                 <h6 class="card-subtitle text-muted">Below is the list of parties.</h6>
             </div>
         </div>
-        <table class="table table-striped table-hover small">
+        <table class="table table-striped table-hover small" data-identifier="party">
             <thead>
                 <tr class="d-flex">
                     <th class="col-md-2">Party Acronym</th>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 @foreach ($PartyController->varPartyList() as $party)
-                <tr class="d-flex">
+                <tr class="d-flex" data-id="{{ $party->id }}">
                     <td class="col-md-2">{{$party->acronym}}</td>
                     <td class="col-md-3">{{$party->name}}</td>
                     <td class="col-md-4">{{$party->description}}</td>
@@ -43,7 +43,7 @@
 @extends('includes.addmodal')
 
 @section('new')
-    Party
+Party
 @endsection
 
 @section('modalbody')
@@ -65,7 +65,7 @@
     </div>
 
     <div class="form-row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <small><label for="desc">Description</label></small>
             <input type="text" class="form-control" id="desc" name="desc" required>
             <div class="valid-tooltip">
@@ -76,3 +76,32 @@
 @endsection
 
 @section('link')"modal-save-party"@endsection
+
+{{-- view modal --}}
+
+@extends('includes.viewmodal')
+
+@section('viewmodalid')"party-view-modal"@endsection
+
+@section('viewmodalbody')
+    <div class="form-row mb-2">
+        <div class="col-md-6">
+            <small><label for="acronym">Party Acronym</label></small>
+            <input type="text" class="form-control" id="vacronym" disabled>
+        </div>
+        <div class="col-md-6">
+            <small><label for="name">Party Name</label></small>
+            <input type="text" class="form-control" id="vname" disabled>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-12">
+            <small><label for="desc">Description</label></small>
+            <input type="text" class="form-control" id="vdesc" disabled>
+        </div>
+    </div>
+@endsection
+
+{{-- Delete modal --}}
+@extends('includes.deletemodal')

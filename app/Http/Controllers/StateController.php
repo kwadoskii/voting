@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\State;
 use App\Lga;
+use App\Admin;
+use App\Party;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,30 +52,54 @@ class StateController extends Controller
         return $statelist;
     }
 
-    public $idd = '';
-
-    public static function getid2()
-    {
-        global $idd;
-        // return  ;
-        return $idd;
-    }
-
     public static function getid(Request $request)
     {
         // global $idd;
+        // $GLOBALS['idd']  = $id;
         $id = $request['id'];
-        $GLOBALS['idd']  = $id;
+        $identifier = $request['identifier'];
 
-        return response()->json();
+        switch ($identifier) {
+            case 'state':
+                $data = State::find($id);
+                return response()->json(['state' => $data]);
+                break;
+
+            case 'lga':
+                $data = Lga::find($id);
+                return response()->json(['lga' => [
+                    'name' => $data->name,
+                    'state' => $data->state->name
+                ]]);
+                break;
+
+            case 'party':
+                $data = Party::find($id);
+                return response()->json(['party' => [
+                    'name' => $data->name,
+                    'acronym' => $data->acronym,
+                    'desc' => $data->description
+                ]]);
+                break;
+
+            case 'admin':
+                $data = Admin::find($id);
+                return response()->json(['admin' => [
+                    'firstname' => $data->first_name,
+                    'midname' => $data->mid_name,
+                    'lastname' => $data->last_name,
+                    'phone' => $data->phone,
+                    'gender' => $data->gender,
+                    'dob' => $data->DOB,
+                    'email' => $data->email
+                ]]);
+                break;
+
+            default:
+                return response()->json(['message' => 'Data Not Found']);
+                break;
+        }
         // Use with and redirect back to the calling page;
-    }
-
-    public static function varstate(Request $id)
-    {
-        // global $id;
-        // $id = State::find($id);
-        // return respnse()->json([], 200);
     }
 
     public static function varLgaList()

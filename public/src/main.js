@@ -1,6 +1,13 @@
 // use this to get the id from the icon click
 // let id = e.target.parentNode.childNodes["0"].parentNode.parentElement.parentElement.dataset['id'];
 
+$(document).on('change', '#consti, #state', function() {
+    if ($(this).is(':checked')) {
+      $(this).attr('value', 'true');
+    } else {
+      $(this).attr('value', 'false');
+    }
+});
 
 $('.nav-link').on('click', function (e) {
 
@@ -21,20 +28,56 @@ $(document).on('click', '.mymodal', function(e){
 
 $(document).on('click', '.viewmodal', function(e){
     e.preventDefault();
-    $('#view-modal').modal('show');
+    $('#state-view-modal, #lga-view-modal, #party-view-modal, #admin-view-modal').modal('show');
+    let identifier = $('.table').data('identifier');
 
     let id = e.target.parentNode.childNodes["0"].parentNode.parentElement.parentElement.dataset['id'];
-    console.log(id);
     $.ajax({
         method: 'POST',
         url: urlid,
-        data: {id: id, _token: token}
+        data: {id: id, identifier: identifier, _token: token} //add an identifier here
     }).done(function(response){
-        console.log(response['message']);
+        switch (identifier) {
+            case 'state':
+                $('#vname').val(response['state'].name);
+                break;
+
+            case 'lga':
+                console.log(response['lga']);
+                $('#vlga').val(response['lga'].name);
+                $('#vstate').val(response['lga'].state);
+                break;
+
+            case 'party':
+                $('#vname').val(response.party.name);
+                $('#vacronym').val(response.party.acronym);
+                $('#vdesc').val(response.party.desc);
+                break;
+
+            case 'admin':
+                $('#vfirstname').val(response.admin.firstname);
+                $('#vmiddlename').val(response.admin.midname);
+                $('#vlastname').val(response.admin.lastname);
+                $('#vgender').val(response.admin.gender);
+                $('#vdob').val(response.admin.dob);
+                $('#vphone').val(response.admin.phone);
+                $('#vemail').val(response.admin.email);
+                break;
+
+            default:
+                console.log(response['message']);
+                break;
+        }
+
+        // $('#vlga').val(response['message'].name); // use case to distiguish between what was clicked and display the need values
     });
 
     // let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
-    // $('#vname').val(statename);
+});
+
+$(document).on('click', '.deletemodal', function(e){
+    e.preventDefault();
+    $('#deletemodal').modal('show');
 });
 
 $(document).on('click', '#modal-save-admin', function(e){
@@ -127,13 +170,31 @@ $(document).on('click', '#modal-save-party', function(e){
     });
 });
 
-// $(document).on('click', '#edit, #view, #delete', function(e){
-// $(document).on('click', '#view', function(e){
-//     e.preventDefault();
+$(document).on('click', '#modal-save-office', function(e){
+    e.preventDefault();
+    console.log('Success');
+    let testt = $('#state').val();
+    let tttt = $('#consti').val();
+    console.log(tttt, testt);
+    // $.ajax({
+    //     method: 'POST',
+    //     url: urlAddOffice,
+    //     data: {
+    //         acronym: $('#acronym').val(),
+    //         name: $('#name').val(),
+    //         desc: $('#desc').val(),
+    //          _token: token
+    //         }
+    // }).done(function(response){
+    //     $('#new-modal').modal('hide');
 
-
-//     console.log(id);
-// });
+    //     $('body').removeClass('modal-open');
+    //     $(".modal-backdrop").remove();
+    //     getpage('addparty');
+    //     console.log(response['message']);
+        //remember to display the success notification using toast
+    // });
+});
 
 function getpage(pagename){
     $.ajax({
