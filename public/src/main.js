@@ -3,9 +3,9 @@
 
 $(document).on('change', '#consti, #state', function() {
     if ($(this).is(':checked')) {
-      $(this).attr('value', 'true');
+      $(this).attr('value', 1);
     } else {
-      $(this).attr('value', 'false');
+      $(this).attr('value', 0);
     }
 });
 
@@ -27,11 +27,15 @@ $(document).on('click', '.mymodal', function(e){
 });
 
 $(document).on('click', '.viewmodal', function(e){
+    //add more view-modal ids in the next line.
+    let views = '#state-view-modal, #lga-view-modal, #party-view-modal, #office-view-modal, #admin-view-modal';
+
     e.preventDefault();
-    $('#state-view-modal, #lga-view-modal, #party-view-modal, #admin-view-modal').modal('show');
+    $(views).modal('show');
     let identifier = $('.table').data('identifier');
 
     let id = e.target.parentNode.childNodes["0"].parentNode.parentElement.parentElement.dataset['id'];
+    // console.log(id, identifier);
     $.ajax({
         method: 'POST',
         url: urlid,
@@ -52,6 +56,20 @@ $(document).on('click', '.viewmodal', function(e){
                 $('#vname').val(response.party.name);
                 $('#vacronym').val(response.party.acronym);
                 $('#vdesc').val(response.party.desc);
+                break;
+
+            case 'office':
+                $('#vname').val(response.office.name);
+                if(response.office.state == 1){
+                    $('#vstate').attr('checked', true);
+                }else{
+                    $('#vstate').attr('checked', false);
+                }
+                if(response.office.consti == 1){
+                    $('#vconsti').attr('checked', true);
+                }else{
+                    $('#vconsti').attr('checked', false);
+                }
                 break;
 
             case 'admin':
@@ -172,28 +190,24 @@ $(document).on('click', '#modal-save-party', function(e){
 
 $(document).on('click', '#modal-save-office', function(e){
     e.preventDefault();
-    console.log('Success');
-    let testt = $('#state').val();
-    let tttt = $('#consti').val();
-    console.log(tttt, testt);
-    // $.ajax({
-    //     method: 'POST',
-    //     url: urlAddOffice,
-    //     data: {
-    //         acronym: $('#acronym').val(),
-    //         name: $('#name').val(),
-    //         desc: $('#desc').val(),
-    //          _token: token
-    //         }
-    // }).done(function(response){
-    //     $('#new-modal').modal('hide');
+    $.ajax({
+        method: 'POST',
+        url: urlAddOffice,
+        data: {
+            name: $('#name').val(),
+            consti: $('#consti').val(),
+            state: $('#state').val(),
+            _token: token,
+            }
+    }).done(function(response){
+        $('#new-modal').modal('hide');
 
-    //     $('body').removeClass('modal-open');
-    //     $(".modal-backdrop").remove();
-    //     getpage('addparty');
-    //     console.log(response['message']);
+        $('body').removeClass('modal-open');
+        $(".modal-backdrop").remove();
+        getpage('addoffice');
+        console.log(response['message']);
         //remember to display the success notification using toast
-    // });
+    });
 });
 
 function getpage(pagename){

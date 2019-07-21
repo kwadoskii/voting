@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\State;
 use App\Lga;
 use App\Admin;
+use App\Office;
 use App\Party;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +71,15 @@ class StateController extends Controller
                 return response()->json(['lga' => [
                     'name' => $data->name,
                     'state' => $data->state->name
+                ]]);
+                break;
+
+            case 'office':
+                $data = Office::find($id);
+                return response()->json(['office' => [
+                    'name' => $data->name,
+                    'state' => $data->is_state,
+                    'consti' => $data->is_constituency
                 ]]);
                 break;
 

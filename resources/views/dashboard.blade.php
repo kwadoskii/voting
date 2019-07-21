@@ -221,5 +221,6 @@ Admin Dashboard
         var urlAddLga = '{{ route('addlga') }}';
         var urlAddParty = '{{ route('addparty') }}';
         var urlid = '{{ route('id') }}';
+        var urlAddOffice = '{{ route('addoffice') }}';
 </script>
 @endsection

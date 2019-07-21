@@ -73,6 +73,13 @@ Route::post('admin/addparty', [
     'middleware' => 'admin'
 ]);
 
+Route::post('admin/addoffice', [
+    'name' => 'addoffice',
+    'uses' => 'OfficeController@postAddOffice',
+    'as' => 'addoffice',
+    'middleware' => 'admin'
+]);
+
 Route::post('admin/id', [
     'name' => 'id',
     'uses' => 'StateController@getid',
