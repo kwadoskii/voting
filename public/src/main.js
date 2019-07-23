@@ -9,6 +9,11 @@ $(document).on('change', '#consti, #state', function() {
     }
 });
 
+$(document).on('click', '.side-bar', function(){
+    $('.side-bar').removeClass('active');
+    $(this).toggleClass('active');
+  });
+
 $('.nav-link').on('click', function (e) {
 
     if (e.target.dataset['mycontent'] !== undefined && e.target.dataset['mycontent'] !== 'home') {

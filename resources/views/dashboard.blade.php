@@ -43,7 +43,7 @@ Admin Dashboard
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('admindashboard') }}" data-mycontent="home">
+                        <a class="nav-link side-bar active" href="{{ route('admindashboard') }}" data-mycontent="home">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-home">
@@ -54,7 +54,7 @@ Admin Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-mycontent="addadmin">
+                        <a class="nav-link side-bar" href="" data-mycontent="addadmin">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-file">
@@ -65,7 +65,7 @@ Admin Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-mycontent="addvoter">
+                        <a class="nav-link side-bar" href="" data-mycontent="addvoter">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-shopping-cart">
@@ -77,7 +77,7 @@ Admin Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-mycontent="addcandidate">
+                        <a class="nav-link side-bar" href="" data-mycontent="addcandidate">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-users">
@@ -93,7 +93,7 @@ Admin Dashboard
                     <li class="nav-item">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-mycontent="">
+                                <a class="nav-link side-bar" href="" data-mycontent="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-bar-chart-2">
@@ -105,7 +105,7 @@ Admin Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-mycontent="addstate">
+                                <a class="nav-link side-bar" href="" data-mycontent="addstate">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-layers">
@@ -117,7 +117,7 @@ Admin Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-mycontent="addlga">
+                                <a class="nav-link side-bar" href="" data-mycontent="addlga">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-layers">
@@ -129,7 +129,7 @@ Admin Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-mycontent="addconstituency">
+                                <a class="nav-link side-bar" href="" data-mycontent="addconstituency">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-layers">
@@ -141,7 +141,7 @@ Admin Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-mycontent="addparty">
+                                <a class="nav-link side-bar" href="" data-mycontent="addparty">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-layers">
@@ -153,7 +153,7 @@ Admin Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-mycontent="addoffice">
+                                <a class="nav-link side-bar" href="" data-mycontent="addoffice">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-layers">
@@ -174,7 +174,7 @@ Admin Dashboard
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-mycontent="results">
+                        <a class="nav-link side-bar" href="" data-mycontent="results">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-file-text">
