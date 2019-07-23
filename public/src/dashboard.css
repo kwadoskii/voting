@@ -2,6 +2,12 @@ body {
     font-size: .875rem;
 }
 
+.active{
+    background: darkslategrey;
+    color: white !important;
+    border-radius: 0 10px 10px 0 ;
+}
+
 .feather {
     width: 16px;
     height: 16px;
@@ -124,8 +130,9 @@ body {
 }
 
 #edit, #view, #delete{
+    color: #333;
     font-size: 1.3em;
-    margin-right: 20px;
+    margin-right: 13px;
 }
 
 #delete{
