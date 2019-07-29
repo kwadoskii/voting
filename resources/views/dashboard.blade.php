@@ -11,7 +11,8 @@ Admin Dashboard
 
 @section('section')
 {{--    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">--}}
-{{--        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"></a>--}}
+    {{-- <div class="container-fluid my-2 my-lg-0"> --}}
+{{--        <a class="navbar-brand col-sm-3 col-md-2 mr-0 pt-1 pb-1" href="#"></a>--}}
 {{--        <ul class="navbar-nav px-3">--}}
 {{--            <li class="nav-item text-nowrap">--}}
 {{--                <a class="nav-link" href="{{ route('adminlogout') }}">Sign out</a>--}}
@@ -19,21 +20,22 @@ Admin Dashboard
 {{--        </ul>--}}
 {{--    </nav>--}}
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 pt-1 pb-1" href="{{ route('admindashboard') }}">Admin Panel</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse pt-1 pb-1" id="navbarCollapse" style="">
-        <ul class="navbar-nav px-3 ml-md-auto">
-            <li class="btn">
-                <p class="btn btn-success">{{ Auth::guard('admin')->user()->first_name}}</p>
-            </li>
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="{{ route('adminlogout') }}">Sign out</a>
-            </li>
-        </ul>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid my-2">
+        <a class="navbar-brand" href="{{ route('admindashboard') }}">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+            <ul class="navbar-nav px-3 ml-md-auto">
+                <li class="btn">
+                    <p class="btn btn-success">{{ Auth::guard('admin')->user()->first_name}}</p>
+                </li>
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="{{ route('adminlogout') }}">Sign out</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
