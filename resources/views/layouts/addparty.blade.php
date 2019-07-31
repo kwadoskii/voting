@@ -103,5 +103,8 @@ Party
     </div>
 @endsection
 
+
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
+
+@section('dellink')"modal-delete-party"@endsection

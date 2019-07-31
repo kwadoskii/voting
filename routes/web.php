@@ -82,7 +82,14 @@ Route::post('admin/addoffice', [
 
 Route::post('admin/id', [
     'name' => 'id',
-    'uses' => 'StateController@getid',
+    'uses' => 'StateController@viewdata',
     'as' => 'id',
+    'middleware' => 'admin'
+]);
+
+Route::post('admin/delete', [
+    'name' => 'deletedata',
+    'uses' => 'DeleteController@deletedata',
+    'as' => 'deletedata',
     'middleware' => 'admin'
 ]);

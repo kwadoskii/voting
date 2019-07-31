@@ -22,13 +22,13 @@ Admin Dashboard
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid my-2">
-        <a class="navbar-brand col-md-2" href="{{ route('admindashboard') }}">Admin Panel</a>
+        <a class="navbar-brand" href="{{ route('admindashboard') }}">Admin Panel</a>
 
-        <div class="btn btn-success ml-auto mr-2">{{ Auth::guard('admin')->user()->first_name}}</div>
+        <div class="btn btn-success ml-auto mr-1">{{ Auth::guard('admin')->user()->first_name}}</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapses">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse" id="navbarCollapses">
+        <div class="navbar-collapse collapse flex-grow-0" id="navbarCollapses">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('adminlogout') }}">Sign Out</a>
@@ -244,5 +244,6 @@ Admin Dashboard
         var urlAddParty = '{{ route('addparty') }}';
         var urlid = '{{ route('id') }}';
         var urlAddOffice = '{{ route('addoffice') }}';
+        var urlDelete = '{{ route('deletedata') }}';
 </script>
 @endsection

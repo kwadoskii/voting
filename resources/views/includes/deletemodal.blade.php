@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer mt-4">
                 <button type="button" class="btn px-3" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-dark px-3" id=''>Yes</button>
+                <button type="button" class="btn btn-dark px-3" id=@yield('dellink')>Yes</button>
             </div>
         </div>
     </div>

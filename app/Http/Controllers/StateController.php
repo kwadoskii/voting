@@ -53,7 +53,7 @@ class StateController extends Controller
         return $statelist;
     }
 
-    public static function getid(Request $request)
+    public static function viewdata(Request $request)
     {
         // global $idd;
         // $GLOBALS['idd']  = $id;

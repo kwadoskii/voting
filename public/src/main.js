@@ -98,9 +98,29 @@ $(document).on('click', '.viewmodal', function(e){
     // let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
 });
 
-$(document).on('click', '.deletemodal', function(e){
+var delid;
+
+$(document).on('click', '#delete', function(e){
     e.preventDefault();
     $('#deletemodal').modal('show');
+    delid = e.target.parentNode.parentNode.parentNode.dataset['id'];
+});
+
+//for deletion of entered data
+$(document).on('click', '#modal-delete-party', function(e){
+    let identifier = $('.table').data('identifier');
+
+    console.log(identifier, delid);
+    $.ajax({
+        method: 'POST',
+        url: urlDelete,
+        data: {
+            identifier: identifier,
+            id: delid
+        }
+    }).done(function(response){
+        console.log();
+    });
 });
 
 $(document).on('click', '#modal-save-admin', function(e){
