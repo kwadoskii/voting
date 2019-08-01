@@ -91,3 +91,5 @@
 
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
+
+@section('dellink')"modal-delete-lga"@endsection

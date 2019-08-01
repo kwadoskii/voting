@@ -40,3 +40,17 @@
 @section('new')
     Constituency
 @endsection
+
+@section('modalbody')
+    <div class="form-group">
+        <label for="multi-select">Select state:</label>
+        <select class="form-control ui fluid search dropdown" multiple="" id='multi-select'>
+            <option value="">State</option>
+            <option value="1">PHP</option>
+            <option value="2">HTML</option>
+            <option value="2">SQL</option>
+            <option value="2">JS</option>
+            <option value="2">C#</option>
+        </select>
+    </div>
+@endsection

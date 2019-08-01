@@ -80,10 +80,10 @@ Route::post('admin/addoffice', [
     'middleware' => 'admin'
 ]);
 
-Route::post('admin/id', [
-    'name' => 'id',
-    'uses' => 'StateController@viewdata',
-    'as' => 'id',
+Route::post('admin/view', [
+    'name' => 'view',
+    'uses' => 'ViewController@viewdata',
+    'as' => 'view',
     'middleware' => 'admin'
 ]);
 

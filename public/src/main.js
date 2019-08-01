@@ -1,5 +1,7 @@
-// use this to get the id from the icon click
-// let id = e.target.parentNode.childNodes["0"].parentNode.parentElement.parentElement.dataset['id'];
+//global variables for diff functions
+var delid;
+var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga';
+
 
 $(document).on('change', '#consti, #state', function() {
     if ($(this).is(':checked')) {
@@ -9,19 +11,20 @@ $(document).on('change', '#consti, #state', function() {
     }
 });
 
+//toggling of sidebar
 $(document).on('click', '.side-bar', function(){
     $('.side-bar').removeClass('active');
     $(this).toggleClass('active');
   });
 
+$('#multi-select').dropdown();
+
 $('.nav-link').on('click', function (e) {
 
     if (e.target.dataset['mycontent'] !== undefined && e.target.dataset['mycontent'] !== 'home') {
         e.preventDefault();
-
         let url = e.target.dataset['mycontent'];
         getpage(url);
-        // e.target.classList.add('active');
         //remember to change the color of the sidebar
     }
 });
@@ -43,7 +46,7 @@ $(document).on('click', '.viewmodal', function(e){
     // console.log(id, identifier);
     $.ajax({
         method: 'POST',
-        url: urlid,
+        url: urlview,
         data: {id: id, identifier: identifier, _token: token} //add an identifier here
     }).done(function(response){
         switch (identifier) {
@@ -98,28 +101,33 @@ $(document).on('click', '.viewmodal', function(e){
     // let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
 });
 
-var delid;
-
 $(document).on('click', '#delete', function(e){
     e.preventDefault();
     $('#deletemodal').modal('show');
     delid = e.target.parentNode.parentNode.parentNode.dataset['id'];
 });
 
-//for deletion of entered data
-$(document).on('click', '#modal-delete-party', function(e){
+//for deletion of entered data uses switch
+$(document).on('click', deletes, function(e){
+    e.preventDefault();
     let identifier = $('.table').data('identifier');
 
-    console.log(identifier, delid);
+    // console.log(identifier, delid);
     $.ajax({
         method: 'POST',
         url: urlDelete,
         data: {
             identifier: identifier,
-            id: delid
+            id: delid,
+            _token: token
         }
     }).done(function(response){
-        console.log();
+        $('#deletemodal').modal('hide');
+        $('body').removeClass('modal-open');
+        $(".modal-backdrop").remove();
+        getpage('add' + identifier);
+        console.log(response.message);
+        //try to make the response a notification!!!
     });
 });
 

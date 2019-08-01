@@ -179,3 +179,5 @@
 
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
+
+@section('dellink')"modal-delete-admin"@endsection

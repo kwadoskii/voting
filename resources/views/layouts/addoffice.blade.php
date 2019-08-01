@@ -110,3 +110,5 @@ Office
 
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
+
+@section('dellink')"modal-delete-office"@endsection
