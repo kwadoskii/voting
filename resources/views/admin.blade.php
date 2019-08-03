@@ -4,7 +4,7 @@
     Admin Login
 @endsection
 
-@section('css')src/main.css @endsection
+@section('styles')src/main.css @endsection
 
 @section('section')
     @include('includes.message')
