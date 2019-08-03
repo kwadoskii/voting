@@ -44,7 +44,7 @@
 @section('modalbody')
     <div class="form-group">
         <label for="multi-select">Select state:</label>
-        <select class="form-control ui fluid search dropdown" multiple="" id='multi-select'>
+        <select class="selectpicker" multiple data-live-search="true">
             <option value="">State</option>
             <option value="1">PHP</option>
             <option value="2">HTML</option>

@@ -3,7 +3,7 @@ body {
 }
 
 .active{
-    background: darkslategrey;
+    background: #343a40;
     color: white !important;
     border-radius: 0 10px 10px 0 ;
 }
@@ -130,7 +130,7 @@ body {
 }
 
 #edit, #view, #delete{
-    color: #333;
+    color:#343a40;
     font-size: 1.3em;
     margin-right: 13px;
 }

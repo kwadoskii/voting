@@ -4,9 +4,6 @@
 Admin Dashboard
 @endsection
 
-@section('css')../src/dashboard.css @endsection
-@section('fav')../@endsection
-
 @inject('AdminController', 'App\Http\Controllers\AdminController')
 
 @section('section')
@@ -242,7 +239,7 @@ Admin Dashboard
         var urlAddState = '{{ route('addstate') }}';
         var urlAddLga = '{{ route('addlga') }}';
         var urlAddParty = '{{ route('addparty') }}';
-        var urlview = '{{ route('view') }}';
+var urlview = '{{ route('view') }}';
         var urlAddOffice = '{{ route('addoffice') }}';
         var urlDelete = '{{ route('deletedata') }}';
 </script>

@@ -17,7 +17,7 @@ $(document).on('click', '.side-bar', function(){
     $(this).toggleClass('active');
   });
 
-$('#multi-select').dropdown();
+$('select').selectpicker();
 
 $('.nav-link').on('click', function (e) {
 
