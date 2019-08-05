@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\State;
 use App\Lga;
+use App\Constituency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,5 +55,11 @@ class StateController extends Controller
     {
         $lgalist = Lga::orderBy('state_id', 'asc')->get();
         return $lgalist;
+    }
+
+    public static function varConstituencyList()
+    {
+        $constilist = Constituency::orderBy('name', 'asc')->get();
+        return $constilist;
     }
 }

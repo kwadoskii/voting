@@ -20,7 +20,7 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"> --}}
     <link rel="stylesheet" href="{{ URL::to('src/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ URL::to('src/bootstrap.min.css') }}">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" /> --}}
+    <link rel="stylesheet" href="{{ URL::to('src/bootstrap-select.min.css')}}" />
 
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/dropdown.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/transition.min.css"> --}}
@@ -42,14 +42,9 @@
     </script> --}}
 
     <title>@yield('title')</title>
-
-    <!-- Fonts -->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"> --}}
-
 </head>
 
 <body>
     @yield('section')
 </body>
-
 </html>

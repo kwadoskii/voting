@@ -17,8 +17,6 @@ $(document).on('click', '.side-bar', function(){
     $(this).toggleClass('active');
   });
 
-$('select').selectpicker();
-
 $('.nav-link').on('click', function (e) {
 
     if (e.target.dataset['mycontent'] !== undefined && e.target.dataset['mycontent'] !== 'home') {
@@ -237,6 +235,7 @@ $(document).on('click', '#modal-save-office', function(e){
 
         $('body').removeClass('modal-open');
         $(".modal-backdrop").remove();
+
         getpage('addoffice');
         console.log(response['message']);
         //remember to display the success notification using toast

@@ -1,3 +1,5 @@
+@inject('StateController', 'App\Http\Controllers\StateController')
+
 <div class="navbar">
     <h1 class="h3 mb-3">Constituencies</h1>
     <div class="btn btn-dark ml-md-auto rounded mouse mymodal" data-toggle="modal">&plus; New Constituency</div>
@@ -14,21 +16,23 @@
         <table class="table table-striped table-hover small" data-identifier="constituency">
             <thead>
                 <tr class="d-flex">
-                    <th class="col-md-4">Name</th>
-                    <th class="col-md-5">State</th>
+                    <th class="col-md-3">Name</th>
+                    <th class="col-md-2">State</th>
+                    {{-- <th class="col-md-4">Lgas</th> --}}
                     <th class="col-md-3 table-action">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($ConstituencyController->varConstituencyList() as $constituency)
+                @foreach ($StateController->varConstituencyList() as $constituency)
                     <tr class="d-flex" data-id="{{ $constituency->id }}">
-                    <td class="col-md-4">{{$constituency->name}}</td>
-                    <td class="col-md-5">{{($constituency->state}}</td>
-                    <td class="table-action col-md-3">
-                        @include('includes.actions')
-                    </td>
-                </tr>
-                @endforeach --}}
+                        <td class="col-md-3">{{$constituency->name}}</td>
+                        <td class="col-md-2">{{ $constituency->state->name}}</td>
+                        {{-- <td class="col-md-4">{{$constituency->state->lgas->name}}</td> --}}
+                        <td class="table-action col-md-3">
+                            @include('includes.actions')
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -42,15 +46,40 @@
 @endsection
 
 @section('modalbody')
-    <div class="form-group">
-        <label for="multi-select">Select state:</label>
-        <select class="selectpicker" multiple data-live-search="true">
-            <option value="">State</option>
-            <option value="1">PHP</option>
-            <option value="2">HTML</option>
-            <option value="2">SQL</option>
-            <option value="2">JS</option>
-            <option value="2">C#</option>
-        </select>
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="name">Name:</label></small>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
     </div>
+
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="state">Select State:</label></small>
+            <select class="custom-select form-control" id="state" name="state" placeholder="test">
+                @foreach ($StateController->varStateList() as $state)
+                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="lgas">Select Local Government Areas:</label></small>
+            <select class="selectpicker form-control" multiple data-live-search="true" id="lgas" name="lgas">
+                <option value="1">Agege</option>
+                <option value="2">Badagry</option>
+                <option value="3">Epe</option>
+                <option value="4">Ikeja</option>
+                <option value="5">Mushin</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('select.selectpicker').selectpicker();
+        });
+    </script>
 @endsection

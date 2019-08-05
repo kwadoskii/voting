@@ -19,77 +19,70 @@ Route::get('/admin', function () {
     return view('admin');
 })->name('admin');
 
-Route::post('/adminlogin',
-    [
+Route::post('/adminlogin', [
         'uses' => 'AdminController@postAdminlogin',
         'as' => 'adminlogin'
-    ]
-);
-
-Route::get('/admin/dashboard', [
-    'name' => 'admindashboard',
-    'uses' => 'AdminController@getAdmindashboard',
-    'as' => 'admindashboard',
-    'middleware' => 'admin'
 ]);
 
-Route::get('admin/signout', [
+Route::group(['prefix' => 'admin'], function () {
+    Route::group(['middleware' => 'admin'], function () {
+        Route::get('dashboard', [
+            'name' => 'admindashboard',
+            'uses' => 'AdminController@getAdmindashboard',
+            'as' => 'admindashboard'
+        ]);
+
+        Route::post('getdashdisplay', [
+            'name' => 'dashdisplay',
+            'uses' => 'AdminController@postGetDashDisplay'
+        ]);
+
+        Route::post('addadmin', [
+            'name' => 'addadmin',
+            'uses' => 'AdminController@postAddAdmin',
+            'as' => 'addadmin'
+        ]);
+
+        Route::post('addstate', [
+            'name' => 'addstate',
+            'uses' => 'StateController@postAddState',
+            'as' => 'addstate'
+        ]);
+
+        Route::post('addlga', [
+            'name' => 'addlga',
+            'uses' => 'StateController@postAddLga',
+            'as' => 'addlga'
+        ]);
+
+        Route::post('addparty', [
+            'name' => 'addparty',
+            'uses' => 'PartyController@postAddParty',
+            'as' => 'addparty'
+        ]);
+
+        Route::post('addoffice', [
+            'name' => 'addoffice',
+            'uses' => 'OfficeController@postAddOffice',
+            'as' => 'addoffice'
+        ]);
+
+        Route::post('view', [
+            'name' => 'view',
+            'uses' => 'ViewController@viewdata',
+            'as' => 'view'
+        ]);
+
+        Route::post('delete', [
+            'name' => 'deletedata',
+            'uses' => 'DeleteController@deletedata',
+            'as' => 'deletedata'
+        ]);
+    });
+});
+
+Route::get('signout', [
     'name' => 'adminlogout',
     'uses' => 'AdminController@getAdminLogout',
     'as' => 'adminlogout'
-]);
-
-Route::post('admin/getdashdisplay', [
-    'name' => 'dashdisplay',
-    'uses' => 'AdminController@postGetDashDisplay',
-    'middleware' => 'admin'
-]);
-
-Route::post('admin/addadmin', [
-    'name' => 'addadmin',
-    'uses' => 'AdminController@postAddAdmin',
-    'as' => 'addadmin',
-    'middleware' => 'admin'
-]);
-
-Route::post('admin/addstate', [
-    'name' => 'addstate',
-    'uses' => 'StateController@postAddState',
-    'as' => 'addstate',
-    'middleware' => 'admin'
-]);
-
-Route::post('admin/addlga', [
-    'name' => 'addlga',
-    'uses' => 'StateController@postAddLga',
-    'as' => 'addlga',
-    'middleware' => 'admin'
-]);
-
-Route::post('admin/addparty', [
-    'name' => 'addparty',
-    'uses' => 'PartyController@postAddParty',
-    'as' => 'addparty',
-    'middleware' => 'admin'
-]);
-
-Route::post('admin/addoffice', [
-    'name' => 'addoffice',
-    'uses' => 'OfficeController@postAddOffice',
-    'as' => 'addoffice',
-    'middleware' => 'admin'
-]);
-
-Route::post('admin/view', [
-    'name' => 'view',
-    'uses' => 'ViewController@viewdata',
-    'as' => 'view',
-    'middleware' => 'admin'
-]);
-
-Route::post('admin/delete', [
-    'name' => 'deletedata',
-    'uses' => 'DeleteController@deletedata',
-    'as' => 'deletedata',
-    'middleware' => 'admin'
 ]);
