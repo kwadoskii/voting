@@ -17,6 +17,7 @@ class Lga extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('state_id');
+            $table->integer('constituency_id')->nullable();
             $table->timestamps();
         });
     }
