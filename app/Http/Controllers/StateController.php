@@ -26,7 +26,7 @@ class StateController extends Controller
         return response()->json(['message' => 'Saved Successfully!'], 200);
     }
 
-    public function postAddLga(Request $request)
+    public static function postAddLga(Request $request)
     {
         $this->validate($request, [
             'lga' => 'required'

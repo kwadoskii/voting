@@ -18,7 +18,7 @@
                 <tr class="d-flex">
                     <th class="col-md-3">Name</th>
                     <th class="col-md-2">State</th>
-                    {{-- <th class="col-md-4">Lgas</th> --}}
+                    <th class="col-md-4">Lgas</th>
                     <th class="col-md-3 table-action">Actions</th>
                 </tr>
             </thead>
@@ -26,8 +26,8 @@
                 @foreach ($StateController->varConstituencyList() as $constituency)
                     <tr class="d-flex" data-id="{{ $constituency->id }}">
                         <td class="col-md-3">{{$constituency->name}}</td>
-                        <td class="col-md-2">{{ $constituency->state->name}}</td>
-                        {{-- <td class="col-md-4">{{$constituency->state->lgas->name}}</td> --}}
+                        <td class="col-md-2">{{ $constituency->state}}</td>
+                        {{-- <td class="col-md-4">{{$constituency->lgas->name}}</td> --}}
                         <td class="table-action col-md-3">
                             @include('includes.actions')
                         </td>

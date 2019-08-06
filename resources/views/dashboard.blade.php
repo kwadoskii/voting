@@ -8,7 +8,7 @@ Admin Dashboard
 
 @section('section')
 {{--    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">--}}
-    {{-- <div class="container-fluid my-2 my-lg-0"> --}}
+{{-- <div class="container-fluid my-2 my-lg-0"> --}}
 {{--        <a class="navbar-brand col-sm-3 col-md-2 mr-0 pt-1 pb-1" href="#"></a>--}}
 {{--        <ul class="navbar-nav px-3">--}}
 {{--            <li class="nav-item text-nowrap">--}}
@@ -34,29 +34,6 @@ Admin Dashboard
         </div>
     </div>
 </nav>
-
-{{-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
-    <div class="container-fluid my-2">
-        <a class="navbar-brand " href="#">Admin Panel</a>
-
-        <div class="btn ggg bg-success ml-auto mr-2">Name</div>
-
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-collapse collapse" id="navbarCollapse">
-
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-item nav-link" href="#">Sign out</a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</nav> --}}
 
 <div class="container-fluid">
     <div class="row">
@@ -222,7 +199,7 @@ Admin Dashboard
 </div>
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script> --}}
-<script src="../src/main.js"></script>
+<script src="{{ URL::to('src/main.js') }}"></script>
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script> --}}
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
@@ -235,12 +212,12 @@ Admin Dashboard
 
 <script>
     var token = '{{ Session::token() }}';
-        var urlAddAdmin = '{{ route('addadmin') }}';
-        var urlAddState = '{{ route('addstate') }}';
-        var urlAddLga = '{{ route('addlga') }}';
-        var urlAddParty = '{{ route('addparty') }}';
-var urlview = '{{ route('view') }}';
-        var urlAddOffice = '{{ route('addoffice') }}';
-        var urlDelete = '{{ route('deletedata') }}';
+    var urlAddAdmin = '{{ route('addadmin') }}';
+    var urlAddState = '{{ route('addstate') }}';
+    var urlAddLga = '{{ route('addlga') }}';
+    var urlAddParty = '{{ route('addparty') }}';
+    var urlview = '{{ route('view') }}';
+    var urlAddOffice = '{{ route('addoffice') }}';
+    var urlDelete = '{{ route('deletedata') }}';
 </script>
 @endsection

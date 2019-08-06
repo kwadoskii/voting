@@ -16,8 +16,6 @@ class Constituency extends Migration
         Schema::create('constituencies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('lga_id');
-            $table->integer('state_id');
             $table->timestamps();
         });
     }
