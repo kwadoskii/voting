@@ -242,6 +242,23 @@ $(document).on('click', '#modal-save-office', function(e){
     });
 });
 
+$(document).on('change', '#constate', function(e){
+    var state_id = e.target.value;
+    if(state_id){
+        console.log(state_id);
+        $.get (urlGetLgaById + '?state_id=' + state_id, function(data){
+            console.log(data);
+            $('#conlgas').empty();
+
+            $.each(data, function(index, lga){
+                $(function() {
+                    $('#conlgas').append("<option value='"+ lga.id +"'>"+ lga.name+"</option>");
+                });
+            });
+        });
+    }
+});
+
 function getpage(pagename){
     $.ajax({
         method: 'POST',

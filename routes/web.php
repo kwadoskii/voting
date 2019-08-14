@@ -1,5 +1,8 @@
 <?php
 
+use App\Lga;
+use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +81,12 @@ Route::group(['prefix' => 'admin'], function () {
             'uses' => 'DeleteController@deletedata',
             'as' => 'deletedata'
         ]);
+
+        Route::get('getlgabyid', function(){
+            $stateid = Input::get('state_id');
+            $lgas = Lga::where('state_id', $stateid)->orderBy('name', 'asc')->get();
+            return $lgas;
+        })->name('getlgabyid');
     });
 });
 

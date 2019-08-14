@@ -219,5 +219,6 @@ Admin Dashboard
     var urlview = '{{ route('view') }}';
     var urlAddOffice = '{{ route('addoffice') }}';
     var urlDelete = '{{ route('deletedata') }}';
+    var urlGetLgaById = '{{ route('getlgabyid') }}';
 </script>
 @endsection

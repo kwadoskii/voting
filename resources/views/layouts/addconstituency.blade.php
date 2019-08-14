@@ -16,23 +16,28 @@
         <table class="table table-striped table-hover small" data-identifier="constituency">
             <thead>
                 <tr class="d-flex">
-                    <th class="col-md-3">Name</th>
+                    <th class="col-md-2">Name</th>
                     <th class="col-md-2">State</th>
-                    <th class="col-md-4">Lgas</th>
+                    <th class="col-md-4">Composition</th>
+                    <th class="col-md-1">Total Lgas</th>
                     <th class="col-md-3 table-action">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($StateController->varConstituencyList() as $constituency)
                     <tr class="d-flex" data-id="{{ $constituency->id }}">
-                        <td class="col-md-3">{{$constituency->name}}</td>
-<<<<<<< HEAD
-                        <td class="col-md-2">{{ $constituency->state}}</td>
-                        {{-- <td class="col-md-4">{{$constituency->lgas->name}}</td> --}}
-=======
-                        <td class="col-md-2">{{ $constituency->state->name}}</td>
-                        <td class="col-md-4">{{$constituency->lgas->name}}</td>
->>>>>>> d5049ab75f66e807a5d0d426e0a9e0a75564e1c1
+                        <td class="col-md-2">{{ $constituency->name }}</td>
+                        <td class="col-md-2">{{ $constituency->state->name }}</td>
+                        <td class="col-md-4">
+                            @foreach ($constituency->lgas as $item)
+                                @if ($loop->last)
+                                    {{ 'and ' . $item->name . '.'}}
+                                @else
+                                    {{ $item->name . ','}}
+                                @endif
+                            @endforeach
+                        </td>
+                        <td class="col-md-1">{{ $constituency->lgas()->count() }}</td>
                         <td class="table-action col-md-3">
                             @include('includes.actions')
                         </td>
@@ -54,14 +59,15 @@
     <div class="form-row">
         <div class="col-md-8 offset-md-2 mb-3">
             <small><label for="name">Name:</label></small>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <input type="text" class="form-control" id="conname" name="name" required>
         </div>
     </div>
 
     <div class="form-row">
         <div class="col-md-8 offset-md-2 mb-3">
             <small><label for="state">Select State:</label></small>
-            <select class="custom-select form-control" id="state" name="state" placeholder="test">
+            <select class="custom-select form-control" id="constate" name="state" placeholder="test">
+                <option value="">Choose a State</option>
                 @foreach ($StateController->varStateList() as $state)
                     <option value="{{ $state->id }}">{{ $state->name }}</option>
                 @endforeach
@@ -72,12 +78,10 @@
     <div class="form-row">
         <div class="col-md-8 offset-md-2 mb-3">
             <small><label for="lgas">Select Local Government Areas:</label></small>
-            <select class="selectpicker form-control" multiple data-live-search="true" id="lgas" name="lgas">
-                <option value="1">Agege</option>
-                <option value="2">Badagry</option>
-                <option value="3">Epe</option>
-                <option value="4">Ikeja</option>
-                <option value="5">Mushin</option>
+            <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas">
+                {{-- @foreach ($StateController->getLgaByStateId(2) as $lgas)
+                    <option value="{{$lgas->id}}">{{$lgas->name }}</option>
+                @endforeach --}}
             </select>
         </div>
     </div>

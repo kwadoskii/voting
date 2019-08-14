@@ -28,9 +28,9 @@ class StateController extends Controller
 
     public static function postAddLga(Request $request)
     {
-        $this->validate($request, [
-            'lga' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'lga' => 'required'
+        // ]);
 
         $name = $request->lga;
         $state = $request->state;
@@ -55,6 +55,12 @@ class StateController extends Controller
     {
         $lgalist = Lga::orderBy('state_id', 'asc')->get();
         return $lgalist;
+    }
+
+    public static function getLgaByStateId($stateid)
+    {
+        $lgas = Lga::where('state_id', $stateid)->orderBy('name', 'asc')->get();
+        return $lgas;
     }
 
     public static function varConstituencyList()

@@ -16,16 +16,22 @@
         <table class="table table-striped table-hover small" data-identifier="lga">
             <thead>
                 <tr class="d-flex">
-                    <th class="col-md-5">Name</th>
-                    <th class="col-md-4">State</th>
+                    <th class="col-md-4">Name</th>
+                    <th class="col-md-3">Constituency</th>
+                    <th class="col-md-2">State</th>
                     <th class="col-md-3 table-action">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($StateController->varLgaList() as $lga)
                 <tr class="d-flex" data-id="{{ $lga->id }}">
-                    <td class="col-md-5">{{$lga->name}}</td>
-                    <td class="col-md-4">{{$lga->state->name}}</td>
+                    <td class="col-md-4">{{$lga->name}}</td>
+                    @if ($lga->constituency == null)
+                        <td class="col-md-3"><span class="bg-info p-2 badge">Not Mapped</span></td>
+                    @else
+                        <td class="col-md-3">{{ $lga->constituency->name }}</td>
+                    @endif
+                    <td class="col-md-2">{{$lga->state->name}}</td>
                     <td class="table-action col-md-3">
                         @include('includes.actions')
                     </td>
