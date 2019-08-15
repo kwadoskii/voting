@@ -253,6 +253,7 @@ $(document).on('change', '#constate', function(e){
             $.each(data, function(index, lga){
                 $(function() {
                     $('#conlgas').append("<option value='"+ lga.id +"'>"+ lga.name+"</option>");
+                    $('select.selectpicker').selectpicker('refresh');
                 });
             });
         });
