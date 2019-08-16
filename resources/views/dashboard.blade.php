@@ -216,6 +216,7 @@ Admin Dashboard
     var urlAddState = '{{ route('addstate') }}';
     var urlAddLga = '{{ route('addlga') }}';
     var urlAddParty = '{{ route('addparty') }}';
+    var urlAddConstituency = '{{ route('addconstituency') }}';
     var urlview = '{{ route('view') }}';
     var urlAddOffice = '{{ route('addoffice') }}';
     var urlDelete = '{{ route('deletedata') }}';

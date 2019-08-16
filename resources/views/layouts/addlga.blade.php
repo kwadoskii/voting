@@ -23,14 +23,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($StateController->varLgaList() as $lga)
+                @foreach ($StateController->varLgaList()->sortBy('name') as $lga)
                 <tr class="d-flex" data-id="{{ $lga->id }}">
                     <td class="col-md-4">{{$lga->name}}</td>
+
                     @if ($lga->constituency == null)
-                        <td class="col-md-3"><span class="bg-info p-2 badge">Not Mapped</span></td>
+                        <td class="col-md-3"><span class="bg-info p-2 badge">No Constituency</span></td>
                     @else
                         <td class="col-md-3">{{ $lga->constituency->name }}</td>
                     @endif
+
                     <td class="col-md-2">{{$lga->state->name}}</td>
                     <td class="table-action col-md-3">
                         @include('includes.actions')
@@ -93,7 +95,8 @@
             <input type="text" class="form-control" id="vstate" disabled>
         </div>
     </div>
-    @endsection
+@endsection
+
 
 {{-- Delete modal --}}
 @extends('includes.deletemodal')

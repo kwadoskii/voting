@@ -26,11 +26,12 @@ class StateController extends Controller
         return response()->json(['message' => 'Saved Successfully!'], 200);
     }
 
-    public static function postAddLga(Request $request)
+    public function postAddLga(Request $request)
     {
-        // $this->validate($request, [
-        //     'lga' => 'required'
-        // ]);
+        $this->validate($request, [
+            'lga' => 'required',
+            'state' => 'required'
+        ]);
 
         $name = $request->lga;
         $state = $request->state;
@@ -57,15 +58,38 @@ class StateController extends Controller
         return $lgalist;
     }
 
-    public static function getLgaByStateId($stateid)
-    {
-        $lgas = Lga::where('state_id', $stateid)->orderBy('name', 'asc')->get();
-        return $lgas;
-    }
-
     public static function varConstituencyList()
     {
         $constilist = Constituency::orderBy('name', 'asc')->get();
         return $constilist;
+    }
+
+    public function postAddConstituency(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'state_id' => 'required',
+            'lga_id' => 'required'
+        ]);
+
+        $name = $request->name;
+        $state_id = $request->state_id;
+        $lga_ids = $request->lga_id;
+
+        $consti = New Constituency();
+        $consti->name = $name;
+        $consti->state_id = $state_id;
+        $consti->save();
+
+        $const_id = Constituency::where('name', $name)->pluck('id')->first();
+
+        foreach($lga_ids as $lga_id)
+        {
+            $lga = Lga::find($lga_id);
+            $lga->constituency_id = $const_id;
+            $lga->update();
+        }
+
+        return response()->json(['message' => 'Successfully Added!'], 200);
     }
 }

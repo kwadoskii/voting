@@ -29,6 +29,7 @@ Route::post('/adminlogin', [
 
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin'], function () {
+
         Route::get('dashboard', [
             'name' => 'admindashboard',
             'uses' => 'AdminController@getAdmindashboard',
@@ -70,6 +71,12 @@ Route::group(['prefix' => 'admin'], function () {
             'as' => 'addoffice'
         ]);
 
+        Route::post('addconstituency', [
+            'name' => 'addconstituency',
+            'uses' => 'StateController@postAddConstituency',
+            'as' => 'addconstituency'
+        ]);
+
         Route::post('view', [
             'name' => 'view',
             'uses' => 'ViewController@viewdata',
@@ -84,7 +91,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('getlgabyid', function(){
             $stateid = Input::get('state_id');
-            $lgas = Lga::where('state_id', $stateid)->orderBy('name', 'asc')->get();
+            $lgas = Lga::where(['state_id' => $stateid, 'constituency_id' => NULL])->orderBy('name', 'asc')->get();
             return $lgas;
         })->name('getlgabyid');
     });

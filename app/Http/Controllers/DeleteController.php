@@ -6,6 +6,7 @@ use App\Admin;
 use App\Candidate;
 use App\Party;
 use App\Lga;
+use App\Constituency;
 use App\office;
 use App\State;
 use App\User;
@@ -43,6 +44,16 @@ class DeleteController extends Controller
             case 'lga':
                 $lga = Lga::where('id', $id)->first();
                 $lga->delete();
+                break;
+
+            case 'constituency':
+
+                $lga = Lga::where('constituency_id', $id);
+                $lga->constituency_id = NULL;
+                $lga->update();
+
+                $constituency = Constituency::where('id', $id)->first();
+                $constituency->delete();
                 break;
 
             default:

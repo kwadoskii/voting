@@ -29,11 +29,11 @@
                         <td class="col-md-2">{{ $constituency->name }}</td>
                         <td class="col-md-2">{{ $constituency->state->name }}</td>
                         <td class="col-md-4">
-                            @foreach ($constituency->lgas as $item)
+                            @foreach ($constituency->lgas->sortBy('name') as $item)
                                 @if ($loop->last)
-                                    {{ 'and ' . $item->name . '.'}}
+                                    {{$item->name . '.'}}
                                 @else
-                                    {{ $item->name . ','}}
+                                    {{$item->name . ','}}
                                 @endif
                             @endforeach
                         </td>
@@ -79,9 +79,6 @@
         <div class="col-md-8 offset-md-2 mb-3">
             <small><label for="lgas">Select Local Government Areas:</label></small>
             <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas">
-                {{-- @foreach ($StateController->getLgaByStateId(2) as $lgas)
-                    <option value="{{$lgas->id}}">{{$lgas->name }}</option>
-                @endforeach --}}
             </select>
         </div>
     </div>
@@ -92,3 +89,11 @@
         });
     </script>
 @endsection
+
+@section('link')"modal-save-constituency"@endsection
+
+
+{{-- Delete modal --}}
+@extends('includes.deletemodal')
+
+@section('dellink')"modal-delete-lga"@endsection

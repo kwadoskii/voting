@@ -1,6 +1,6 @@
 //global variables for diff functions
 var delid;
-var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga';
+var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency';
 
 
 $(document).on('change', '#consti, #state', function() {
@@ -95,7 +95,6 @@ $(document).on('click', '.viewmodal', function(e){
 
         // $('#vlga').val(response['message'].name); // use case to distiguish between what was clicked and display the need values
     });
-
     // let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
 });
 
@@ -110,7 +109,7 @@ $(document).on('click', deletes, function(e){
     e.preventDefault();
     let identifier = $('.table').data('identifier');
 
-    // console.log(identifier, delid);
+    console.log(identifier, delid);
     $.ajax({
         method: 'POST',
         url: urlDelete,
@@ -242,19 +241,40 @@ $(document).on('click', '#modal-save-office', function(e){
     });
 });
 
+$(document).on('click', '#modal-save-constituency', function(e){
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: urlAddConstituency,
+        data: {
+            name: $('#conname').val(),
+            state_id: $('#constate').val(),
+            lga_id: $('#conlgas').val(),
+            _token: token
+        }
+    }).done(function(response){
+        $('#new-modal').modal('hide');
+
+        $('body').removeClass('modal-open');
+        $(".modal-backdrop").remove();
+
+        getpage('addconstituency');
+        //remember to display the success notification using toast
+    });
+});
+
+
+//this controls the multi-select for adding of constituency lgas
 $(document).on('change', '#constate', function(e){
     var state_id = e.target.value;
     if(state_id){
-        console.log(state_id);
         $.get (urlGetLgaById + '?state_id=' + state_id, function(data){
-            console.log(data);
             $('#conlgas').empty();
-
+            $('select.selectpicker').selectpicker('refresh');
             $.each(data, function(index, lga){
-                $(function() {
-                    $('#conlgas').append("<option value='"+ lga.id +"'>"+ lga.name+"</option>");
-                    $('select.selectpicker').selectpicker('refresh');
-                });
+                $('#conlgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
+                $('select.selectpicker').selectpicker('refresh');
             });
         });
     }
