@@ -28,7 +28,7 @@
                     <td class="col-md-4">{{$lga->name}}</td>
 
                     @if ($lga->constituency == null)
-                        <td class="col-md-3"><span class="bg-info p-2 badge">No Constituency</span></td>
+                        <td class="col-md-3"><span class="badge-info badge-pill p-2 badge">No Constituency</span></td>
                     @else
                         <td class="col-md-3">{{ $lga->constituency->name }}</td>
                     @endif

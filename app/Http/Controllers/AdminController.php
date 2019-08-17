@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Admin;
 use App\Candidate;
 use App\Party;
+use App\Lga;
+use App\Constituency;
 use App\State;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,13 +36,17 @@ class AdminController extends Controller
         $voters = User::count();
         $parties = Party::count();
         $states = State::count();
+        $lgas = Lga::count();
+        $constituencies = Constituency::count();
 
         return response()->view('dashboard', [
             'ab' => 'layouts.maindashboard',
             'candidates' => $candidates,
             'voters' => $voters,
             'parties' => $parties,
-            'states' => $states
+            'states' => $states,
+            'lgas' => $lgas,
+            'constituencies' => $constituencies
         ], 200);
     }
 

@@ -25,23 +25,23 @@
             </thead>
             <tbody>
                 @foreach ($StateController->varConstituencyList() as $constituency)
-                    <tr class="d-flex" data-id="{{ $constituency->id }}">
-                        <td class="col-md-2">{{ $constituency->name }}</td>
-                        <td class="col-md-2">{{ $constituency->state->name }}</td>
-                        <td class="col-md-4">
-                            @foreach ($constituency->lgas->sortBy('name') as $item)
-                                @if ($loop->last)
-                                    {{$item->name . '.'}}
-                                @else
-                                    {{$item->name . ','}}
-                                @endif
-                            @endforeach
-                        </td>
-                        <td class="col-md-1">{{ $constituency->lgas()->count() }}</td>
-                        <td class="table-action col-md-3">
-                            @include('includes.actions')
-                        </td>
-                    </tr>
+                <tr class="d-flex" data-id="{{ $constituency->id }}">
+                    <td class="col-md-2">{{ $constituency->name }}</td>
+                    <td class="col-md-2">{{ $constituency->state->name }}</td>
+                    <td class="col-md-4">
+                        @foreach ($constituency->lgas->sortBy('name') as $item)
+                        @if ($loop->last)
+                        {{$item->name . '.'}}
+                        @else
+                        {{$item->name . ','}}
+                        @endif
+                        @endforeach
+                    </td>
+                    <td class="col-md-1">{{ $constituency->lgas()->count() }}</td>
+                    <td class="table-action col-md-3">
+                        @include('includes.actions')
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
@@ -52,45 +52,76 @@
 @extends('includes.addmodal')
 
 @section('new')
-    Constituency
+Constituency
 @endsection
 
 @section('modalbody')
-    <div class="form-row">
-        <div class="col-md-8 offset-md-2 mb-3">
-            <small><label for="name">Name:</label></small>
-            <input type="text" class="form-control" id="conname" name="name" required>
-        </div>
+<div class="form-row">
+    <div class="col-md-8 offset-md-2 mb-3">
+        <small><label for="name">Name:</label></small>
+        <input type="text" class="form-control" id="conname" name="name" required>
     </div>
+</div>
 
-    <div class="form-row">
-        <div class="col-md-8 offset-md-2 mb-3">
-            <small><label for="state">Select State:</label></small>
-            <select class="custom-select form-control" id="constate" name="state" placeholder="test">
-                <option value="">Choose a State</option>
-                @foreach ($StateController->varStateList() as $state)
-                    <option value="{{ $state->id }}">{{ $state->name }}</option>
-                @endforeach
-            </select>
-        </div>
+<div class="form-row">
+    <div class="col-md-8 offset-md-2 mb-3">
+        <small><label for="state">Select State:</label></small>
+        <select class="custom-select form-control" id="constate" name="state" placeholder="test">
+            <option value="">Choose a State</option>
+            @foreach ($StateController->varStateList() as $state)
+            <option value="{{ $state->id }}">{{ $state->name }}</option>
+            @endforeach
+        </select>
     </div>
+</div>
 
-    <div class="form-row">
-        <div class="col-md-8 offset-md-2 mb-3">
-            <small><label for="lgas">Select Local Government Areas:</label></small>
-            <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas">
-            </select>
-        </div>
+<div class="form-row">
+    <div class="col-md-8 offset-md-2 mb-3">
+        <small><label for="lgas">Select Local Government Areas:</label></small>
+        <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas">
+        </select>
     </div>
+</div>
 
-    <script>
-        $(function () {
+<script>
+    $(function () {
             $('select.selectpicker').selectpicker();
         });
-    </script>
+</script>
 @endsection
 
 @section('link')"modal-save-constituency"@endsection
+
+
+{{-- view constituency modal --}}
+@extends('includes.viewmodal')
+
+@section('viewmodalid')"constituency-view-modal"@endsection
+
+@section('viewmodalbody')
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="name">Constituency Name:</label></small>
+            <input type="text" class="form-control" id="vconname" disabled>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="name">State:</label></small>
+            <input type="text" class="form-control" id="vconstate" disabled>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="name">Local Governments: &nbsp;</label></small><span class="badge badge-pill badge-info" id="vconcount"></span>
+            <ul class="list-group" id="vconlgas">
+                {{-- added dynamically using JS --}}
+            </ul>
+        </div>
+    </div>
+@endsection
 
 
 {{-- Delete modal --}}

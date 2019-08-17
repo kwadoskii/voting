@@ -47,10 +47,13 @@ class DeleteController extends Controller
                 break;
 
             case 'constituency':
-
-                $lga = Lga::where('constituency_id', $id);
-                $lga->constituency_id = NULL;
-                $lga->update();
+                $lgas = Lga::where('constituency_id', $id)->get();
+                
+                foreach($lgas as $lga)
+                {
+                    $lga->constituency_id = null;
+                    $lga->update();
+                }
 
                 $constituency = Constituency::where('id', $id)->first();
                 $constituency->delete();

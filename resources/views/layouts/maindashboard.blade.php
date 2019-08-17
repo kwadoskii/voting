@@ -26,4 +26,18 @@
             <h5 class="card-title p-4 text-center" style="font-size: 3em;">{{ $states }}</h5>
         </div>
     </div>
+
+    <div class="card text-white bg-secondary m-2 col-lg-3" style="min-width: 46%;">
+        <div class="card-header text-center">Total Number of Local Govts.</div>
+        <div class="card-body">
+            <h5 class="card-title p-4 text-center" style="font-size: 3em;">{{ $lgas }}</h5>
+        </div>
+    </div>
+
+    <div class="card text-white bg-secondary m-2 col-lg-3" style="min-width: 46%;">
+        <div class="card-header text-center">Total Number of Constituencies</div>
+        <div class="card-body">
+            <h5 class="card-title p-4 text-center" style="font-size: 3em;">{{ $constituencies }}</h5>
+        </div>
+    </div>
 </div>

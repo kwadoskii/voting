@@ -33,8 +33,8 @@ $(document).on('click', '.mymodal', function(e){
 });
 
 $(document).on('click', '.viewmodal', function(e){
-    //add more view-modal ids in the next line.
-    let views = '#state-view-modal, #lga-view-modal, #party-view-modal, #office-view-modal, #admin-view-modal';
+    //add more view modal ids here.
+    let views = '#state-view-modal, #lga-view-modal, #party-view-modal, #office-view-modal, #admin-view-modal, #constituency-view-modal';
 
     e.preventDefault();
     $(views).modal('show');
@@ -87,13 +87,26 @@ $(document).on('click', '.viewmodal', function(e){
                 $('#vphone').val(response.admin.phone);
                 $('#vemail').val(response.admin.email);
                 break;
+            
+            case 'constituency':
+                $('#vconlgas').empty();
+                $('#vconcount').empty();
+
+                $('#vconname').val(response.constituency.name);
+                $('#vconstate').val(response.constituency.state);
+                $('#vconcount').append(response.constituency.lgas.length);
+                let sortedlga = response.constituency.lgas;
+                sortedlga = sortedlga.sort();
+
+                sortedlga.forEach(lga => {
+                    $('#vconlgas').append("<li class='list-group-item disabled'>"+lga+"</li>");
+                });
+                console.log(response.constituency.name, response.constituency.lgas, response.constituency.state);
 
             default:
                 console.log(response['message']);
                 break;
         }
-
-        // $('#vlga').val(response['message'].name); // use case to distiguish between what was clicked and display the need values
     });
     // let statename = e.target.parentElement.parentElement.parentElement.childNodes[1].textContent;
 });

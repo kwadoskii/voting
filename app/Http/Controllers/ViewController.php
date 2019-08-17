@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin;
 use App\Candidate;
 use App\Party;
+use App\Constituency;
 use App\Lga;
 use App\office;
 use App\State;
@@ -63,6 +64,15 @@ class ViewController extends Controller
                     'gender' => $data->gender,
                     'dob' => $data->DOB,
                     'email' => $data->email
+                ]]);
+                break;
+
+            case 'constituency':
+                $data = Constituency::find($id);
+                return response()->json(['constituency' => [
+                    'name' => $data->name,
+                    'state' =>$data->state->name,
+                    'lgas' => $data->lgas()->pluck('name')
                 ]]);
                 break;
 

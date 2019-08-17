@@ -7,15 +7,6 @@ Admin Dashboard
 @inject('AdminController', 'App\Http\Controllers\AdminController')
 
 @section('section')
-{{--    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">--}}
-{{-- <div class="container-fluid my-2 my-lg-0"> --}}
-{{--        <a class="navbar-brand col-sm-3 col-md-2 mr-0 pt-1 pb-1" href="#"></a>--}}
-{{--        <ul class="navbar-nav px-3">--}}
-{{--            <li class="nav-item text-nowrap">--}}
-{{--                <a class="nav-link" href="{{ route('adminlogout') }}">Sign out</a>--}}
-{{--            </li>--}}
-{{--        </ul>--}}
-{{--    </nav>--}}
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid my-2">
