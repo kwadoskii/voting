@@ -112,10 +112,11 @@ Constituency
             <input type="text" class="form-control" id="vconstate" disabled>
         </div>
     </div>
-    
+
     <div class="form-row">
         <div class="col-md-8 offset-md-2 mb-3">
-            <small><label for="name">Local Governments: &nbsp;</label></small><span class="badge badge-pill badge-info" id="vconcount"></span>
+            {{-- <small><label for="name">Local Governments: &nbsp;</label></small><span class="badge badge-pill badge-info" id="vconcount"></span> --}}
+            <small><label for="name" class="btn btn-info">Local Governments: &nbsp; <span class="badge badge-light" id="vconcount"></span></label>
             <ul class="list-group" id="vconlgas">
                 {{-- added dynamically using JS --}}
             </ul>
