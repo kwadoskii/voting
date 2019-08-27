@@ -104,6 +104,41 @@ Party
 @endsection
 
 
+{{-- edit party modal --}}
+@extends('includes.editmodal')
+
+@section('editmodalbody')
+    <div class="form-row mb-2">
+        <div class="col-md-6">
+            <small><label for="eacronym">Party Acronym</label></small>
+            <input type="text" class="form-control" id="eacronym" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-6">
+            <small><label for="ename">Party Name</label></small>
+            <input type="text" class="form-control" id="ename" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-12">
+            <small><label for="edesc">Description</label></small>
+            <input type="text" class="form-control" id="edesc" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('editmodalid')"modal-edit-party"@endsection
+
+
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
 

@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class OfficeController extends Controller
 {
-    public static function postAddOffice(Request $request)
+    public function postAddOffice(Request $request)
     {
-        // $this->validate($request, [          See why this did
-        //     'name' => 'required'             not work!!!
-        // ]);
-        
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+
         $name = $request['name'];
         $consti = $request['consti'];
         $state = $request['state'];
@@ -23,7 +23,6 @@ class OfficeController extends Controller
         $office->name = $name;
         $office->is_constituency = $consti;
         $office->is_state = $state;
-
         $office->save();
 
         return response()->json(['message' => 'Office Added Successfully!']);

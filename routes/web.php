@@ -83,6 +83,12 @@ Route::group(['prefix' => 'admin'], function () {
             'as' => 'view'
         ]);
 
+        Route::post('edit', [
+            'name' => 'edit',
+            'uses' => 'EditController@editData',
+            'as' => 'edit'
+        ]);
+
         Route::post('delete', [
             'name' => 'deletedata',
             'uses' => 'DeleteController@deletedata',

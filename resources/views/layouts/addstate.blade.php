@@ -59,16 +59,26 @@ State
 
 @section('viewmodalid')"state-view-modal"@endsection
 
-{{-- @if ($StateController->idd = null) --}}
-{{-- @if ($StateController->getid2() != null) --}}
 @section('viewmodalbody')
-<div class="col-md-10 offset-md-1 mb-2">
-    <small><label for="state">State Name</label></small>
-    <input type="text" class="form-control" id="vname" disabled>
-        {{-- value="{{ $StateController->varStateList()->find($StateController->$this->id)->name }}"> --}}
-    {{-- value="{{ $StateController->varStateList()->find(2)->name }}"> --}}
-</div>
+    <div class="col-md-10 offset-md-1 mb-2">
+        <small><label for="state">State Name</label></small>
+        <input type="text" class="form-control" id="vname" disabled>
+    </div>
 @endsection
+
+
+{{-- edit state modal --}}
+@extends('includes.editmodal')
+
+@section('editmodalbody')
+    <div class="col-md-10 offset-md-1 mb-2">
+        <small><label for="state">State Name</label></small>
+        <input type="text" class="form-control" id="ename">
+    </div>
+@endsection
+
+@section('editmodalid')"modal-edit-state"@endsection
+
 
 {{-- Delete modal --}}
 @extends('includes.deletemodal')

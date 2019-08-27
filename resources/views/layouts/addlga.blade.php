@@ -98,6 +98,34 @@
 @endsection
 
 
+{{-- edit lga modal --}}
+@extends('includes.editmodal')
+
+@section('editmodalbody')
+    <div class="form-row">
+        <div class="col-md-6 mb-2">
+            <small><label for="elga">LGA Name</label></small>
+            <input type="text" class="form-control" id="elga" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-2">
+            <small><label for="elga">LGA State</label></small>
+            <select class="custom-select" id="estate" required>
+                <option selected>Select State</option>
+                @foreach ($StateController->varStateList() as $state)
+                <option value="{{$state->id}}">{{$state->name}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+@endsection
+
+@section('editmodalid')"modal-edit-lga"@endsection
+
+
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
 

@@ -108,6 +108,41 @@ Office
 </div>
 @endsection
 
+
+{{-- edit office modal --}}
+@extends('includes.editmodal')
+
+@section('editmodalbody')
+    <div class="form-row mb-2">
+        <div class="col-md-8">
+            <small><label for="ename">Office Name</label></small>
+            <input type="text" class="form-control" id="ename" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="econsti">
+                <label class="custom-control-label" for="econsti">Is Constituency?</label>
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-2">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="estate">
+                <label class="custom-control-label" for="estate">Is State?</label>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('editmodalid')"modal-edit-office"@endsection
+
+
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
 

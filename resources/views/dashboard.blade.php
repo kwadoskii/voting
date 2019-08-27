@@ -208,7 +208,8 @@ Admin Dashboard
     var urlAddLga = '{{ route('addlga') }}';
     var urlAddParty = '{{ route('addparty') }}';
     var urlAddConstituency = '{{ route('addconstituency') }}';
-    var urlview = '{{ route('view') }}';
+    var urlView = '{{ route('view') }}';
+    var urlEdit = '{{ route('edit') }}';
     var urlAddOffice = '{{ route('addoffice') }}';
     var urlDelete = '{{ route('deletedata') }}';
     var urlGetLgaById = '{{ route('getlgabyid') }}';

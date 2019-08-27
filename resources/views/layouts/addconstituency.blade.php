@@ -56,36 +56,36 @@ Constituency
 @endsection
 
 @section('modalbody')
-<div class="form-row">
-    <div class="col-md-8 offset-md-2 mb-3">
-        <small><label for="name">Name:</label></small>
-        <input type="text" class="form-control" id="conname" name="name" required>
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="name">Name:</label></small>
+            <input type="text" class="form-control" id="conname" name="name" required>
+        </div>
     </div>
-</div>
 
-<div class="form-row">
-    <div class="col-md-8 offset-md-2 mb-3">
-        <small><label for="state">Select State:</label></small>
-        <select class="custom-select form-control" id="constate" name="state" placeholder="test">
-            <option value="">Choose a State</option>
-            @foreach ($StateController->varStateList() as $state)
-            <option value="{{ $state->id }}">{{ $state->name }}</option>
-            @endforeach
-        </select>
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="state">Select State:</label></small>
+            <select class="custom-select form-control" id="constate" name="state" placeholder="test">
+                <option value="">Choose a State</option>
+                @foreach ($StateController->varStateList() as $state)
+                <option value="{{ $state->id }}">{{ $state->name }}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
-</div>
 
-<div class="form-row">
-    <div class="col-md-8 offset-md-2 mb-3">
-        <small><label for="lgas">Select Local Government Areas:</label></small>
-        <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas">
-        </select>
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="lgas">Select Local Government Areas:</label></small>
+            <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas">
+            </select>
+        </div>
     </div>
-</div>
 
 <script>
     $(function () {
-            $('select.selectpicker').selectpicker();
+            $('#conlgas').selectpicker();
         });
 </script>
 @endsection
@@ -102,14 +102,14 @@ Constituency
     <div class="form-row">
         <div class="col-md-8 offset-md-2 mb-3">
             <small><label for="name">Constituency Name:</label></small>
-            <input type="text" class="form-control" id="vconname" disabled>
+            <input type="text" class="form-control" id="vconname">
         </div>
     </div>
 
     <div class="form-row">
         <div class="col-md-8 offset-md-2 mb-3">
             <small><label for="name">State:</label></small>
-            <input type="text" class="form-control" id="vconstate" disabled>
+            <input type="text" class="form-control" id="vconstate">
         </div>
     </div>
 
@@ -123,6 +123,48 @@ Constituency
         </div>
     </div>
 @endsection
+
+
+{{-- edit constituency modal --}}
+@extends('includes.editmodal')
+
+@section('editmodalbody')
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="ename">Name:</label></small>
+            <input type="text" class="form-control" id="ename" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="estate">Select State:</label></small>
+            <select class="custom-select form-control" id="estate">
+                <option value="">Choose a State</option>
+                @foreach ($StateController->varStateList() as $state)
+                <option value="{{ $state->id }}">{{ $state->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <small><label for="elgas">Select Local Government Areas:</label></small>
+            <select class="selectpicker form-control" multiple data-live-search="true" id="elgas">
+            </select>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#elgas').selectpicker();
+        });
+    </script>
+@endsection
+
+@section('editmodalid')"modal-edit-constituency"@endsection
+
 
 
 {{-- Delete modal --}}
