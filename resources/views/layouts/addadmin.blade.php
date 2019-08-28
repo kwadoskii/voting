@@ -177,6 +177,75 @@
     </div>
 @endsection
 
+
+{{-- edit admin modal --}}
+@extends('includes.editmodal')
+
+@section('editmodalbody')
+    <div class="form-row">
+        <div class="col-md-4 mb-2">
+            <small><label for="efirstname">First Name</label></small>
+            <input type="text" class="form-control" id="efirstname" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-2">
+            <small><label for="emiddlename">Middle Name</label></small>
+            <input type="text" class="form-control" id="emiddlename">
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-2">
+            <small><label for="elastname">Last Name</label></small>
+            <div class="input-group">
+                <input type="text" class="form-control" id="elastname" required>
+                <div class="invalid-tooltip">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 mb-2">
+            <div class="form-group">
+                <small><label for="egender">Gender</label></small>
+                <select class="custom-select" id="egender" required>
+                    <option value="">Select gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <small><label for="edob">Date of Birth</label></small>
+            <input type="date" class="form-control" id="edob" required>
+            <div class="invalid-tooltip">
+                Please provide a valid state.
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-2">
+            <small><label for="ephone">Phone Number</label></small>
+            <input type="text" class="form-control" id="ephone" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-12 mb-2">
+            <small><label for="eemail">E-mail</label></small>
+            <input type="email" class="form-control" id="eemail" required>
+        </div>
+    </div>
+@endsection
+
+@section('editmodalid')"modal-edit-admin"@endsection
+
+
 {{-- Delete modal --}}
 @extends('includes.deletemodal')
 

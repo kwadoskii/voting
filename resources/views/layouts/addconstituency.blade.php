@@ -83,11 +83,11 @@ Constituency
         </div>
     </div>
 
-<script>
-    $(function () {
-            $('#conlgas').selectpicker();
-        });
-</script>
+    <script>
+        $(function () {
+                $('#conlgas').selectpicker();
+            });
+    </script>
 @endsection
 
 @section('link')"modal-save-constituency"@endsection

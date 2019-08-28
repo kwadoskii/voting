@@ -1,7 +1,7 @@
 //global variables for diff functions
 var delid;
 var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency';
-var views = '#modal-edit-state, #modal-edit-lga, #modal-edit-party, #modal-edit-office, #modal-edit-constituency';
+var views = '#modal-edit-state, #modal-edit-lga, #modal-edit-party, #modal-edit-office, #modal-edit-constituency, #modal-edit-admin';
 var editid;
 var editidentifier;
 
@@ -132,6 +132,16 @@ $(document).on('click', '.editmodal', function (e) {
         }
     }).done(function (response) {
         switch (identifier) {
+            case 'admin':
+                $('#efirstname').val(response.admin.first_name);
+                $('#emiddlename').val(response.admin.mid_name);
+                $('#elastname').val(response.admin.last_name);
+                $('#egender').val(response.admin.gender);
+                $('#edob').val(response.admin.DOB);
+                $('#ephone').val(response.admin.phone);
+                $('#eemail').val(response.admin.email);
+                break;
+
             case 'state':
                 $('#ename').val(response.state.name);
                 break;
@@ -158,7 +168,6 @@ $(document).on('click', '.editmodal', function (e) {
             case 'constituency':
                 $('#ename').val(response.constituency.name);
                 $('#estate').val(response.constituency.stateid);
-                // $('#elgas').val(response.constituency.lgasid);
 
                 $.get (urlGetLgaById + '?state_id=' + response.constituency.stateid, function(data){
                     let lgaids = [];
@@ -167,16 +176,28 @@ $(document).on('click', '.editmodal', function (e) {
                     response.constituency.lgasid.forEach(lga => {
                         lgaids.push(lga.id);
                         $('#elgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
-                        $('#elgas').selectpicker('refresh');
                     });
                     $('#elgas').selectpicker('refresh');
                     $.each(data, function(index, lga){
                         $('#elgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
-                        $('#elgas').selectpicker('refresh');
                     });
 
                     $('#elgas').val(lgaids);
                     $('#elgas').selectpicker('refresh');
+                });
+
+                //refresh the lga if state is changed
+                $(document).on('change', '#estate', function(){
+                    $('#elgas').val([]);
+                    let state_id = $('#estate').val();
+
+                    $.get (urlGetLgaById + '?state_id=' + state_id, function(data){
+                        $('#elgas').empty();
+                        $.each(data, function(index, lga){
+                            $('#elgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
+                            $('#elgas').selectpicker('refresh');
+                        });
+                    });
                 });
                 console.log(response.constituency.lgasid);
                 break;
@@ -210,6 +231,21 @@ $(document).on('click', views, function (e) {
 // used to parse edited data to the actual ajax update request
 function toBeParse(identifier){
     switch (identifier) {
+        case 'admin':
+            return {
+                id: editid,
+                identifier: identifier,
+                update: 1,
+                _token: token,
+                firstname: $('#efirstname').val(),
+                middlename: $('#emiddlename').val(),
+                lastname: $('#elastname').val(),
+                gender: $('#egender').val(),
+                dob: $('#edob').val(),
+                phone: $('#ephone').val(),
+                email: $('#eemail').val()
+            };
+
         case 'state':
             return {
                 id: editid,
@@ -250,6 +286,17 @@ function toBeParse(identifier){
                 name: $('#ename').val(),
                 is_state: $('#estate').val(),
                 is_constituency: $('#econsti').val()
+            };
+
+        case 'constituency':
+            return {
+                id: editid,
+                identifier: identifier,
+                update: 1,
+                _token: token,
+                name: $('#ename').val(),
+                stateid: $('#estate').val(),
+                lgaids: $('#elgas').val(),
             };
 
         default:

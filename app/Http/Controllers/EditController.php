@@ -28,6 +28,35 @@ class EditController extends Controller
         $identifier = $request->identifier;
 
         switch ($identifier) {
+            case 'admin':
+                $admin = Admin::find($id);
+
+                if($update == 0){
+                    return response()->json(['admin'=> $admin], 200);
+                }
+                else{
+                    $this->validate($request, [
+                        'firstname' => 'required',
+                        'lastname' => 'required',
+                        'dob' => 'required',
+                        'gender' => 'required',
+                        'phone' => 'required',
+                        'email' => 'required'
+                    ]);
+
+                    $admin->first_name = $request->firstname;
+                    $admin->mid_name = $request->middlename;
+                    $admin->last_name = $request->lastname;
+                    $admin->DOB = $request->dob;
+                    $admin->gender = $request->gender;
+                    $admin->phone = $request->phone;
+                    $admin->email = $request->email;
+
+                    $admin->update();
+                    return response()->json(['message' => "Updated Successfully!"], 200);
+                }
+                break;
+
             case 'state':
                 $state = State::find($id);
 
@@ -111,7 +140,33 @@ class EditController extends Controller
                 return response()->json(['constituency' => ['name' => $constituency->name, 'stateid' => $constituency->state->id, 'lgasid' => $constituency->lgas]], 200);
                 }
                 else{
-                    //
+                    $this->validate($request, [
+                        'name' => 'required',
+                        'stateid' => 'required',
+                        'lgaids' => 'required'
+                    ]);
+
+                    $constituency->name = $request->name;
+                    $constituency->state_id = $request->stateid;
+
+                    $newlgaids = $request->lgaids;                      //Eg: 10 30
+                    $oldlgaids = $constituency->lgas()->pluck('id');    // Eg:10 20 30
+                    // $finalids = array_diff($oldlgaids, $newlgaids);
+
+                    foreach ($oldlgaids as $lgaid) {
+                        $lga = Lga::find($lgaid);           //try and use php array diff to achieve this
+                        $lga->constituency_id = null;       //and the foreach block below.
+                        $lga->update();
+                    }
+
+                    foreach ($newlgaids as $lgaid) {
+                        $lga = Lga::find($lgaid);
+                        $lga->constituency_id = $id;
+                        $lga->update();
+                    }
+
+                    $constituency->update();
+                    return response()->json(['message' => "Updated Successfully!"], 200);
                 }
             default:
                 return response()->json(['message' => 'Data Not Found'], 422);

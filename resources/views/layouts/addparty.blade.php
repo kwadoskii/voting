@@ -1,4 +1,5 @@
 @inject('PartyController', 'App\Http\Controllers\PartyController')
+@include('includes.message')
 
 <div class="navbar">
     <h1 class="h3 mb-3">Parties</h1>
@@ -37,6 +38,10 @@
         </table>
     </div>
 </div>
+
+<script>
+    $('.toast').toast('show');
+</script>
 
 {{--add new party modal--}}
 
