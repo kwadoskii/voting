@@ -1,3 +1,6 @@
+@inject('UserController', 'App\Http\Controllers\UserController')
+@include('includes.message')
+
 <div class="navbar">
     <h1 class="h3 mb-3">Voters</h1>
     <div class="btn btn-dark ml-md-auto rounded mouse mymodal">&plus; Add Voter</div>
@@ -11,6 +14,38 @@
                 <h6 class="card-subtitle text-muted">Below is the list of registered voters</h6>
             </div>
         </div>
+        <table class="table table-striped table-hover small" data-identifier="voter">
+                <thead>
+                    <tr class="d-flex">
+                        <th class="col-md-1">Firstname</th>
+                        <th class="col-md-1">Lastname</th>
+                        <th class="col-md-1">Gender</th>
+                        <th class="col-md-2">DOB</th>
+                        <th class="col-md-2">LGA</th>
+                        <th class="col-md-2">Constituency</th>
+                        <th class="col-md-1">State</th>
+                        <th class="col-md-2 table-action">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($UserController->varVoterList() as $voter)
+                    <tr class="d-flex" data-id="{{ $voter->id }}">
+                        <td class="col-md-1">{{$voter->first_name}}</td>
+                        <td class="col-md-1">{{$voter->last_name}}</td>
+                        <td class="col-md-1">{{$voter->gender}}</td>
+                        <td class="col-md-2">{{$voter->DOB}}</td>
+                        {{-- <td class="col-md-2">{{$voter->lga}}</td> --}}
+                        <td class="col-md-2">{{$voter->constituency_id}}</td>
+                        <td class="col-md-1">{{$voter->state_id}}</td>
+                        {{-- <td class="col-md-2">{{$office->is_constituency  == 1 || $office->is_constituency == true ? 'Yes' : 'No'}}</td>
+                        <td class="col-md-2">{{$office->is_state == 1 || $office->is_state == true ? 'Yes' : 'No'}}</td> --}}
+                        <td class="table-action col-md-2">
+                            @include('includes.actions')
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
     </div>
 </div>
 

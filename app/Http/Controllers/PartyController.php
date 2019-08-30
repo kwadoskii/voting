@@ -28,7 +28,7 @@ class PartyController extends Controller
 
         $party->save();
 
-        return response()->json(['message' => 'Saved auccessfully.']);
+        return response()->json(['message' => 'Created Successfully!']);
     }
 
     public static function varPartyList()

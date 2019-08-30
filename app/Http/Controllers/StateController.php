@@ -17,13 +17,11 @@ class StateController extends Controller
         ]);
 
         $name = $request->state;
-
         $state = New State();
-
         $state->name = $name;
         $state->save();
 
-        return response()->json(['message' => 'Saved Successfully!'], 200);
+        return response()->json(['message' => 'Created Successfully!'], 200);
     }
 
     public function postAddLga(Request $request)
@@ -37,13 +35,12 @@ class StateController extends Controller
         $state = $request->state;
 
         $lga = New Lga();
-
         $lga->name = $name;
         $lga->state_id = $state;
 
         $lga->save();
 
-        return response()->json(['message' => 'Saved Successfully'], 200);
+        return response()->json(['message' => 'Created Successfully'], 200);
     }
 
     public static function varStateList()
@@ -90,6 +87,6 @@ class StateController extends Controller
             $lga->update();
         }
 
-        return response()->json(['message' => 'Successfully Added!'], 200);
+        return response()->json(['message' => 'Created Added!'], 200);
     }
 }

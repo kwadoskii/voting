@@ -27,8 +27,11 @@ class DeleteController extends Controller
                 break;
 
             case 'admin':
-                $admin = Admin::where('id', $id)->first();
-                $admin->delete();
+                if(Auth::guard('admin')->user() != Admin::find($id))
+                {
+                    $admin = Admin::where('id', $id)->first();
+                    $admin->delete();
+                }
                 break;
 
             case 'office':
@@ -48,7 +51,7 @@ class DeleteController extends Controller
 
             case 'constituency':
                 $lgas = Lga::where('constituency_id', $id)->get();
-                
+
                 foreach($lgas as $lga)
                 {
                     $lga->constituency_id = null;

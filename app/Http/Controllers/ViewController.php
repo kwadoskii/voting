@@ -17,8 +17,6 @@ class ViewController extends Controller
 {
     public static function viewdata(Request $request)
     {
-        // global $idd;
-        // $GLOBALS['idd']  = $id;
         $id = $request['id'];
         $identifier = $request['identifier'];
 

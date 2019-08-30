@@ -25,7 +25,7 @@ class OfficeController extends Controller
         $office->is_state = $state;
         $office->save();
 
-        return response()->json(['message' => 'Office Added Successfully!']);
+        return response()->json(['message' => 'Created Successfully!']);
     }
 
     public static function varOfficeList()

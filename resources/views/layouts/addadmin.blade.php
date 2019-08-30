@@ -1,4 +1,5 @@
 @inject('AdminController', 'App\Http\Controllers\AdminController' )
+@include('includes.message')
 
 <div class="navbar">
     <h1 class="h3 mb-3">Administrators</h1>

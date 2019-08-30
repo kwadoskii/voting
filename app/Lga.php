@@ -15,4 +15,9 @@ class Lga extends Model
     {
         return $this->belongsTo('App\Constituency');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

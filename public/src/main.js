@@ -3,22 +3,23 @@ var delid;
 var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency';
 var views = '#modal-edit-state, #modal-edit-lga, #modal-edit-party, #modal-edit-office, #modal-edit-constituency, #modal-edit-admin';
 var editid;
+var msg;
 var editidentifier;
 
 
-$(document).on('change', '#consti, #state, #econsti, #estate', function() {
+$(document).on('change', '#consti, #state, #econsti, #estate', function () {
     if ($(this).is(':checked')) {
-      $(this).attr('value', 1);
+        $(this).attr('value', 1);
     } else {
-      $(this).attr('value', 0);
+        $(this).attr('value', 0);
     }
 });
 
 //toggling of sidebar
-$(document).on('click', '.side-bar', function(){
+$(document).on('click', '.side-bar', function () {
     $('.side-bar').removeClass('active');
     $(this).toggleClass('active');
-  });
+});
 
 $('.nav-link').on('click', function (e) {
 
@@ -30,12 +31,12 @@ $('.nav-link').on('click', function (e) {
     }
 });
 
-$(document).on('click', '.mymodal', function(e){
+$(document).on('click', '.mymodal', function (e) {
     $('#new-modal').modal('show');
     // $('#new-modal').modal({keyboard: false, backdrop: 'static'});
 });
 
-$(document).on('click', '.viewmodal', function(e){
+$(document).on('click', '.viewmodal', function (e) {
     //add more view modal ids here.
     let views = '#state-view-modal, #lga-view-modal, #party-view-modal, #office-view-modal, #admin-view-modal, #constituency-view-modal';
 
@@ -48,8 +49,8 @@ $(document).on('click', '.viewmodal', function(e){
     $.ajax({
         method: 'POST',
         url: urlView,
-        data: {id: id, identifier: identifier, _token: token} //add an identifier here
-    }).done(function(response){
+        data: { id: id, identifier: identifier, _token: token } //add an identifier here
+    }).done(function (response) {
         switch (identifier) {
             case 'state':
                 $('#vname').val(response['state'].name);
@@ -69,14 +70,14 @@ $(document).on('click', '.viewmodal', function(e){
 
             case 'office':
                 $('#vname').val(response.office.name);
-                if(response.office.state == 1){
+                if (response.office.state == 1) {
                     $('#vstate').attr('checked', true);
-                }else{
+                } else {
                     $('#vstate').attr('checked', false);
                 }
-                if(response.office.consti == 1){
+                if (response.office.consti == 1) {
                     $('#vconsti').attr('checked', true);
-                }else{
+                } else {
                     $('#vconsti').attr('checked', false);
                 }
                 break;
@@ -102,9 +103,9 @@ $(document).on('click', '.viewmodal', function(e){
                 sortedlga = sortedlga.sort();
 
                 sortedlga.forEach(lga => {
-                    $('#vconlgas').append("<li class='list-group-item disabled'>"+lga+"</li>");
+                    $('#vconlgas').append("<li class='list-group-item disabled'>" + lga + "</li>");
                 });
-                // console.log(response.constituency.name, response.constituency.lgas, response.constituency.state);
+            // console.log(response.constituency.name, response.constituency.lgas, response.constituency.state);
 
             default:
                 console.log(response['message']);
@@ -169,17 +170,17 @@ $(document).on('click', '.editmodal', function (e) {
                 $('#ename').val(response.constituency.name);
                 $('#estate').val(response.constituency.stateid);
 
-                $.get (urlGetLgaById + '?state_id=' + response.constituency.stateid, function(data){
+                $.get(urlGetLgaById + '?state_id=' + response.constituency.stateid, function (data) {
                     let lgaids = [];
                     $('#elgas').empty();
 
                     response.constituency.lgasid.forEach(lga => {
                         lgaids.push(lga.id);
-                        $('#elgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
+                        $('#elgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
                     });
                     $('#elgas').selectpicker('refresh');
-                    $.each(data, function(index, lga){
-                        $('#elgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
+                    $.each(data, function (index, lga) {
+                        $('#elgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
                     });
 
                     $('#elgas').val(lgaids);
@@ -187,14 +188,14 @@ $(document).on('click', '.editmodal', function (e) {
                 });
 
                 //refresh the lga if state is changed
-                $(document).on('change', '#estate', function(){
+                $(document).on('change', '#estate', function () {
                     $('#elgas').val([]);
                     let state_id = $('#estate').val();
 
-                    $.get (urlGetLgaById + '?state_id=' + state_id, function(data){
+                    $.get(urlGetLgaById + '?state_id=' + state_id, function (data) {
                         $('#elgas').empty();
-                        $.each(data, function(index, lga){
-                            $('#elgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
+                        $.each(data, function (index, lga) {
+                            $('#elgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
                             $('#elgas').selectpicker('refresh');
                         });
                     });
@@ -216,6 +217,7 @@ $(document).on('click', '.editmodal', function (e) {
 // Actual saving of the edited data
 $(document).on('click', views, function (e) {
     e.preventDefault();
+
     $.ajax({
         method: 'POST',
         url: urlEdit,
@@ -224,12 +226,15 @@ $(document).on('click', views, function (e) {
         $('#edit-modal').modal("hide");
 
         getpage('add' + editidentifier);
-        console.log(response.message);
+        msg = response.message;
+        setTimeout(displayNotification, 500);
     });
+
 });
 
+
 // used to parse edited data to the actual ajax update request
-function toBeParse(identifier){
+function toBeParse(identifier) {
     switch (identifier) {
         case 'admin':
             return {
@@ -305,14 +310,14 @@ function toBeParse(identifier){
 }
 
 
-$(document).on('click', '#delete', function(e){
+$(document).on('click', '#delete', function (e) {
     e.preventDefault();
     $('#deletemodal').modal('show');
     delid = e.target.parentNode.parentNode.parentNode.dataset['id'];
 });
 
 //for deletion of entered data uses switch
-$(document).on('click', deletes, function(e){
+$(document).on('click', deletes, function (e) {
     e.preventDefault();
     let identifier = $('.table').data('identifier');
 
@@ -325,13 +330,15 @@ $(document).on('click', deletes, function(e){
             id: delid,
             _token: token
         }
-    }).done(function(response){
+    }).done(function (response) {
         $('#deletemodal').modal('hide');
         $('body').removeClass('modal-open');
         $(".modal-backdrop").remove();
         getpage('add' + identifier);
+
+        msg = response.message;
+        setTimeout(displayNotification, 500);
         console.log(response.message);
-        //try to make the response a notification!!!
     });
 });
 
@@ -364,6 +371,8 @@ $(document).on('click', deletes, function(e){
             });
         }
         else {
+            msg = 'Check your password!';
+            setTimeout(displayNotification, 500);
             console.log('check your password');
         }
     });
@@ -381,7 +390,8 @@ $(document).on('click', deletes, function(e){
             $('body').removeClass('modal-open');
             $(".modal-backdrop").remove();
             getpage('addstate');
-            //remember to display the success notification using toast
+            msg = response.message;
+            setTimeout(displayNotification, 500);
         });
     });
 
@@ -472,26 +482,33 @@ $(document).on('click', deletes, function(e){
     });
 }
 
+
+//Display of Notifications
+function displayNotification() {
+    $('.lead').text(msg);
+    $('#toast').toast('show');
+}
+
 //this controls the multi-select for adding of constituency lgas
-$(document).on('change', '#constate', function(e){
+$(document).on('change', '#constate', function (e) {
     var state_id = e.target.value;
-    if(state_id){
-        $.get (urlGetLgaById + '?state_id=' + state_id, function(data){
+    if (state_id) {
+        $.get(urlGetLgaById + '?state_id=' + state_id, function (data) {
             $('#conlgas').empty();
             $('#conlgas').selectpicker('refresh');
-            $.each(data, function(index, lga){
-                $('#conlgas').append("<option value='"+lga.id+"'>"+lga.name+"</option>");
+            $.each(data, function (index, lga) {
+                $('#conlgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
                 $('#conlgas').selectpicker('refresh');
             });
         });
     }
 });
 
-function getpage(pagename){
+function getpage(pagename) {
     $.ajax({
         method: 'POST',
         url: 'getdashdisplay',
-        data: {display: pagename, _token: token}
+        data: { display: pagename, _token: token }
     }).done(function (page) {
         $('#mycontainer').html(page);
     });

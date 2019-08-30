@@ -37,6 +37,6 @@
     </form>
 
     <script>
-        $('.toast').toast('show');
+        $('#sessiontoast').toast('show');
     </script>
 @endsection

@@ -23,6 +23,7 @@ class EditController extends Controller
             'update' => 'required'
         ]);
 
+        $updatemsg = "Changes Saved!";              //notification message
         $id = $request->id;
         $update = $request->update;
         $identifier = $request->identifier;
@@ -35,25 +36,28 @@ class EditController extends Controller
                     return response()->json(['admin'=> $admin], 200);
                 }
                 else{
-                    $this->validate($request, [
-                        'firstname' => 'required',
-                        'lastname' => 'required',
-                        'dob' => 'required',
-                        'gender' => 'required',
-                        'phone' => 'required',
-                        'email' => 'required'
-                    ]);
+                    if(Auth::guard('admin')->user() != $admin)
+                    {
+                        $this->validate($request, [
+                            'firstname' => 'required',
+                            'lastname' => 'required',
+                            'dob' => 'required',
+                            'gender' => 'required',
+                            'phone' => 'required',
+                            'email' => 'required'
+                        ]);
 
-                    $admin->first_name = $request->firstname;
-                    $admin->mid_name = $request->middlename;
-                    $admin->last_name = $request->lastname;
-                    $admin->DOB = $request->dob;
-                    $admin->gender = $request->gender;
-                    $admin->phone = $request->phone;
-                    $admin->email = $request->email;
+                        $admin->first_name = $request->firstname;
+                        $admin->mid_name = $request->middlename;
+                        $admin->last_name = $request->lastname;
+                        $admin->DOB = $request->dob;
+                        $admin->gender = $request->gender;
+                        $admin->phone = $request->phone;
+                        $admin->email = $request->email;
 
-                    $admin->update();
-                    return response()->json(['message' => "Updated Successfully!"], 200);
+                        $admin->update();
+                        return response()->json(['message' => $updatemsg], 200);
+                    }
                 }
                 break;
 
@@ -69,7 +73,7 @@ class EditController extends Controller
                     ]);
                     $state->name = $request->name;
                     $state->update();
-                    return response()->json(['message' => "Updated Successfully!"], 200);
+                    return response()->json(['message' => $updatemsg], 200);
                 }
                 break;
 
@@ -89,7 +93,7 @@ class EditController extends Controller
                     $lga->state_id = $request->stateid;
                     $lga->constituency_id = null;
                     $lga->update();
-                    return response()->json(['message' => "Updated Successfully!"], 200);
+                    return response()->json(['message' => $updatemsg], 200);
                 }
                 break;
 
@@ -110,7 +114,7 @@ class EditController extends Controller
                     $party->acronym = $request->acronym;
                     $party->description = $request->desc;
                     $party->update();
-                    return response()->json(['message' => "Updated Successfully!"], 200);
+                    return response()->json(['message' => $updatemsg], 200);
                 }
 
             case 'office':
@@ -130,7 +134,7 @@ class EditController extends Controller
                     $office->is_state = $request->is_state;
                     $office->is_constituency = $request->is_constituency;
                     $office->update();
-                    return response()->json(['message' => "Updated Successfully!"], 200);
+                    return response()->json(['message' => $updatemsg], 200);
                 }
 
             case 'constituency':
@@ -166,7 +170,7 @@ class EditController extends Controller
                     }
 
                     $constituency->update();
-                    return response()->json(['message' => "Updated Successfully!"], 200);
+                    return response()->json(['message' => $updatemsg], 200);
                 }
             default:
                 return response()->json(['message' => 'Data Not Found'], 422);

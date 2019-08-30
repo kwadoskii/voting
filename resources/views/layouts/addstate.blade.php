@@ -1,4 +1,5 @@
 @inject('StateController', 'App\Http\Controllers\StateController')
+@include('includes.message')
 
 <div class="navbar">
     <h1 class="h3 mb-3">States</h1>

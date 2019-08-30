@@ -39,10 +39,6 @@
     </div>
 </div>
 
-<script>
-    $('.toast').toast('show');
-</script>
-
 {{--add new party modal--}}
 
 @extends('includes.addmodal')

@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Candidate');
     }
+
+    public function lga()
+    {
+        return $this->hasOne('App\Lga');
+    }
 }
