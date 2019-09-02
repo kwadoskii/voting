@@ -65,6 +65,12 @@ Route::group(['prefix' => 'admin'], function () {
             'as' => 'addparty'
         ]);
 
+        Route::post('addvoter', [
+            'name' => 'addvoter',
+            'uses' => 'UserController@postAddVoter',
+            'as' => 'addvoter'
+        ]);
+
         Route::post('addoffice', [
             'name' => 'addoffice',
             'uses' => 'OfficeController@postAddOffice',

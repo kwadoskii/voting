@@ -34,7 +34,7 @@
                         <td class="col-md-1">{{$voter->last_name}}</td>
                         <td class="col-md-1">{{$voter->gender}}</td>
                         <td class="col-md-2">{{$voter->DOB}}</td>
-                        {{-- <td class="col-md-2">{{$voter->lga}}</td> --}}
+                        <td class="col-md-2">{{$voter->lga_id}}</td>
                         <td class="col-md-2">{{$voter->constituency_id}}</td>
                         <td class="col-md-1">{{$voter->state_id}}</td>
                         {{-- <td class="col-md-2">{{$office->is_constituency  == 1 || $office->is_constituency == true ? 'Yes' : 'No'}}</td>
@@ -71,7 +71,7 @@ Voter
         <div class="col-md-6 mb-3">
             <small><label for="email">E-mail</label></small>
             <div class="input-group">
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email">
             </div>
         </div>
     </div>
@@ -114,7 +114,7 @@ Voter
 
         <div class="col-md-4 mb-3">
             <small><label for="phone">Phone</label></small>
-            <input type="text" class="form-control" id="phone" name="phone" required>
+            <input type="text" class="form-control" id="phone" name="phone">
             </select>
         </div>
     </div>
@@ -155,4 +155,4 @@ Voter
 
 @endsection
 
-@section('link')"modal-save-constituency"@endsection
+@section('link')"modal-save-voter"@endsection

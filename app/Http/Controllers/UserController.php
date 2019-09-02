@@ -16,20 +16,34 @@ class UserController extends Controller
 {
     public function postAddVoter(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'nin' => 'required | max: 10',
+        //     'firstname' => 'required',
+        //     'lastname' => 'required',
+        //     'gender' => 'required',
+        //     'dob' => 'required',
+        //     'address' => 'required',
+        //     'lgaid' => 'required',
+        //     'stateid' => 'required',
+        //     'password' => 'required'
+        // ]);
 
-        $name = $request['name'];
-        $consti = $request['consti'];
-        $state = $request['state'];
+        $voter = New User();
+        $voter->vin = $request->nin;
+        $voter->first_name = $request->firstname;
+        $voter->mid_name = $request->midname;
+        $voter->last_name = $request->lastname;
+        $voter->phone = $request->phone;
+        $voter->gender = $request->gender;
+        $voter->DOB = $request->dob;
+        $voter->address = $request->address;
+        $voter->constituency_id = 1;
+        $voter->lga_id = $request->lgaid;
+        $voter->state_id = $request->stateid;
+        $voter->email = $request->email;
+        $voter->password = bcrypt($request->password);
 
-        $office = New Office();
-
-        $office->name = $name;
-        $office->is_constituency = $consti;
-        $office->is_state = $state;
-        $office->save();
+        $voter->save();
 
         return response()->json(['message' => 'Created Successfully!']);
     }

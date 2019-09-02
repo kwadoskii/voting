@@ -408,7 +408,8 @@ $(document).on('click', deletes, function (e) {
             $('body').removeClass('modal-open');
             $(".modal-backdrop").remove();
             getpage('addlga');
-            //remember to display the success notification using toast
+            msg = response.message;
+            setTimeout(displayNotification, 500);
         });
     });
 
@@ -431,7 +432,8 @@ $(document).on('click', deletes, function (e) {
             $(".modal-backdrop").remove();
             getpage('addparty');
             console.log(response['message']);
-            //remember to display the success notification using toast
+            msg = response.message;
+            setTimeout(displayNotification, 500);
         });
     });
 
@@ -454,7 +456,8 @@ $(document).on('click', deletes, function (e) {
 
             getpage('addoffice');
             console.log(response['message']);
-            //remember to display the success notification using toast
+            msg = response.message;
+            setTimeout(displayNotification, 500);
         });
     });
 
@@ -477,7 +480,41 @@ $(document).on('click', deletes, function (e) {
             $(".modal-backdrop").remove();
 
             getpage('addconstituency');
-            //remember to display the success notification using toast
+            msg = response.message;
+            setTimeout(displayNotification, 500);
+        });
+    });
+
+    $(document).on('click', '#modal-save-voter', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            method: 'POST',
+            url: urlAddVoter,
+            data: {
+                nin: $('#nin').val(),
+                email: $('#email').val(),
+                firstname: $('#firstname').val(),
+                midname: $('#midname').val(),
+                lastname: $('#lastname').val(),
+                gender: $('#gender').val(),
+                dob: $('#dob').val(),
+                phone: $('#phone').val(),
+                address: $('#address').val(),
+                stateid: $('#state').val(),
+                lgaid: $('#lga').val(),
+                password: $('#password').val(),
+                _token: token
+            }
+        }).done(function (response) {
+            $('#new-modal').modal('hide');
+
+            $('body').removeClass('modal-open');
+            $(".modal-backdrop").remove();
+
+            getpage('addvoter');
+            msg = response.message;
+            setTimeout(displayNotification, 500);
         });
     });
 }

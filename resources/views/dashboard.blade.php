@@ -207,6 +207,7 @@ Admin Dashboard
     var urlAddState = '{{ route('addstate') }}';
     var urlAddLga = '{{ route('addlga') }}';
     var urlAddParty = '{{ route('addparty') }}';
+    var urlAddVoter = '{{ route('addvoter') }}';
     var urlAddConstituency = '{{ route('addconstituency') }}';
     var urlView = '{{ route('view') }}';
     var urlEdit = '{{ route('edit') }}';
