@@ -28,24 +28,26 @@ class UserController extends Controller
         //     'password' => 'required'
         // ]);
 
-        $voter = New User();
-        $voter->vin = $request->nin;
-        $voter->first_name = $request->firstname;
-        $voter->mid_name = $request->midname;
-        $voter->last_name = $request->lastname;
-        $voter->phone = $request->phone;
-        $voter->gender = $request->gender;
-        $voter->DOB = $request->dob;
-        $voter->address = $request->address;
-        $voter->constituency_id = 1;
-        $voter->lga_id = $request->lgaid;
-        $voter->state_id = $request->stateid;
-        $voter->email = $request->email;
-        $voter->password = bcrypt($request->password);
+        // $voter = New User();
+        // $voter->vin = $request->nin;
+        // $voter->first_name = $request->firstname;
+        // $voter->mid_name = $request->midname;
+        // $voter->last_name = $request->lastname;
+        // $voter->phone = $request->phone;
+        // $voter->gender = $request->gender;
+        // $voter->DOB = $request->dob;
+        // $voter->address = $request->address;
+        // $voter->constituency_id = 1;
+        // $voter->lga_id = $request->lgaid;
+        // $voter->state_id = $request->stateid;
+        // $voter->email = $request->email;
+        // $voter->password = bcrypt($request->password);
 
-        $voter->save();
+        // $voter->save();
 
-        return response()->json(['message' => 'Created Successfully!']);
+        $voter = User::find(1);
+
+        return response()->json(['message' => $voter->lga()]);
     }
 
     public static function varVoterList()

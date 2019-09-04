@@ -514,6 +514,7 @@ $(document).on('click', deletes, function (e) {
 
             getpage('addvoter');
             msg = response.message;
+            console.log(msg);
             setTimeout(displayNotification, 500);
         });
     });

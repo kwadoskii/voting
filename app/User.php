@@ -10,6 +10,21 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function candidate()
+    {
+        return $this->hasOne('App\Candidate');
+    }
+
+    public function lga()
+    {
+        return $this->hasOne('App\Lga', 'lga_id');
+    }
+
+    public function constituency()
+    {
+        return $this->hasOne('App\Constituency');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,19 +51,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function candidate()
-    {
-        return $this->hasOne('App\Candidate');
-    }
-
-    public function lga()
-    {
-        return $this->hasOne('App\Lga');
-    }
-
-    public function constituency()
-    {
-        return $this->hasOne('App\Constituency');
-    }
 }
