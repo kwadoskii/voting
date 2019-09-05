@@ -27,7 +27,6 @@ $('.nav-link').on('click', function (e) {
         e.preventDefault();
         let url = e.target.dataset['mycontent'];
         getpage(url);
-        //remember to change the color of the sidebar
     }
 });
 
@@ -507,12 +506,12 @@ $(document).on('click', deletes, function (e) {
                 _token: token
             }
         }).done(function (response) {
-            $('#new-modal').modal('hide');
+            // $('#new-modal').modal('hide');
 
-            $('body').removeClass('modal-open');
-            $(".modal-backdrop").remove();
+            // $('body').removeClass('modal-open');
+            // $(".modal-backdrop").remove();
 
-            getpage('addvoter');
+            // getpage('addvoter');
             msg = response.message;
             console.log(msg);
             setTimeout(displayNotification, 500);
@@ -537,6 +536,20 @@ $(document).on('change', '#constate', function (e) {
             $.each(data, function (index, lga) {
                 $('#conlgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
                 $('#conlgas').selectpicker('refresh');
+            });
+        });
+    }
+});
+
+$(document).on('change', '#state', function (e) {
+    var state_id = e.target.value;
+    if (state_id) {
+        $.get(urlGetLgaByStateId + '?stateid=' + state_id, function (data) {
+            $('#lga').empty();
+            $('#lga').selectpicker('refresh');
+            $.each(data, function (index, lga) {
+                $('#lga').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
+                $('#lga').selectpicker('refresh');
             });
         });
     }

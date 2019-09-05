@@ -1,4 +1,5 @@
 @inject('UserController', 'App\Http\Controllers\UserController')
+@inject('StateController', 'App\Http\Controllers\StateController')
 @include('includes.message')
 
 <div class="navbar">
@@ -49,7 +50,7 @@
     </div>
 </div>
 
-{{--add new constituency modal--}}
+{{--add new voter modal--}}
 @extends('includes.addmodal')
 
 @section('new')
@@ -130,18 +131,16 @@ Voter
         <div class="col-md-6 mb-3">
             <small><label for="state">State</label></small>
             <select class="form-control" name="state" id="state" required>
-                <option value="">Select State</option>
-                <option value="1">State One</option>
-                <option value="2">State Two</option>
+                <option value="">Choose a State</option>
+                @foreach ($StateController->varStateList() as $state)
+                <option value="{{ $state->id }}">{{ $state->name }}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="col-md-6 mb-3">
             <small><label for="lga">Lga</label></small>
             <select class="form-control" name="lga" id="lga" required>
-                <option value="">Select Lga</option>
-                <option value="1">Lga One</option>
-                <option value="2">Lga Two</option>
             </select>
         </div>
     </div>

@@ -45,8 +45,8 @@ class UserController extends Controller
 
         // $voter->save();
 
-        $voter = User::find(1);
-
+        $voter = User::where('id', 1)->first();
+        
         return response()->json(['message' => $voter->lga()]);
     }
 

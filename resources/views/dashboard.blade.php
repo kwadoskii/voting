@@ -214,5 +214,6 @@ Admin Dashboard
     var urlAddOffice = '{{ route('addoffice') }}';
     var urlDelete = '{{ route('deletedata') }}';
     var urlGetLgaById = '{{ route('getlgabyid') }}';
+    var urlGetLgaByStateId = '{{ route('getlgabystateid') }}';
 </script>
 @endsection

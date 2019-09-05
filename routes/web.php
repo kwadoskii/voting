@@ -59,6 +59,12 @@ Route::group(['prefix' => 'admin'], function () {
             'as' => 'addlga'
         ]);
 
+        Route::get('getlgabystateid', function(){
+            $stateid = Input::get('stateid');
+            $lgas = Lga::where(['state_id' => $stateid])->orderBy('name', 'asc')->get();
+            return $lgas;
+        })->name('getlgabystateid');
+
         Route::post('addparty', [
             'name' => 'addparty',
             'uses' => 'PartyController@postAddParty',
