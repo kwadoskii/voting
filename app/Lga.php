@@ -15,13 +15,13 @@ class Lga extends Model
         return $this->belongsTo('App\Constituency');
     }
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo('App\User');
     }
 
-    public function voter()
-    {
-        return $this->belongsTo('App\Voter');
-    }
+    // public function voter()
+    // {
+    //     return $this->belongsTo('App\Voter');
+    // }
 }

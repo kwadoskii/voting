@@ -45,14 +45,21 @@ class UserController extends Controller
 
         // $voter->save();
 
-        $voter = User::where('id', 1)->first();
-        
-        return response()->json(['message' => $voter->lga()]);
+        // $voter = User::where('id', 1)->first();
+        $voter = User::find(1);
+        $lga = Lga::find(7);
+
+
+        return response()->json([
+            'message2' => $voter,
+            'message' => Lga::find($voter->lga_id)->constituency->users->first()->first_name
+            ]);
     }
 
     public static function varVoterList()
     {
         $voterlist = User::orderBy('id', 'desc')->get();
-        return $voterlist;
+        $lga = Lga::find(7);
+        return [$voterlist => $voterlist, $lga => $lga];
     }
 }
