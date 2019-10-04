@@ -49,6 +49,11 @@ class DeleteController extends Controller
                 $lga->delete();
                 break;
 
+            case 'voter':
+                $voter = User::where('id', $id)->first();
+                $voter->delete();
+                break;
+
             case 'constituency':
                 $lgas = Lga::where('constituency_id', $id)->get();
 
@@ -63,7 +68,7 @@ class DeleteController extends Controller
                 break;
 
             default:
-                return response()->json(['message' => 'An error Occured!'], 201);
+                return response()->json(['message' => 'Error - Identifier Error'], 201);
                 break;
         }
 

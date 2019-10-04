@@ -1,6 +1,6 @@
 //global variables for diff functions
 var delid;
-var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency';
+var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency, #modal-delete-voter';
 var views = '#modal-edit-state, #modal-edit-lga, #modal-edit-party, #modal-edit-office, #modal-edit-constituency, #modal-edit-admin';
 var editid;
 var msg;
@@ -37,7 +37,7 @@ $(document).on('click', '.mymodal', function (e) {
 
 $(document).on('click', '.viewmodal', function (e) {
     //add more view modal ids here.
-    let views = '#state-view-modal, #lga-view-modal, #party-view-modal, #office-view-modal, #admin-view-modal, #constituency-view-modal';
+    let views = '#state-view-modal, #lga-view-modal, #party-view-modal, #office-view-modal, #admin-view-modal, #constituency-view-modal, #voter-view-modal';
 
     e.preventDefault();
     $(views).modal('show');
@@ -91,6 +91,16 @@ $(document).on('click', '.viewmodal', function (e) {
                 $('#vemail').val(response.admin.email);
                 break;
 
+            case 'voter':
+                $('#vnin').val(response.admin.firstname);
+                $('#vmiddlename').val(response.admin.midname);
+                $('#vlastname').val(response.admin.lastname);
+                $('#vgender').val(response.admin.gender);
+                $('#vdob').val(response.admin.dob);
+                $('#vphone').val(response.admin.phone);
+                $('#vemail').val(response.admin.email);
+                break;
+
             case 'constituency':
                 $('#vconlgas').empty();
                 $('#vconcount').empty();
@@ -107,7 +117,7 @@ $(document).on('click', '.viewmodal', function (e) {
             // console.log(response.constituency.name, response.constituency.lgas, response.constituency.state);
 
             default:
-                console.log(response['message']);
+                console.log(response.message);
                 break;
         }
     });
@@ -333,11 +343,12 @@ $(document).on('click', deletes, function (e) {
         $('#deletemodal').modal('hide');
         $('body').removeClass('modal-open');
         $(".modal-backdrop").remove();
-        getpage('add' + identifier);
 
         msg = response.message;
         setTimeout(displayNotification, 500);
-        console.log(response.message);
+
+        getpage('add' + identifier);
+
     });
 });
 
@@ -487,35 +498,42 @@ $(document).on('click', deletes, function (e) {
     $(document).on('click', '#modal-save-voter', function (e) {
         e.preventDefault();
 
-        $.ajax({
-            method: 'POST',
-            url: urlAddVoter,
-            data: {
-                nin: $('#nin').val(),
-                email: $('#email').val(),
-                firstname: $('#firstname').val(),
-                midname: $('#midname').val(),
-                lastname: $('#lastname').val(),
-                gender: $('#gender').val(),
-                dob: $('#dob').val(),
-                phone: $('#phone').val(),
-                address: $('#address').val(),
-                stateid: $('#state').val(),
-                lgaid: $('#lga').val(),
-                password: $('#password').val(),
-                _token: token
-            }
-        }).done(function (response) {
-            // $('#new-modal').modal('hide');
+        if ($('#cpassword').val() === $('#password').val()) {
+            $.ajax({
+                method: 'POST',
+                url: urlAddVoter,
+                data: {
+                    nin: $('#nin').val(),
+                    email: $('#email').val(),
+                    firstname: $('#firstname').val(),
+                    midname: $('#midname').val(),
+                    lastname: $('#lastname').val(),
+                    gender: $('#gender').val(),
+                    dob: $('#dob').val(),
+                    phone: $('#phone').val(),
+                    address: $('#address').val(),
+                    stateid: $('#state').val(),
+                    lgaid: $('#lga').val(),
+                    password: $('#password').val(),
+                    _token: token
+                }
+            }).done(function (response) {
+                $('#new-modal').modal('hide');
 
-            // $('body').removeClass('modal-open');
-            // $(".modal-backdrop").remove();
+                $('body').removeClass('modal-open');
+                $(".modal-backdrop").remove();
 
-            // getpage('addvoter');
-            msg = response.message;
-            console.log(msg);
+                getpage('addvoter');
+                msg = response.message;
+                console.log(msg);
+                setTimeout(displayNotification, 500);
+            });
+        }
+        else {
+            msg = 'Check your password!';
             setTimeout(displayNotification, 500);
-        });
+            console.log('check your password');
+        }
     });
 }
 

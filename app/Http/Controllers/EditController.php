@@ -97,6 +97,18 @@ class EditController extends Controller
                 }
                 break;
 
+            case 'voter':
+                $voter = User::find($id);
+
+                if($update == 0){
+                    return response()->json(['voter' => $voter], 200);
+                }
+
+                else{
+
+                }
+                break;
+
             case 'party':
                 $party = Party::find($id);
 
