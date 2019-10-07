@@ -36,7 +36,11 @@
                     <td class="col-md-1">{{$voter->gender}}</td>
                     <td class="col-md-2">{{$voter->DOB}}</td>
                     <td class="col-md-2">{{$UserController->varLgaList($voter->lga_id)->name}}</td>
-                    <td class="col-md-2">{{$UserController->varLgaList($voter->lga_id)->constituency->name}}</td>
+                    @if ($UserController->varLgaList($voter->lga_id)->constituency == null)
+                        <td class="col-md-2"><span class="badge-danger badge-pill p-2 badge">N/A</span></td>
+                        @else
+                        <td class="col-md-2">{{$UserController->varLgaList($voter->lga_id)->constituency->name}}</td>
+                    @endif
                     <td class="col-md-1">{{$UserController->varLgaList($voter->lga_id)->state->name}}</td>
                     {{-- <td class="col-md-2">{{$office->is_constituency  == 1 || $office->is_constituency == true ? 'Yes' : 'No'}}
                     </td>
@@ -247,6 +251,13 @@ Voter
         <hr class="m-2">
     </div>
 
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <small><label for="vconsti">Constituency</label></small>
+            <input type="text" class="form-control" id="vconsti" disabled>
+        </div>
+    </div>
+
 @endsection
 
 
@@ -326,13 +337,13 @@ Voter
                 @endforeach
             </select>
         </div>
-        
+
         <div class="col-md-6 mb-3">
             <small><label for="elga">Lga</label></small>
             <select class="form-control" name="elgas" id="elgas" required>
             </select>
         </div>
-        
+
         <hr class="m-2">
     </div>
 

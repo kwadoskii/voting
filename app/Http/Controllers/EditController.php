@@ -124,7 +124,7 @@ class EditController extends Controller
                     $voter->gender = $request->gender;
                     $voter->DOB = $request->dob;
                     $voter->address = $request->address;
-                    $voter->constituency_id = Lga::find($request->lgaid)->constituency->id;
+                    // $voter->constituency_id = Lga::find($request->lgaid)->constituency->id;
                     $voter->lga_id = $request->lgaid;
                     $voter->state_id = $request->stateid;
                     $voter->email = $request->email;

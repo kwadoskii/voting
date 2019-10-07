@@ -78,7 +78,9 @@ class ViewController extends Controller
                 $data = User::find($id);
                 $data->state = State::find($data->state_id)->name;
                 $data->lga = Lga::find($data->lga_id)->name;
-                $data->consti = Constituency::find($data->constituency_id)->name;
+                if(Lga::find($data->lga_id)->constituency != null){
+                    $data->consti = Lga::find($data->lga_id)->constituency->name;
+                }
                 return response()->json(['voter' => $data]);
                 break;
 

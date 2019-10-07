@@ -23,7 +23,6 @@ class User extends Migration
             $table->string('gender');
             $table->date('DOB');
             $table->string('address', 200);
-            $table->integer('constituency_id');
             $table->integer('lga_id');
             $table->integer('state_id');
             $table->string('email', 150)->nullable();

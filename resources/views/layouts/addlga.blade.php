@@ -44,7 +44,6 @@
         </table>
     </div>
 </div>
-</div>
 
 {{--add new lga modal--}}
 

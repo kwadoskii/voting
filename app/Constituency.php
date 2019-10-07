@@ -20,9 +20,4 @@ class Constituency extends Model
     {
         return $this->hasMany('App\Candidate');
     }
-
-    public function users()
-    {
-        return $this->hasMany('App\User');
-    }
 }

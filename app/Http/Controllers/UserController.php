@@ -53,7 +53,6 @@ class UserController extends Controller
     public static function varVoterList()
     {
         $voterlist = User::orderBy('id', 'desc')->get();
-        // $lga = Lga::find(7);
         return $voterlist;
     }
 

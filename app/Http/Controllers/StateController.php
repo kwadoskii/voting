@@ -87,6 +87,6 @@ class StateController extends Controller
             $lga->update();
         }
 
-        return response()->json(['message' => 'Created Added!'], 200);
+        return response()->json(['message' => 'Created Successfully!'], 200);
     }
 }
