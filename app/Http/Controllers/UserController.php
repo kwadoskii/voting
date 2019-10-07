@@ -45,14 +45,8 @@ class UserController extends Controller
 
         $voter->save();
 
-        // $voter = User::where('id', 1)->first();
-        // $voter = User::find(1);
-        // $lga = Lga::find(7);
-
-
         return response()->json([
             'message' => 'Voter saved Successfully',
-            'message2' => Lga::find($voter->lga_id)->constituency->id
             ]);
     }
 

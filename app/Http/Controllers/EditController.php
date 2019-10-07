@@ -105,7 +105,37 @@ class EditController extends Controller
                 }
 
                 else{
+                    $this->validate($request, [
+                        'nin' => 'required | max: 10',
+                        'firstname' => 'required',
+                        'lastname' => 'required',
+                        'gender' => 'required',
+                        'dob' => 'required',
+                        'address' => 'required',
+                        'lgaid' => 'required',
+                        'stateid' => 'required'
+                    ]);
 
+                    $voter->vin = $request->nin;
+                    $voter->first_name = $request->firstname;
+                    $voter->mid_name = $request->midname;
+                    $voter->last_name = $request->lastname;
+                    $voter->phone = $request->phone;
+                    $voter->gender = $request->gender;
+                    $voter->DOB = $request->dob;
+                    $voter->address = $request->address;
+                    $voter->constituency_id = Lga::find($request->lgaid)->constituency->id;
+                    $voter->lga_id = $request->lgaid;
+                    $voter->state_id = $request->stateid;
+                    $voter->email = $request->email;
+                    $voter->update();
+                    return response()->json(['message' => $updatemsg], 200);
+
+                    // if(property_exists(Lga::find($request->lgaid)->constituency, 'id')){
+                    //     return response()->json(['message' => 'LGA not assigned to a Constituency']);
+                    // }
+                    // else{
+                    // }
                 }
                 break;
 

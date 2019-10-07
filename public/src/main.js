@@ -1,7 +1,7 @@
 //global variables for diff functions
 var delid;
 var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency, #modal-delete-voter';
-var views = '#modal-edit-state, #modal-edit-lga, #modal-edit-party, #modal-edit-office, #modal-edit-constituency, #modal-edit-admin';
+var views = '#modal-edit-state, #modal-edit-lga, #modal-edit-party, #modal-edit-office, #modal-edit-constituency, #modal-edit-admin, #modal-edit-voter';
 var editid;
 var msg;
 var editidentifier;
@@ -92,13 +92,18 @@ $(document).on('click', '.viewmodal', function (e) {
                 break;
 
             case 'voter':
-                $('#vnin').val(response.admin.firstname);
-                $('#vmiddlename').val(response.admin.midname);
-                $('#vlastname').val(response.admin.lastname);
-                $('#vgender').val(response.admin.gender);
-                $('#vdob').val(response.admin.dob);
-                $('#vphone').val(response.admin.phone);
-                $('#vemail').val(response.admin.email);
+                $('#vnin').val(response.voter.vin);
+                $('#vfirstname').val(response.voter.first_name);
+                $('#vmidname').val(response.voter.mid_name);
+                $('#vlastname').val(response.voter.last_name);
+                $('#vgender').val(response.voter.gender);
+                $('#vdob').val(response.voter.DOB);
+                $('#vphone').val(response.voter.phone);
+                $('#vemail').val(response.voter.email);
+                $('#vaddress').val(response.voter.address);
+                $('#vstate').val(response.voter.state);
+                $('#vlga').val(response.voter.lga);
+                $('#vconsti').val(response.voter.consti);
                 break;
 
             case 'constituency':
@@ -165,6 +170,29 @@ $(document).on('click', '.editmodal', function (e) {
                 $('#ename').val(response.party.name);
                 $('#eacronym').val(response.party.acronym);
                 $('#edesc').val(response.party.description);
+                break;
+
+            case 'voter':
+                $('#enin').val(response.voter.vin);
+                $('#efirstname').val(response.voter.first_name);
+                $('#emidname').val(response.voter.mid_name);
+                $('#elastname').val(response.voter.last_name);
+                $('#egender').val(response.voter.gender);
+                $('#edob').val(response.voter.DOB);
+                $('#ephone').val(response.voter.phone);
+                $('#eemail').val(response.voter.email);
+                $('#eaddress').val(response.voter.address);
+                $('#estate').val(response.voter.state_id);
+
+                $.get(urlGetLgaByStateId + '?stateid=' + response.voter.state_id, function (data) {
+                    $('#elgas').empty();
+
+                    $.each(data, function (index, lga) {
+                        $('#elgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
+                    });
+                    $('#elgas').val(response.voter.lga_id);
+                    $('#elgas').selectpicker('refresh');
+                });
                 break;
 
             case 'office':
@@ -236,6 +264,7 @@ $(document).on('click', views, function (e) {
 
         getpage('add' + editidentifier);
         msg = response.message;
+        console.log(msg);
         setTimeout(displayNotification, 500);
     });
 
@@ -278,6 +307,25 @@ function toBeParse(identifier) {
                 update: 1,
                 name: $('#elga').val(),
                 stateid: $('#estate').val()
+            };
+
+        case 'voter':
+            return {
+                id: editid,
+                identifier: identifier,
+                _token: token,
+                update: 1,
+                nin: $('#enin').val(),
+                firstname: $('#efirstname').val(),
+                midname: $('#emidname').val(),
+                lastname: $('#elastname').val(),
+                phone: $('#ephone').val(),
+                gender: $('#egender').val(),
+                dob: $('#edob').val(),
+                address: $('#eaddress').val(),
+                lgaid: $('#elgas').val(),
+                stateid: $('#estate').val(),
+                email: $('#eemail').val()
             };
 
         case 'party':
@@ -559,15 +607,15 @@ $(document).on('change', '#constate', function (e) {
     }
 });
 
-$(document).on('change', '#state', function (e) {
+$(document).on('change', '#state, #estate', function (e) {
     var state_id = e.target.value;
     if (state_id) {
         $.get(urlGetLgaByStateId + '?stateid=' + state_id, function (data) {
-            $('#lga').empty();
-            $('#lga').selectpicker('refresh');
+            $('#lga, #elgas').empty();
+            $('#lga, #elgas').selectpicker('refresh');
             $.each(data, function (index, lga) {
-                $('#lga').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
-                $('#lga').selectpicker('refresh');
+                $('#lga, #elgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
+                $('#lga, #elgas').selectpicker('refresh');
             });
         });
     }

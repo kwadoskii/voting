@@ -16,37 +16,39 @@
             </div>
         </div>
         <table class="table table-striped table-hover small" data-identifier="voter">
-                <thead>
-                    <tr class="d-flex">
-                        <th class="col-md-1">Firstname</th>
-                        <th class="col-md-1">Lastname</th>
-                        <th class="col-md-1">Gender</th>
-                        <th class="col-md-2">DOB</th>
-                        <th class="col-md-2">LGA</th>
-                        <th class="col-md-2">Constituency</th>
-                        <th class="col-md-1">State</th>
-                        <th class="col-md-2 table-action">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($UserController->varVoterList() as $voter)
-                    <tr class="d-flex" data-id="{{ $voter->id }}">
-                        <td class="col-md-1">{{$voter->first_name}}</td>
-                        <td class="col-md-1">{{$voter->last_name}}</td>
-                        <td class="col-md-1">{{$voter->gender}}</td>
-                        <td class="col-md-2">{{$voter->DOB}}</td>
-                        <td class="col-md-2">{{$UserController->varLgaList($voter->lga_id)->name}}</td>
-                        <td class="col-md-2">{{$UserController->varLgaList($voter->lga_id)->constituency->name}}</td>
-                        <td class="col-md-1">{{$UserController->varLgaList($voter->lga_id)->state->name}}</td>
-                        {{-- <td class="col-md-2">{{$office->is_constituency  == 1 || $office->is_constituency == true ? 'Yes' : 'No'}}</td>
-                        <td class="col-md-2">{{$office->is_state == 1 || $office->is_state == true ? 'Yes' : 'No'}}</td> --}}
-                        <td class="table-action col-md-2">
-                            @include('includes.actions')
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-md-1">Firstname</th>
+                    <th class="col-md-1">Lastname</th>
+                    <th class="col-md-1">Gender</th>
+                    <th class="col-md-2">DOB</th>
+                    <th class="col-md-2">LGA</th>
+                    <th class="col-md-2">Constituency</th>
+                    <th class="col-md-1">State</th>
+                    <th class="col-md-2 table-action">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($UserController->varVoterList() as $voter)
+                <tr class="d-flex" data-id="{{ $voter->id }}">
+                    <td class="col-md-1">{{$voter->first_name}}</td>
+                    <td class="col-md-1">{{$voter->last_name}}</td>
+                    <td class="col-md-1">{{$voter->gender}}</td>
+                    <td class="col-md-2">{{$voter->DOB}}</td>
+                    <td class="col-md-2">{{$UserController->varLgaList($voter->lga_id)->name}}</td>
+                    <td class="col-md-2">{{$UserController->varLgaList($voter->lga_id)->constituency->name}}</td>
+                    <td class="col-md-1">{{$UserController->varLgaList($voter->lga_id)->state->name}}</td>
+                    {{-- <td class="col-md-2">{{$office->is_constituency  == 1 || $office->is_constituency == true ? 'Yes' : 'No'}}
+                    </td>
+                    <td class="col-md-2">{{$office->is_state == 1 || $office->is_state == true ? 'Yes' : 'No'}}</td>
+                    --}}
+                    <td class="table-action col-md-2">
+                        @include('includes.actions')
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -171,7 +173,7 @@ Voter
 @section('viewmodalbody')
     <div class="form-row">
         <div class="col-md-6 mb-3">
-            <small><label for="nin">National Identification Number</label></small>
+            <small><label for="vnin">National Identification Number</label></small>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">#</span>
@@ -181,7 +183,7 @@ Voter
         </div>
 
         <div class="col-md-6 mb-3">
-            <small><label for="email">E-mail</label></small>
+            <small><label for="vemail">E-mail</label></small>
             <div class="input-group">
                 <input type="email" class="form-control" id="vemail" disabled>
             </div>
@@ -190,17 +192,17 @@ Voter
 
     <div class="form-row">
         <div class="col-md-4 mb-3">
-            <small><label for="firstname">First Name</label></small>
+            <small><label for="vfirstname">First Name</label></small>
             <input type="text" class="form-control" id="vfirstname" disabled>
         </div>
 
         <div class="col-md-4 mb-3">
-            <small><label for="midname">Middle Name</label></small>
+            <small><label for="vmidname">Middle Name</label></small>
             <input type="text" class="form-control" id="vmidname" disabled>
         </div>
 
         <div class="col-md-4 mb-3">
-            <small><label for="lastname">Last Name</label></small>
+            <small><label for="vlastname">Last Name</label></small>
             <input type="text" class="form-control" id="vlastname" disabled>
         </div>
 
@@ -209,36 +211,36 @@ Voter
 
     <div class="form-row">
         <div class="col-md-4 mb-3">
-            <small><label for="gender">Gender</label></small>
+            <small><label for="vgender">Gender</label></small>
             <input tyoe='text' class="form-control" id="vgender" disabled>
         </div>
 
         <div class="col-md-4 mb-3">
-            <small><label for="dob">Date of Birth</label></small>
+            <small><label for="vdob">Date of Birth</label></small>
             <input type="date" class="form-control" id="vdob" disabled>
         </div>
 
         <div class="col-md-4 mb-3">
-            <small><label for="phone">Phone</label></small>
+            <small><label for="vphone">Phone</label></small>
             <input type="text" class="form-control" id="vphone" disabled>
         </div>
     </div>
 
     <div class="form-row">
         <div class="col-md-12 mb-3">
-            <small><label for="address">Full Address</label></small>
+            <small><label for="vaddress">Full Address</label></small>
             <input type="text" class="form-control" id="vaddress" disabled>
         </div>
     </div>
 
     <div class="form-row">
         <div class="col-md-6 mb-3">
-            <small><label for="state">State</label></small>
+            <small><label for="vstate">State</label></small>
             <input type="text" class="form-control" id="vstate" disabled>
         </div>
 
         <div class="col-md-6 mb-3">
-            <small><label for="lga">Lga</label></small>
+            <small><label for="vlga">Lga</label></small>
             <input type="text" class="form-control" id="vlga" disabled>
         </div>
 
@@ -247,32 +249,96 @@ Voter
 
 @endsection
 
+
 {{-- edit voter modal --}}
-{{-- @extends('includes.editmodal')
+@extends('includes.editmodal')
 
 @section('editmodalbody')
     <div class="form-row">
-        <div class="col-md-6 mb-2">
-            <small><label for="elga">LGA Name</label></small>
-            <input type="text" class="form-control" id="elga" required>
-            <div class="valid-tooltip">
-                Looks good!
+        <div class="col-md-6 mb-3">
+            <small><label for="nin">National Identification Number</label></small>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">#</span>
+                </div>
+                <input type="text" class="form-control" id="enin" >
             </div>
         </div>
 
-        <div class="col-md-6 mb-2">
-            <small><label for="elga">LGA State</label></small>
-            <select class="custom-select" id="estate" required>
-                <option selected>Select State</option>
+        <div class="col-md-6 mb-3">
+            <small><label for="email">E-mail</label></small>
+            <div class="input-group">
+                <input type="email" class="form-control" id="eemail" >
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <small><label for="firstname">First Name</label></small>
+            <input type="text" class="form-control" id="efirstname" >
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <small><label for="midname">Middle Name</label></small>
+            <input type="text" class="form-control" id="emidname" >
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <small><label for="lastname">Last Name</label></small>
+            <input type="text" class="form-control" id="elastname" >
+        </div>
+
+        <hr class="m-2">
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <small><label for="gender">Gender</label></small>
+            <input tyoe='text' class="form-control" id="egender" >
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <small><label for="dob">Date of Birth</label></small>
+            <input type="date" class="form-control" id="edob" >
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <small><label for="phone">Phone</label></small>
+            <input type="text" class="form-control" id="ephone" >
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <small><label for="address">Full Address</label></small>
+            <input type="text" class="form-control" id="eaddress" >
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <small><label for="estate">State</label></small>
+            <select class="form-control" name="estate" id="estate" required>
+                <option value="">Choose a State</option>
                 @foreach ($StateController->varStateList() as $state)
-                <option value="{{$state->id}}">{{$state->name}}</option>
+                <option value="{{ $state->id }}">{{ $state->name }}</option>
                 @endforeach
             </select>
         </div>
+        
+        <div class="col-md-6 mb-3">
+            <small><label for="elga">Lga</label></small>
+            <select class="form-control" name="elgas" id="elgas" required>
+            </select>
+        </div>
+        
+        <hr class="m-2">
     </div>
+
 @endsection
 
-@section('editmodalid')"modal-edit-voter"@endsection --}}
+@section('editmodalid')"modal-edit-voter"@endsection
 
 
 {{-- Delete modal --}}

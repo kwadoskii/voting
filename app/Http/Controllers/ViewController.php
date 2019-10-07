@@ -74,6 +74,14 @@ class ViewController extends Controller
                 ]]);
                 break;
 
+                case 'voter':
+                $data = User::find($id);
+                $data->state = State::find($data->state_id)->name;
+                $data->lga = Lga::find($data->lga_id)->name;
+                $data->consti = Constituency::find($data->constituency_id)->name;
+                return response()->json(['voter' => $data]);
+                break;
+
             default:
                 return response()->json(['message' => 'Data Not Found']);
                 break;
