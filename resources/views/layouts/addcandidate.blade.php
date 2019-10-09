@@ -1,3 +1,4 @@
+@inject('CandidateController', 'App\Http\Controllers\CandidateController')
 @include('includes.message')
 
 <div class="navbar">
@@ -9,19 +10,19 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Valid Candidates</h5>
+                <h5 class="card-title">Registered Candidates</h5>
                 <h6 class="card-subtitle text-muted">Below is the list of Candidates.</h6>
 
                 <select class="custom-select col-md-3 mt-2" name="office" id="office">
-                    <option value="pre">President</option>
-                    <option value="gov">Governor</option>
-                    <option value="sen">Senator</option>
+                    <option value="1">President</option>
+                    <option value="2">Governor</option>
+                    <option value="3">Senator</option>
                 </select>
 
                 <select class="custom-select col-md-3 mt-2" name="office-state" id="office-state">
-                    <option value="1">Abia</option>
-                    <option value="2">Adamawa</option>
-                    <option value="3">Akwa Ibom</option>
+                    <option value="11">Abia</option>
+                    <option value="12">Adamawa</option>
+                    <option value="13">Akwa Ibom</option>
                 </select>
 
                 <select class="custom-select col-md-3 mt-2" name="office-consti" id="office-consti">
@@ -37,16 +38,19 @@
         <table class="table table-striped table-hover small" data-identifier="candidate">
             <thead>
                 <tr class="d-flex">
-                    <th class="col-md-3"></th>
+                    <th class="col-md-2">Office</th>
                     <th class="col-md-3">Candidate Name</th>
                     <th class="col-md-2">Party</th>
-                    <th class="col-md-2">Age</th>
-                    <th class="col-md-2">Gender</th>
+                    <th class="col-md-1">Age</th>
+                    <th class="col-md-1">Gender</th>
                     <th class="col-md-3 table-action">Actions</th>
                 </tr>
             </thead>
-            <tbody>
 
+            <tbody>
+                @foreach ($collection as $item)
+
+                @endforeach
             </tbody>
         </table>
     </div>

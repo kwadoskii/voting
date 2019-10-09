@@ -45,6 +45,7 @@
     </div>
 </div>
 
+
 {{--add new lga modal--}}
 
 @extends('includes.addmodal')
