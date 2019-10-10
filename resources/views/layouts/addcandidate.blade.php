@@ -48,8 +48,15 @@
             </thead>
 
             <tbody>
-                @foreach ($collection as $item)
-
+                @foreach ($CandidateController->getCandidateList() as $candidate)
+                    <tr class="d-flex" data-id="{{ $candidate->id }}">
+                    <th class="col-md-2">{{ $candidate->office->name}}</th>
+                        <th class="col-md-3">{{ $candidate->user->first_name . " " . $candidate->user->last_name}}</th>
+                        <th class="col-md-2">{{ $candidate->party->acronym }}</th>
+                        <th class="col-md-1">Age</th>
+                        <th class="col-md-1">Gender</th>
+                        <th class="col-md-3 table-action">Actions</th>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

@@ -15,5 +15,27 @@ use Illuminate\Support\Facades\Auth;
 
 class CandidateController extends Controller
 {
+    public static function getCandidateList()
+    {
+        $candidate = Candidate::all();
+        return $candidate;
+    }
 
+    public static function getOfficeList()
+    {
+        $office = Office::all();
+        return $office;
+    }
+
+    public static function getVoterList()
+    {
+        $voter = User::orderBy('first_name', 'asc')->get();
+        return $voter;
+    }
+
+    public static function getStateList()
+    {
+        $state = State::orderBy('name', 'asc')->get();
+        return $state;
+    }
 }
