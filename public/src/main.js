@@ -586,6 +586,15 @@ $(document).on('click', deletes, function (e) {
 }
 
 
+// candiate search control to hide the state and constituency LOV
+{
+    $(document).on('change', '#search_office', function(e){
+        console.log(e.dataset['isstate']);
+        $('#search_state').hide();
+        $('#search_consti').hide();
+    });
+}
+
 //Display of Notifications
 function displayNotification() {
     $('.lead').text(msg);
@@ -607,6 +616,7 @@ $(document).on('change', '#constate', function (e) {
     }
 });
 
+// populates the lga dropdowns after state is picked for both new and edits
 $(document).on('change', '#state, #estate', function (e) {
     var state_id = e.target.value;
     if (state_id) {

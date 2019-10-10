@@ -79,8 +79,7 @@ Constituency
     <div class="form-row">
         <div class="col-md-8 offset-md-2 mb-3">
             <small><label for="lgas">Select Local Government Areas:</label></small>
-            <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas">
-            </select>
+            <select class="selectpicker form-control" multiple data-live-search="true" id="conlgas" name="lgas"></select>
         </div>
     </div>
 
