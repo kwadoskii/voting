@@ -1,6 +1,6 @@
 //global variables for diff functions
 var delid;
-var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency, #modal-delete-voter';
+var deletes = '#modal-delete-party, #modal-delete-admin, #modal-delete-office, #modal-delete-state, #modal-delete-lga, #modal-delete-constituency, #modal-delete-voter, #modal-delete-candidate';
 var views = '#modal-edit-state, #modal-edit-lga, #modal-edit-party, #modal-edit-office, #modal-edit-constituency, #modal-edit-admin, #modal-edit-voter';
 var editid;
 var msg;
@@ -583,15 +583,66 @@ $(document).on('click', deletes, function (e) {
             console.log('check your password');
         }
     });
+
+    //Adding of new candidate method
+    $(document).on('click', '#modal-save-candidate', function(e){
+        e.preventDefault();
+        // let state, constituency = null;
+        $.ajax({
+            method: 'POST',
+            url: urlAddCandidate,
+            data: {
+                office: $('#office').val(),
+                candidate: $('#candidate').val(),
+                state: $('#state').val(),
+                constituency: $('#constituency').val(),
+                party: $('#party').val(),
+                _token: token
+            }
+        }).done(function (response){
+            $('#new-modal').modal('hide');
+
+            $('body').removeClass('modal-open');
+            $(".modal-backdrop").remove();
+
+            getpage('addcandidate');
+            msg = response.message;
+            console.log(msg);
+            setTimeout(displayNotification, 500);
+        });
+        console.log($('#office').val(), $('#candidate').val(), $('#state').val(), $('#constituency').val(), $('#party').val())
+    });
 }
 
 
-// candiate search control to hide the state and constituency LOV
+// candiate search control to hide the state and constituency Dropdowns
 {
     $(document).on('change', '#search_office', function(e){
-        console.log(e.dataset['isstate']);
-        $('#search_state').hide();
-        $('#search_consti').hide();
+        let isconsti = $(this).find(':selected').data('isconsti');
+        let isstate = $(this).find(':selected').data('isstate');
+
+        isstate === 0 ? $('#search_state').hide() : $('#search_state').show();
+
+        if(isconsti === 0){
+            $('#search_consti').hide();
+        } else{
+            $('#search_consti').show();
+            $('#search_state').show();
+        }
+    });
+
+    $(document).on('change', '#office', function(e){
+        let isconsti = $(this).find(':selected').data('isconsti');
+        let isstate = $(this).find(':selected').data('isstate');
+
+        isstate === 0 ? $('#stateholder').hide() : $('#stateholder').show();
+
+        if(isconsti === 0){
+            $('#constituencyholder').hide();
+        } else{
+            $('#constituencyholder').show();
+            $('#stateholder').show();
+        }
     });
 }
 
@@ -626,6 +677,21 @@ $(document).on('change', '#state, #estate', function (e) {
             $.each(data, function (index, lga) {
                 $('#lga, #elgas').append("<option value='" + lga.id + "'>" + lga.name + "</option>");
                 $('#lga, #elgas').selectpicker('refresh');
+            });
+        });
+    }
+});
+
+//populates constituency when the state is picked
+$(document).on('change', '#state', function (e) {
+    state_id = e.target.value;
+    if(state_id){
+        $.get(urlGetConstiByStateId + '?state_id=' + state_id, function (data) {
+            $('#constituency').empty();
+            $('#constituency').selectpicker('refresh');
+            $.each(data, function(index, consti){
+                $('#constituency').append("<option value='" + consti.id + "'>" + consti.name + "</option>");
+                $('#constituency').selectpicker('refresh');
             });
         });
     }

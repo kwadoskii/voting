@@ -49,6 +49,11 @@ class DeleteController extends Controller
                 $lga->delete();
                 break;
 
+            case 'candidate':
+                $candidate = Candidate::where('id', $id)->first();
+                $candidate->delete();
+                break;
+
             case 'voter':
                 $voter = User::where('id', $id)->first();
                 $voter->delete();

@@ -216,7 +216,7 @@ Voter
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <small><label for="vgender">Gender</label></small>
-            <input tyoe='text' class="form-control" id="vgender" disabled>
+            <input type='text' class="form-control" id="vgender" disabled>
         </div>
 
         <div class="col-md-4 mb-3">
@@ -306,7 +306,10 @@ Voter
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <small><label for="gender">Gender</label></small>
-            <input tyoe='text' class="form-control" id="egender" >
+            <select class="form-control" name="gender" id="egender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
         </div>
 
         <div class="col-md-4 mb-3">

@@ -212,6 +212,7 @@ Admin Dashboard
     var urlAddLga = '{{ route('addlga') }}';
     var urlAddParty = '{{ route('addparty') }}';
     var urlAddVoter = '{{ route('addvoter') }}';
+    var urlAddCandidate = '{{ route('addcandidate') }}';
     var urlAddConstituency = '{{ route('addconstituency') }}';
     var urlView = '{{ route('view') }}';
     var urlEdit = '{{ route('edit') }}';
@@ -219,5 +220,6 @@ Admin Dashboard
     var urlDelete = '{{ route('deletedata') }}';
     var urlGetLgaById = '{{ route('getlgabyid') }}';
     var urlGetLgaByStateId = '{{ route('getlgabystateid') }}';
+    var urlGetConstiByStateId = '{{ route('getconstibystate') }}';
 </script>
 @endsection

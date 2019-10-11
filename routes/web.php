@@ -1,6 +1,7 @@
 <?php
 
 use App\Lga;
+use App\Constituency;
 use Illuminate\Support\Facades\Input;
 
 /*
@@ -89,6 +90,12 @@ Route::group(['prefix' => 'admin'], function () {
             'as' => 'addconstituency'
         ]);
 
+        Route::post('addcandidate', [
+            'name' => 'addcandidate',
+            'uses' => 'CandidateController@postAddCandidate',
+            'as' => 'addcandidate'
+        ]);
+
         Route::post('view', [
             'name' => 'view',
             'uses' => 'ViewController@viewdata',
@@ -112,6 +119,13 @@ Route::group(['prefix' => 'admin'], function () {
             $lgas = Lga::where(['state_id' => $stateid, 'constituency_id' => NULL])->orderBy('name', 'asc')->get();
             return $lgas;
         })->name('getlgabyid');
+
+        Route::get('getconstibystate', function(){
+            $stateid = Input::get('state_id');
+            $consti = Constituency::where(['state_id' => $stateid])->orderBy('name', 'asc')->get();
+            return $consti;
+        })->name('getconstibystate');
+
     });
 });
 
