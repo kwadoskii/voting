@@ -24,8 +24,8 @@ Route::get('/admin', function () {
 })->name('admin');
 
 Route::post('/adminlogin', [
-        'uses' => 'AdminController@postAdminlogin',
-        'as' => 'adminlogin'
+    'uses' => 'AdminController@postAdminlogin',
+    'as' => 'adminlogin'
 ]);
 
 Route::group(['prefix' => 'admin'], function () {
@@ -114,6 +114,8 @@ Route::group(['prefix' => 'admin'], function () {
             'as' => 'deletedata'
         ]);
 
+
+        //APIs
         Route::get('getlgabyid', function(){
             $stateid = Input::get('state_id');
             $lgas = Lga::where(['state_id' => $stateid, 'constituency_id' => NULL])->orderBy('name', 'asc')->get();
@@ -126,7 +128,46 @@ Route::group(['prefix' => 'admin'], function () {
             return $consti;
         })->name('getconstibystate');
 
+        //for addition of candidate stateConsti
+        Route::get('getavailbleparty00', function(){
+            $officeid = Input::get('office_id');
+            $parties = DB::select('select * from parties where acronym not in ( SELECT parties.acronym FROM users, candidates, offices, parties WHERE candidates.user_id = users.id AND candidates.office_id = offices.id AND candidates.party_id = parties.id AND candidates.office_id = :id) order by 2', ['id' => $officeid]);
+            return response()->json(($parties));
+        })->name('getavailbleparty00');
+
+        Route::get('getavailbleparty10', function(){
+            $officeid = Input::get('office_id');
+            $stateid = Input::get('state_id');
+            $parties = DB::select('select * from parties where parties.acronym not in (SELECT parties.acronym FROM users, candidates, offices, parties WHERE candidates.user_id = users.id AND candidates.office_id = offices.id AND candidates.party_id = parties.id AND candidates.office_id = :office_id and candidates.state_id = :state_id) order by 2', ['office_id' => $officeid, 'state_id' => $stateid]);
+            return response()->json(($parties));
+        })->name('getavailbleparty10');
+
+        Route::get('getavailbleparty01', function(){
+            $officeid = Input::get('office_id');
+            $stateid = Input::get('state_id');
+            $constiid = Input::get('consti_id');
+            $parties = DB::select('select * from parties where parties.acronym not in (SELECT parties.acronym FROM users, candidates, offices, parties WHERE candidates.user_id = users.id AND candidates.office_id = offices.id AND candidates.party_id = parties.id AND candidates.office_id = :office_id and candidates.state_id = :state_id and candidates.consti_id = :consti_id) order by 2', ['office_id' => $officeid, 'state_id' => $stateid, 'consti_id' => $constiid]);
+            return response()->json(($parties));
+        })->name('getavailbleparty01');
+
     });
+});
+
+Route::post('/login', [
+    'uses' => 'UserController@postUserLogin',
+    'as' => 'login'
+]);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/ballot', function() {
+        return view('ballot');
+    })->name('ballot');
+
+    Route::get('/ballot/signout', [
+        'name' => 'userlogout',
+        'uses' => 'UserController@postUserLogout',
+        'as' => 'userlogout'
+    ]);
 });
 
 Route::get('signout', [

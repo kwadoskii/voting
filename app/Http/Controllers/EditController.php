@@ -58,6 +58,10 @@ class EditController extends Controller
                         $admin->update();
                         return response()->json(['message' => $updatemsg], 200);
                     }
+                    else{
+                        $updatemsg = 'Can not edit your own details.';
+                        return response()->json(['message' => $updatemsg], 200);
+                    }
                 }
                 break;
 

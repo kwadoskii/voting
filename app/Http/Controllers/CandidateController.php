@@ -43,8 +43,8 @@ class CandidateController extends Controller
 
     public static function getPartyList()
     {
-        $party = Party::whereNotIn('id', Candidate::where('office_id', 2)->pluck('party_id'))->orderBy('name', 'asc')->get(); //use this for the dynamic candidate party
-        // $party = Party::orderBy('name', 'asc')->get();
+        //$party = Party::whereNotIn('id', Candidate::where('office_id', 2)->pluck('party_id'))->orderBy('name', 'asc')->get(); //use this for the dynamic candidate party
+        $party = Party::orderBy('name', 'asc')->get();
         return $party;
     }
 

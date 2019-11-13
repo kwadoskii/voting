@@ -221,5 +221,8 @@ Admin Dashboard
     var urlGetLgaById = '{{ route('getlgabyid') }}';
     var urlGetLgaByStateId = '{{ route('getlgabystateid') }}';
     var urlGetConstiByStateId = '{{ route('getconstibystate') }}';
+    var getAvailbleParty00 = '{{ route('getavailbleparty00') }}';
+    var getAvailbleParty10 = '{{ route('getavailbleparty10') }}';
+    var getAvailbleParty01 = '{{ route('getavailbleparty01') }}';
 </script>
 @endsection

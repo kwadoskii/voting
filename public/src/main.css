@@ -8,12 +8,13 @@
 
 body{
     background: #D5D5FF;
-    padding: 40px 0;
+    /* padding: 40px 0; */
 }
 
 /*for Admin CSS start*/
 .form-signin {
     width: 100%;
+    margin-top: 40px;
     max-width: 450px;
     padding: 50px 40px;
     margin: auto;

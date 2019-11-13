@@ -81,6 +81,7 @@
         <div class="col-md-6 mb-2">
             <small><label for="office">Office</label></small>
             <select class="selectpicker form-control picker" data-live-search="true" id="office" name="office" required>
+                <option value=""></option>
                 @foreach ($CandidateController->getOfficeList() as $office)
                     <option value="{{ $office->id }}" data-isstate="{{ $office->is_state }}" data-isconsti="{{ $office->is_constituency }}">{{ $office->name }}</option>
                 @endforeach

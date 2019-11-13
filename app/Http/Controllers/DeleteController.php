@@ -32,6 +32,9 @@ class DeleteController extends Controller
                     $admin = Admin::where('id', $id)->first();
                     $admin->delete();
                 }
+                else{
+                    return response()->json(['message' => 'Can not delete your own details.'], 200);
+                }
                 break;
 
             case 'office':

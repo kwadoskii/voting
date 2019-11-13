@@ -27,7 +27,6 @@ class AdminController extends Controller
 
         $message = 'Invalid Email or Password';
         return redirect()->back()->with(['message'=>$message]);
-
     }
 
     public function getAdmindashboard()

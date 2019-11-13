@@ -7,6 +7,7 @@ use App\Lga;
 use App\Constituency;
 use App\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -59,5 +60,26 @@ class UserController extends Controller
     {
         $lga = Lga::find($lgaid);
         return $lga;
+    }
+
+    public function postUserLogin(Request $request)
+    {
+        $this->validate($request, [
+            'nin' => 'required',
+            'pass' => 'required'
+        ]);
+
+        if(Auth::attempt(['vin' => $request['nin'], 'password' => $request['pass']])){
+            return redirect()->route('ballot');
+        } else{
+            $message = 'Invalid Email or Password';
+            return redirect()->back()->with(['message' => $message]);
+        }
+    }
+
+    public function postUserLogout()
+    {
+        Auth::Logout();
+        return redirect()->route('welcome');
     }
 }

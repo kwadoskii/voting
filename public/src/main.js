@@ -587,7 +587,6 @@ $(document).on('click', deletes, function (e) {
     //Adding of new candidate method
     $(document).on('click', '#modal-save-candidate', function(e){
         e.preventDefault();
-        // let state, constituency = null;
         $.ajax({
             method: 'POST',
             url: urlAddCandidate,
@@ -621,27 +620,76 @@ $(document).on('click', deletes, function (e) {
         let isconsti = $(this).find(':selected').data('isconsti');
         let isstate = $(this).find(':selected').data('isstate');
 
-        isstate === 0 ? $('#search_state').hide() : $('#search_state').show();
-
-        if(isconsti === 0){
+        if(isstate === 0 && isconsti === 0){
             $('#search_consti').hide();
-        } else{
+            $('#search_state').hide();
+        }
+
+        if(isstate === 1 && isconsti === 0){
+            $('#search_consti').hide();
+            $('#search_state').show();
+        }
+
+        if(isstate === 0 && isconsti === 1){
             $('#search_consti').show();
             $('#search_state').show();
         }
     });
+}
 
+//for controlling the multiple voters for an particular party in a particular office
+{
     $(document).on('change', '#office', function(e){
         let isconsti = $(this).find(':selected').data('isconsti');
         let isstate = $(this).find(':selected').data('isstate');
 
-        isstate === 0 ? $('#stateholder').hide() : $('#stateholder').show();
-
-        if(isconsti === 0){
+        if(isstate === 0 && isconsti === 0)  //for president 00
+        {
+            $('#stateholder').hide();
             $('#constituencyholder').hide();
-        } else{
-            $('#constituencyholder').show();
+
+            $.get(getAvailbleParty00 + '?office_id=' + $('#office').val(), function(data) {
+                $('#party').empty();
+                $('#party').selectpicker('refresh');
+                $.each(data, function (index, party){
+                    $('#party').append(`<option value="${party.id}"> ${party.acronym} - ${party.name} </option>`);
+                    $('#party').selectpicker('refresh');
+                });
+            });
+        }
+
+        if(isstate === 1 && isconsti === 0) //for governors 10
+        {
             $('#stateholder').show();
+            $('#constituencyholder').hide();
+
+            $(document).on('change', '#state', function(e){
+                $.get(getAvailbleParty10 + '?state_id=' + $('#state').val() + '&' + 'office_id=' + $('#office').val(), function(data){
+                    $('#party').empty();
+                    $('#party').selectpicker('refresh');
+                    $.each(data, function (index, party){
+                        $('#party').append(`<option value="${party.id}"> ${party.acronym} - ${party.name} </option>`);
+                        $('#party').selectpicker('refresh');
+                    });
+                });
+            });
+        }
+
+        if(isstate === 0 && isconsti === 1) // for senators 01
+        {
+            $('#stateholder').show();
+            $('#constituencyholder').show();
+
+            $(document).on('change', '#constituency', function(e){
+                $.get(getAvailbleParty01 + '?state_id=' + $('#state').val() + '&' + 'office_id=' + $('#office').val() + '&' + 'consti_id' + $('#constituency').val(), function(data){
+                    $('#party').empty();
+                    $('#party').selectpicker('refresh');
+                    $.each(data, function (index, party){
+                        $('#party').append(`<option value="${party.id}"> ${party.acronym} - ${party.name} </option>`);
+                        $('#party').selectpicker('refresh');
+                    });
+                });
+            });
         }
     });
 }

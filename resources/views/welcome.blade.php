@@ -1,36 +1,44 @@
 @extends('layouts.master')
 
 @section('title')
-    Welcome
+E-Voting Home
 @endsection
+
 @section('section')
-    <div class="showcase">
-        <div class="container-fluid container">
-            <div class="row no-gutters">
-                <div class="col-lg-6 showcase-img text-white" id="vimg"></div>
+@include('includes.message')
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+                <span class="login100-form-title p-b-34">
+                    LOGIN
+                </span>
 
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <h5>Welcome please login to your account to proceed.</h5>
-                            <form action="" method="post">
-                                <div class="form-group">
-                                    <label for="nin">NIN</label>
-                                    <input type="text" class="form-control" placeholder="1234567890" name="nin" id="nin">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" placeholder="********" name="password" id="password">
-                                </div>
-                                <input type="hidden" value="{{ Session::token() }}" name="_token">
-                                <button type="submit" class="btn btn-info btn-block">Sign in</button>
-                            </form>
-                        </div>
-                    </div>
-
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-10" data-validate="Type user name">
+                    <input id="nin" class="input100" type="text" name="nin" placeholder="NIN">
+                    <span class="focus-input100"></span>
                 </div>
-            </div>
+
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Type password">
+                    <input class="input100" type="password" name="pass" id="pass" placeholder="Password">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    <button class="login100-form-btn" type="submit">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+
+            <div class="login100-more" style="background-image: url({{URL::to('Ballot-box.png')}});"></div>
         </div>
     </div>
+</div>
+
+<script>
+    $('#sessiontoast').toast('show');
+</script>
+
 @endsection
