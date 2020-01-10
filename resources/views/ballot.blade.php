@@ -4,9 +4,18 @@
 Ballot
 @endsection
 
+@section('head')
+<link rel="stylesheet" href="{{ URL::to('src/ballot.css') }}">
+@endsection
+
 @section('section')
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">E-Voting </h5>
+    <button type="button" id="sidebarCollapse" class="btn btn-info mr-1">
+        <i class="fas fa-align-left"></i>
+        <span></span>
+    </button>
+    <h5 class="my-0 font-weight-normal mr-md-auto">E-Voting </h5>
+
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="#">{{ Auth::user()->first_name . ', ' . Auth::user()->last_name }}</a>
     </nav>
@@ -15,82 +24,75 @@ Ballot
 
 <div class="container-fluid">
     <div class="row">
-        {{-- <div class="col-md-2 list-group list-group-flush bg-primary">
-            <a href="" class="list-group-item list-group-item-action bg-light">Test</a>
-        </div> --}}
-        {{-- <ul class="col-md-2 list-group list-group-flush navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link list-group-item list-group-item-action bg-light" href="#">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+        <div class="wrapper">
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle list-group-item list-group-item-action bg-light" href="#" id="pagesDropdown1" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>General Elections</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown1" x-placement="bottom-start"
-                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 56px, 0px);">
-                    <a class="dropdown-item" href="login.html">President</a>
-                    <a class="dropdown-item" href="forgot-password.html">Test</a>
+            <!-- Sidebar -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h6>Select Ballot</h6>
                 </div>
-            </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle list-group-item list-group-item-action bg-light" href="#" id="pagesDropdown2" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>State Elections</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown2" x-placement="bottom-start"
-                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 56px, 0px);">
-                    <a class="dropdown-item" href="login.html">President</a>
-                    <a class="dropdown-item" href="forgot-password.html">Test</a>
-                </div>
-            </li>
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">General Elections</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#">President</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle list-group-item list-group-item-action bg-light" href="#" id="pagesDropdown3" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Constituency Election</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown3" x-placement="bottom-start"
-                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 56px, 0px);">
-                    <a class="dropdown-item" href="login.html">President</a>
-                    <a class="dropdown-item" href="forgot-password.html">Test</a>
-                </div>
-            </li>
-        </ul> --}}
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">State Elections</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="#">Governor</a>
+                            </li>
+                        </ul>
+                    </li>
 
-        {{-- use this .list-group-item-action{   min-width: 130px;      } --}}
+                    <li>
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Constituency Elections</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu2">
+                            <li>
+                                <a href="#">Senatorial</a>
+                            </li>
+                            <li>
+                                <a href="#">House of Representatives</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
 
-        <div class="col-md-2 navbar-nav accordion" id="accordionExample">
-
-            <a class="nav-link dropdown-toggle list-group-item-action bg-light" href="#" id="headingOne" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>General Elections</span>
-            </a>
-            <div class="dropdown-menu" id='collapseOne' aria-labelledby="headingOne" data-parent="#accordionExample">
-                <a class="dropdown-item" href="login.html">President</a>
-                <a class="dropdown-item" href="forgot-password.html">Test</a>
-            </div>
-
-
-          <a class="nav-link dropdown-toggle list-group-item-action bg-light" href="#" id="headingTwo" role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>General Elections</span>
-            </a>
-            <div class="dropdown-menu" id='collapseTwo' aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <a class="dropdown-item" href="login.html">President</a>
-                <a class="dropdown-item" href="forgot-password.html">Test</a>
+            <div id="content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <div class="ballotbox">
+                            
+                        </div>
+                    </div>
+                </nav>
             </div>
 
         </div>
     </div>
 </div>
 </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+
+<script>
+    $(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    });
+
+    });
+</script>
 @endsection

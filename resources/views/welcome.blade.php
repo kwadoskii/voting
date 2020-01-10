@@ -4,6 +4,10 @@
 E-Voting Home
 @endsection
 
+@section('head')
+<link rel="stylesheet" href="{{ URL::to('src/user.css') }}">
+@endsection
+
 @section('section')
 @include('includes.message')
 <div class="limiter">

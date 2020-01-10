@@ -4,6 +4,11 @@
 Admin Dashboard
 @endsection
 
+@section('head')
+<link rel="stylesheet" href="{{ URL::to('src/dashboard.css') }}">
+<link rel="stylesheet" href="{{ URL::to('src/main.css') }}">
+@endsection
+
 @inject('AdminController', 'App\Http\Controllers\AdminController')
 
 @section('section')

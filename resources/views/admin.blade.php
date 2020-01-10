@@ -4,6 +4,10 @@
 Admin Login
 @endsection
 
+@section('head')
+<link rel="stylesheet" href="{{ URL::to('src/main.css') }}">
+@endsection
+
 @section('section')
 @include('includes.message')
     <form class="form-signin" method="post" action="{{ route('adminlogin') }}">
