@@ -1,6 +1,7 @@
 <?php
 
 use App\Lga;
+use App\Office;
 use App\Constituency;
 use Illuminate\Support\Facades\Input;
 
@@ -159,15 +160,26 @@ Route::post('/login', [
 ]);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/ballot', function() {
-        return view('ballot');
-    })->name('ballot');
-
-    Route::get('/ballot/signout', [
-        'name' => 'userlogout',
-        'uses' => 'UserController@postUserLogout',
-        'as' => 'userlogout'
+    Route::get('/ballot', [
+        'name' => 'ballot',
+        'uses' => 'BallotController@getBallot',
+        'as' => 'ballot'
     ]);
+
+    Route::group(['prefix' => 'ballot'], function () {
+        Route::get('/signout', [
+            'name' => 'userlogout',
+            'uses' => 'UserController@postUserLogout',
+            'as' => 'userlogout'
+        ]);
+
+        // Ballot APIs
+        Route::get('getOfficebyId', function(){
+            $officeid = Input::get('office_id');
+            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name FROM candidates , offices, users, parties WHERE office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id ORDER by 1", ['office_id' => $officeid]);
+            return response()->json($candidates);
+        });
+    });
 });
 
 Route::get('signout', [

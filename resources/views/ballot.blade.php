@@ -23,68 +23,235 @@ Ballot
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="wrapper">
+    <div class="row wrapper">
 
-            <!-- Sidebar -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h6>Select Ballot</h6>
-                </div>
-
-                <ul class="list-unstyled components">
-                    <li>
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle">General Elections</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="#">President</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle">State Elections</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li>
-                                <a href="#">Governor</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle">Constituency Elections</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu2">
-                            <li>
-                                <a href="#">Senatorial</a>
-                            </li>
-                            <li>
-                                <a href="#">House of Representatives</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-
-            <div id="content">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <div class="ballotbox">
-                            
-                        </div>
-                    </div>
-                </nav>
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-2">
+            <div class="sidebar-header">
+                <h6>Select Ballot</h6>
             </div>
 
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">General
+                        Elections</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            @foreach ($offices as $office)
+                            @if($office->is_state == '0' && $office->is_constituency == '0' )
+                            <a href="#" class="test" data-office_id="{{ $office->id }}">{{ $office->name}}</a>
+                            @endif
+                            @endforeach
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">State
+                        Elections</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            @foreach ($offices as $office)
+                            @if($office->is_state == '1' && $office->is_constituency == '0' )
+                            <a href="#" class="test" data-office_id="{{ $office->id }}">{{ $office->name}}</a>
+                            @endif
+                            @endforeach
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Constituency Elections</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu2">
+                        <li>
+                            @foreach ($offices as $office)
+                            @if($office->is_state == '0' && $office->is_constituency == '1' )
+                            <a href="#" class="test" data-office_id="{{ $office->id }}">{{ $office->name}}</a>
+                            @endif
+                            @endforeach
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="content" class="col-md-10">
+            <div class="col-md-12 mt-3 mb-3">
+                <h5 id="test2">Presidential</h5>
+            </div>
+
+            <div class="row ballotbox">
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">APC</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Mohammed Buhari</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">pdp</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Atiku Abubakar</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">kowa</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Goodluck Jonathan</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">nnpc</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Nelson Onyenobi</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">pdp</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Atiku Abubakar</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">kowa</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Goodluck Jonathan</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">nnpc</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Nelson Onyenobi</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">pdp</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Atiku Abubakar</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">kowa</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Goodluck Jonathan</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">nnpc</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Nelson Onyenobi</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">pdp</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Atiku Abubakar</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="party">kowa</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>Goodluck Jonathan</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
 </div>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+{{-- https://bootstrapious.com/p/bootstrap-sidebar for the sidebar--}}
+<script>
+    var token = '{{ Session::token() }}';
 </script>
+<script src="{{ URL::to('src/bootstrap.min.js') }}"></script>
+<script src="{{ URL::to('src/ballot.js') }}">
+</script>
+{{-- <script src="{{ URL::to('src/ajax.js') }}"></script> --}}
 
 <script>
     $(document).ready(function () {
