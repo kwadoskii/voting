@@ -33,13 +33,13 @@ Ballot
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">General
+                    <a href="#genSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">General
                         Elections</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <ul class="collapse list-unstyled" id="genSubmenu">
                         <li>
                             @foreach ($offices as $office)
                             @if($office->is_state == '0' && $office->is_constituency == '0' )
-                            <a href="#" class="test" data-office_id="{{ $office->id }}">{{ $office->name}}</a>
+                            <a href="#" class="genElec" data-office_id="{{ $office->id }}">{{ $office->name}}</a>
                             @endif
                             @endforeach
                         </li>
@@ -47,13 +47,13 @@ Ballot
                 </li>
 
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">State
+                    <a href="#stateSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">State
                         Elections</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <ul class="collapse list-unstyled" id="stateSubmenu">
                         <li>
                             @foreach ($offices as $office)
                             @if($office->is_state == '1' && $office->is_constituency == '0' )
-                            <a href="#" class="test" data-office_id="{{ $office->id }}">{{ $office->name}}</a>
+                        <a href="#" class="stateElec" data-office_id="{{ $office->id }}" data-state_id="{{ Auth::user()->state_id }}">{{ $office->name}}</a>
                             @endif
                             @endforeach
                         </li>
@@ -61,13 +61,13 @@ Ballot
                 </li>
 
                 <li>
-                    <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false"
+                    <a href="#constiSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Constituency Elections</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu2">
+                    <ul class="collapse list-unstyled" id="constiSubmenu">
                         <li>
                             @foreach ($offices as $office)
                             @if($office->is_state == '0' && $office->is_constituency == '1' )
-                            <a href="#" class="test" data-office_id="{{ $office->id }}">{{ $office->name}}</a>
+                            <a href="#" class="constiElec" data-office_id="{{ $office->id }}" data-state_id="{{ Auth::user()->state_id }}" data-consti_id="{{ Auth::user()->lga_id }}">{{ $office->name}}</a>
                             @endif
                             @endforeach
                         </li>
@@ -78,11 +78,11 @@ Ballot
 
         <div id="content" class="col-md-10">
             <div class="col-md-12 mt-3 mb-3">
-                <h5 id="test2">Presidential</h5>
+                <h5 id="ballotheader">Welcome</h5>
             </div>
 
             <div class="row ballotbox">
-                <div class="col-md-4 mb-3">
+                {{-- <div class="col-md-4 mb-3">
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
@@ -119,124 +119,10 @@ Ballot
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">nnpc</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Nelson Onyenobi</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">pdp</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Atiku Abubakar</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">kowa</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Goodluck Jonathan</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">nnpc</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Nelson Onyenobi</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">pdp</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Atiku Abubakar</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">kowa</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Goodluck Jonathan</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">nnpc</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Nelson Onyenobi</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">pdp</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Atiku Abubakar</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">kowa</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Goodluck Jonathan</h1>
-                            </div>
-                        </div>
-                    </div>
+                <div class="jumbotron col-md-12">
+                    <p class='lead'>Welcome</p>
                 </div>
 
             </div>
@@ -247,6 +133,9 @@ Ballot
 {{-- https://bootstrapious.com/p/bootstrap-sidebar for the sidebar--}}
 <script>
     var token = '{{ Session::token() }}';
+    var getOfficebyId = '{{ route('getOfficebyId') }}';
+    var getStateOfficebyId = '{{ route('getStateOfficebyId') }}';
+    var getConstiOfficebyId = '{{ route('getConstiOfficebyId') }}';
 </script>
 <script src="{{ URL::to('src/bootstrap.min.js') }}"></script>
 <script src="{{ URL::to('src/ballot.js') }}">

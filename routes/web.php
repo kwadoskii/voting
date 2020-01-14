@@ -176,9 +176,24 @@ Route::group(['middleware' => 'auth'], function () {
         // Ballot APIs
         Route::get('getOfficebyId', function(){
             $officeid = Input::get('office_id');
-            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name FROM candidates , offices, users, parties WHERE office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id ORDER by 1", ['office_id' => $officeid]);
+            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name FROM candidates , offices, users, parties WHERE office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id ORDER by 5", ['office_id' => $officeid]);
             return response()->json($candidates);
-        });
+        })->name('getOfficebyId');
+
+        Route::get('getStateOfficebyId', function(){
+            $officeid = Input::get('office_id');
+            $stateid = Input::get('state_id');
+            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name  FROM candidates , offices, users, parties, states WHERE candidates.office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id and candidates.state_id = :state_id and candidates.state_id = states.id ORDER by 5", ['office_id' => $officeid, 'state_id' => $stateid]);
+            return response()->json($candidates);
+        })->name('getStateOfficebyId');
+
+        Route::get('getConstiOfficebyId', function(){
+            $officeid = Input::get('office_id');
+            $stateid = Input::get('state_id');
+            $constiid = Input::get('consti_id');
+            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name FROM candidates , offices, users, parties, states, constituencies WHERE candidates.office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id and candidates.constituency_id = constituencies.id and candidates.constituency_id = :consti_id and candidates.state_id = :state_id and candidates.state_id = states.id ORDER by 5", ['office_id' => $officeid, 'state_id' => $stateid, 'consti_id' => $constiid]);
+            return response()->json($candidates);
+        })->name('getConstiOfficebyId');
     });
 });
 
