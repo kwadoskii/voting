@@ -176,24 +176,52 @@ Route::group(['middleware' => 'auth'], function () {
         // Ballot APIs
         Route::get('getOfficebyId', function(){
             $officeid = Input::get('office_id');
-            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name FROM candidates , offices, users, parties WHERE office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id ORDER by 5", ['office_id' => $officeid]);
+            $candidates = DB::select("SELECT candidates.id, parties.id as partyid, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym, offices.name FROM candidates , offices, users, parties WHERE office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id ORDER by 5", ['office_id' => $officeid]);
             return response()->json($candidates);
         })->name('getOfficebyId');
 
         Route::get('getStateOfficebyId', function(){
             $officeid = Input::get('office_id');
             $stateid = Input::get('state_id');
-            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name  FROM candidates , offices, users, parties, states WHERE candidates.office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id and candidates.state_id = :state_id and candidates.state_id = states.id ORDER by 5", ['office_id' => $officeid, 'state_id' => $stateid]);
+            $candidates = DB::select("SELECT candidates.id, parties.id as partyid, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name  FROM candidates , offices, users, parties, states WHERE candidates.office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id and candidates.state_id = :state_id and candidates.state_id = states.id ORDER by 5", ['office_id' => $officeid, 'state_id' => $stateid]);
             return response()->json($candidates);
         })->name('getStateOfficebyId');
 
         Route::get('getConstiOfficebyId', function(){
             $officeid = Input::get('office_id');
             $stateid = Input::get('state_id');
-            $constiid = Input::get('consti_id');
-            $candidates = DB::select("SELECT candidates.id, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name FROM candidates , offices, users, parties, states, constituencies WHERE candidates.office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id and candidates.constituency_id = constituencies.id and candidates.constituency_id = :consti_id and candidates.state_id = :state_id and candidates.state_id = states.id ORDER by 5", ['office_id' => $officeid, 'state_id' => $stateid, 'consti_id' => $constiid]);
+            $lgaid = Input::get('lga_id');
+
+            $constiid = Lga::find($lgaid)->constituency->id;
+            $candidates = DB::select("SELECT candidates.id, parties.id as partyid, users.first_name, users.last_name, parties.name as 'partyname', parties.acronym,offices.name FROM candidates , offices, users, parties, states, constituencies WHERE candidates.office_id = :office_id and offices.id = candidates.office_id and users.id = candidates.user_id and parties.id = candidates.party_id and candidates.constituency_id = constituencies.id and candidates.constituency_id = :consti_id and candidates.state_id = :state_id and candidates.state_id = states.id ORDER by 5", ['office_id' => $officeid, 'state_id' => $stateid, 'consti_id' => $constiid]);
             return response()->json($candidates);
         })->name('getConstiOfficebyId');
+
+    //     use this for the result API
+    //          SELECT offices.name, users.first_name, users.mid_name, users.last_name, parties.acronym, lgas.name as vlga, constituencies.name as vconsti, states.name as vstate
+    //          FROM `results`, offices, parties, lgas, constituencies, states, users, candidates
+    //          where results.office_id = offices.id and
+    //          parties.id = results.party_id and
+    //          lgas.id = results.lga_id AND
+    //          constituencies.id = results.consti_id and
+    //          states.id = results.state_id AND
+    //          candidates.id = results.candi_id AND
+    //          users.id = candidates.user_id
+
+    // --------------------------------------
+
+    //          SELECT parties.acronym, users.first_name, users.mid_name, users.last_name, count(parties.acronym) as Polls
+    //          FROM `results`, offices, parties, lgas, constituencies, states, users, candidates
+    //          where results.office_id = offices.id and
+    //          parties.id = results.party_id and
+    //          lgas.id = results.lga_id AND
+    //          constituencies.id = results.consti_id and
+    //          states.id = results.state_id AND
+    //          candidates.id = results.candi_id AND
+    //          users.id = candidates.user_id and
+    //          results.office_id = 1
+    //          GROUP by parties.acronym
+    //          order by 1
     });
 });
 
@@ -202,3 +230,4 @@ Route::get('signout', [
     'uses' => 'AdminController@getAdminLogout',
     'as' => 'adminlogout'
 ]);
+

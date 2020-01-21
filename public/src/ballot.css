@@ -48,7 +48,6 @@ a, a:hover, a:focus {
 }
 
 #sidebar {
-    /* don't forget to add all the previously mentioned styles here too */
     /* background: #7386D5;  */
     background: #2C1A18;
     color: #fff;
@@ -93,7 +92,8 @@ ul ul a {
     background: rgba(56, 32, 29, 0.3);
 }
 
-/* ballot content UI */
+
+/* ballot content UI *****************/
 
 .flip-card {
     background-color: transparent;
@@ -162,4 +162,12 @@ ul ul a {
 
 .flip-card:hover .flip-card-back {
     opacity: 100%;
+}
+
+.blk{
+    color: black;
+}
+
+#mpartyacr{
+    color: red;
 }

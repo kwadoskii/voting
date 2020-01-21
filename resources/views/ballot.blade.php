@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Ballot
+Ballot Box
 @endsection
 
 @section('head')
@@ -67,7 +67,7 @@ Ballot
                         <li>
                             @foreach ($offices as $office)
                             @if($office->is_state == '0' && $office->is_constituency == '1' )
-                            <a href="#" class="constiElec" data-office_id="{{ $office->id }}" data-state_id="{{ Auth::user()->state_id }}" data-consti_id="{{ Auth::user()->lga_id }}">{{ $office->name}}</a>
+                            <a href="#" class="constiElec" data-office_id="{{ $office->id }}" data-state_id="{{ Auth::user()->state_id }}" data-lga_id="{{ Auth::user()->lga_id }}">{{ $office->name}}</a>
                             @endif
                             @endforeach
                         </li>
@@ -78,58 +78,20 @@ Ballot
 
         <div id="content" class="col-md-10">
             <div class="col-md-12 mt-3 mb-3">
-                <h5 id="ballotheader">Welcome</h5>
+                <h5 id="ballotheader" class="text-center">Welcome</h5>
             </div>
 
-            <div class="row ballotbox">
-                {{-- <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">APC</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Mohammed Buhari</h1>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row @if (Auth::user()->isvoted == '0') ballotbox @endif">
+                <div class="jumbotron col-md-8 offset-md-2 mt-2 p-20">
+                    <p class='lead text-center'>We will do our best to assess any possible risks for users (and in particular, for children) from third parties when they use any interactive service provided on our site, and we will decide in each case whether it is appropriate to use moderation of the relevant service (including what kind of moderation to use) in the light of those risks. However, we are under no obligation to oversee, monitor or moderate any interactive service we provide on our site, and we expressly exclude our liability for any loss or damage arising from the use of any interactive service by a user in contravention of our content standards, whether the service is moderated or not.</p>
                 </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">pdp</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Atiku Abubakar</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="party">kowa</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <h1>Goodluck Jonathan</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <div class="jumbotron col-md-12">
-                    <p class='lead'>Welcome</p>
-                </div>
-
             </div>
         </div>
     </div>
 </div>
 </div>
+
+@extends('includes.confirmvotemodal')
 {{-- https://bootstrapious.com/p/bootstrap-sidebar for the sidebar--}}
 <script>
     var token = '{{ Session::token() }}';
