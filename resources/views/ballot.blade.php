@@ -1,11 +1,15 @@
 @extends('layouts.master')
 
+@section('head')
+<link rel="stylesheet" href="{{ URL::to('src/ballot.css') }}">
+@endsection
+
 @section('title')
 Ballot Box
 @endsection
 
-@section('head')
-<link rel="stylesheet" href="{{ URL::to('src/ballot.css') }}">
+@section('confirmVotemodalid')
+    confirmVoteBtn
 @endsection
 
 @section('section')
@@ -83,7 +87,12 @@ Ballot Box
 
             <div class="row @if (Auth::user()->isvoted == '0') ballotbox @endif">
                 <div class="jumbotron col-md-8 offset-md-2 mt-2 p-20">
-                    <p class='lead text-center'>We will do our best to assess any possible risks for users (and in particular, for children) from third parties when they use any interactive service provided on our site, and we will decide in each case whether it is appropriate to use moderation of the relevant service (including what kind of moderation to use) in the light of those risks. However, we are under no obligation to oversee, monitor or moderate any interactive service we provide on our site, and we expressly exclude our liability for any loss or damage arising from the use of any interactive service by a user in contravention of our content standards, whether the service is moderated or not.</p>
+                    @if (Auth::user()->isvoted == '1')
+                        <h3 class='lead text-center'>You have already voted in this election.</p>
+                    @else
+                        <h3 class='lead text-center'>Please select an election category from the left and cast your vote.</h3>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -91,13 +100,15 @@ Ballot Box
 </div>
 </div>
 
-@extends('includes.confirmvotemodal')
+@include('includes.confirmvotemodal')
+@include('includes.message')
 {{-- https://bootstrapious.com/p/bootstrap-sidebar for the sidebar--}}
 <script>
     var token = '{{ Session::token() }}';
     var getOfficebyId = '{{ route('getOfficebyId') }}';
     var getStateOfficebyId = '{{ route('getStateOfficebyId') }}';
     var getConstiOfficebyId = '{{ route('getConstiOfficebyId') }}';
+    var vote = '{{ route('vote') }}';
 </script>
 <script src="{{ URL::to('src/bootstrap.min.js') }}"></script>
 <script src="{{ URL::to('src/ballot.js') }}">

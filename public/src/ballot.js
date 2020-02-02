@@ -10,7 +10,7 @@ $('.genElec').on('click', function (e) {
         url: getOfficebyId,
         data: { office_id: office_id, _token: token }
     }).done(function (response) {
-        console.log(response);
+        // console.log(response);
 
         let candidates = response.reduce((acc, { id, partyid, first_name, last_name, acronym }) => acc +=
         `<div class='col-md-4 mb-3'>
@@ -42,7 +42,7 @@ $('.stateElec').on('click', function (e) {
         url: getStateOfficebyId,
         data: { office_id: office_id, state_id: state_id, _token: token }
     }).done(function (response) {
-        console.log(response);
+        //console.log(response);
         let candidates = response.reduce((acc, { id, partyid, first_name, last_name, acronym }) => acc +=
         `<div class='col-md-4 mb-3'>
             <div class='flip-card'>
@@ -73,7 +73,7 @@ $('.constiElec').on('click', function (e) {
         url: getConstiOfficebyId,
         data: { office_id: office_id, state_id: state_id, lga_id: lga_id, _token: token }
     }).done(function (response) {
-        console.log(response);
+        //console.log(response);
         let candidates = response.reduce((acc, { id, partyid, first_name, last_name, acronym }) => acc +=
         `<div class='col-md-4 mb-3'>
             <div class='flip-card'>
@@ -92,18 +92,45 @@ $('.constiElec').on('click', function (e) {
     });
 });
 
+{
+    var candidate_id, party_id, office_id;
 
-$(document).on('click', '.flip-card-inner', function(e){
-    e.preventDefault();
-    console.log(e);
-    $('#confirmVote-modal').modal('show');
-    let pacr = $(this).find('p')[0].textContent;
-    console.log(pacr);
-    $('#mpartyacr').text(pacr);
+    $(document).on('click', '.flip-card-inner', function (e) {
+        e.preventDefault();
+        // console.log(e);
+        $('#confirmVote-modal').modal('show');
+        let partyAcronym = $(this).find('p')[0].textContent;
+        // console.log(partyAcronym);
+        $('#mpartyacr').text(partyAcronym);
 
-    let candidate_id = $(this).find('p')[0].dataset['candidate_id'];
-    let party_id = $(this).find('p')[0].dataset['party_id'];
-    let office_id = $(this).find('p')[0].dataset['office_id'];
-    console.log(candidate_id, party_id, office_id)
+        candidate_id = $(this).find('p')[0].dataset['candidate_id'];
+        party_id = $(this).find('p')[0].dataset['party_id'];
+        office_id = $(this).find('p')[0].dataset['office_id'];
 
-});
+    });
+
+    $(document).on('click', '#confirmVoteBtn', (e) => {
+        e.preventDefault();
+        $.ajax({
+            method: 'POST',
+            url: vote,
+            data: {
+                candidate_id: candidate_id,
+                party_id: party_id,
+                office_id: office_id,
+                _token: token
+            }
+        }).done(function(response){
+            // console.log(response.message);
+            // console.log(candidate_id, party_id, office_id);
+            $('#confirmVote-modal').modal('hide');
+            displayNotification(response.message);
+        });
+    });
+}
+
+//Display of Notifications
+function displayNotification(msg) {
+    $('.lead').text(msg);
+    $('#toast').toast('show');
+}

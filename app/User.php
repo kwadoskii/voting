@@ -13,4 +13,9 @@ class User extends Model implements Authenticatable
     {
         return $this->hasOne('App\Lga');
     }
+
+    public function result()
+    {
+        return $this->belongsTo('App\Result');
+    }
 }

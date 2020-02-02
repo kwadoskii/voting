@@ -1,7 +1,6 @@
 <?php
 
 use App\Lga;
-use App\Office;
 use App\Constituency;
 use Illuminate\Support\Facades\Input;
 
@@ -197,6 +196,10 @@ Route::group(['middleware' => 'auth'], function () {
             return response()->json($candidates);
         })->name('getConstiOfficebyId');
 
+        Route::post('vote', [
+            'uses' => 'ResultController@vote'
+        ])->name('vote');
+
     //     use this for the result API
     //          SELECT offices.name, users.first_name, users.mid_name, users.last_name, parties.acronym, lgas.name as vlga, constituencies.name as vconsti, states.name as vstate
     //          FROM `results`, offices, parties, lgas, constituencies, states, users, candidates
@@ -224,6 +227,7 @@ Route::group(['middleware' => 'auth'], function () {
     //          order by 1
     });
 });
+
 
 Route::get('signout', [
     'name' => 'adminlogout',

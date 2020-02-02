@@ -25,4 +25,9 @@ class Candidate extends Model
     {
         return $this->belongsTo('App\Constituency');
     }
+
+    public function result()
+    {
+        return $this->belongsTo('App\Result');
+    }
 }

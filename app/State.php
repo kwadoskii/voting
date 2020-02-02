@@ -20,4 +20,9 @@ class State extends Model
     {
         return $this->hasMany('App\Candidate');
     }
+
+    public function result()
+    {
+        return $this->belongsTo('App\Result');
+    }
 }

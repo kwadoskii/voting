@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Lga;
 use App\Constituency;
+use App\Result;
 use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -79,7 +80,17 @@ class UserController extends Controller
 
     public function postUserLogout()
     {
-        Auth::Logout();
-        return redirect()->route('welcome');
+        if(Result::where('user_id', Auth::user()->id)->first())
+        {
+            Auth::user()->isvoted = 1;
+            Auth::user()->update();
+            Auth::Logout();
+            return redirect()->route('welcome');
+        }
+
+        else{
+            Auth::Logout();
+            return redirect()->route('welcome');
+        }
     }
 }

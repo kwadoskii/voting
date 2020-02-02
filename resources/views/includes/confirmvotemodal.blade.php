@@ -11,8 +11,8 @@
                 <p class="text-center blk">Want to vote for <span id="mpartyacr"></span>?</p>
             </div>
             <div class="modal-footer mt-1">
-                <button type="button" class="btn btn-dark" id=@yield('confirmVotemodalid')>Yes</button>
-                <button type="button" data-dismiss="modal" class="btn btn-dark" id=>No</button>
+                <button type="button" class="btn btn-success" id=@yield('confirmVotemodalid')>Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
             </div>
         </div>
     </div>
