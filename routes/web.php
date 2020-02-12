@@ -23,6 +23,11 @@ Route::get('/admin', function () {
     return view('admin');
 })->name('admin');
 
+//test
+// Route::post('/testadd', [
+//     'uses' => 'AdminController@postAddAdmin',
+// ]);
+
 Route::post('/adminlogin', [
     'uses' => 'AdminController@postAdminlogin',
     'as' => 'adminlogin'
@@ -200,6 +205,10 @@ Route::group(['middleware' => 'auth'], function () {
             'uses' => 'ResultController@vote'
         ])->name('vote');
 
+        Route::get('result', [
+            'uses' => 'ResultController@countVotes'
+        ])->name('votecounts');
+
     //     use this for the result API
     //          SELECT offices.name, users.first_name, users.mid_name, users.last_name, parties.acronym, lgas.name as vlga, constituencies.name as vconsti, states.name as vstate
     //          FROM `results`, offices, parties, lgas, constituencies, states, users, candidates
@@ -224,7 +233,7 @@ Route::group(['middleware' => 'auth'], function () {
     //          users.id = candidates.user_id and
     //          results.office_id = 1
     //          GROUP by parties.acronym
-    //          order by 1
+    //          order by 5 DESC
     });
 });
 
@@ -234,4 +243,3 @@ Route::get('signout', [
     'uses' => 'AdminController@getAdminLogout',
     'as' => 'adminlogout'
 ]);
-

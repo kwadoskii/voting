@@ -20,6 +20,7 @@ class Result extends Migration
             $table->integer('lga_id');
             $table->integer('consti_id');
             $table->integer('state_id');
+            $table->integer('party_id');
             $table->integer('user_id');
             $table->timestamps();
         });

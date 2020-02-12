@@ -138,3 +138,8 @@ body {
 #delete{
     margin-right: 0;
 }
+
+.lead{
+    font-size: 1.05em !important;
+    color: black !important;
+}

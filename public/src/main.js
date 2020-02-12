@@ -585,7 +585,7 @@ $(document).on('click', deletes, function (e) {
     });
 
     //Adding of new candidate method
-    $(document).on('click', '#modal-save-candidate', function(e){
+    $(document).on('click', '#modal-save-candidate', function (e) {
         e.preventDefault();
         $.ajax({
             method: 'POST',
@@ -598,7 +598,7 @@ $(document).on('click', deletes, function (e) {
                 party: $('#party').val(),
                 _token: token
             }
-        }).done(function (response){
+        }).done(function (response) {
             $('#new-modal').modal('hide');
 
             $('body').removeClass('modal-open');
@@ -614,7 +614,7 @@ $(document).on('click', deletes, function (e) {
 }
 
 {
-    $(document).on('click', '#candidateSearch', function(e){
+    $(document).on('click', '#candidateSearch', function (e) {
         console.log('yes');
     });
 
@@ -628,9 +628,9 @@ $(document).on('click', deletes, function (e) {
             return reverse // `-1 *` if want opposite order
                 * (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
                     .localeCompare(b.cells[col].textContent.trim())
-                   );
+                );
         });
-        for(i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
+        for (i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
     }
 
     function makeSortable(table) {
@@ -640,7 +640,7 @@ $(document).on('click', deletes, function (e) {
         else return; // if no `<thead>` then do nothing
         while (--i >= 0) (function (i) {
             var dir = 1;
-            th[i].addEventListener('click', function () {sortTable(table, i, (dir = 1 - dir))});
+            th[i].addEventListener('click', function () { sortTable(table, i, (dir = 1 - dir)) });
         }(i));
     }
 
@@ -650,63 +650,139 @@ $(document).on('click', deletes, function (e) {
         while (--i >= 0) makeSortable(t[i]);
     }
 
-    window.onload = function () {makeAllSortable();};
+    window.onload = function () { makeAllSortable(); };
 }
 
 // candiate search control to hide the state and constituency Dropdowns
 {
-    $(document).on('change', '#search_office', function(e){
+    $(document).on('change', '#search_office', function (e) {
         let isconsti = $(this).find(':selected').data('isconsti');
         let isstate = $(this).find(':selected').data('isstate');
 
-        if(isstate === 0 && isconsti === 0){
+        if (isstate === 0 && isconsti === 0) {
             $('#search_consti').hide();
             $('#search_state').hide();
         }
 
-        if(isstate === 1 && isconsti === 0){
+        if (isstate === 1 && isconsti === 0) {
             $('#search_consti').hide();
             $('#search_state').show();
         }
 
-        if(isstate === 0 && isconsti === 1){
+        if (isstate === 0 && isconsti === 1) {
             $('#search_consti').show();
             $('#search_state').show();
         }
     });
 }
 
+// Result search control to hide the state and constituency Dropdowns
+{
+    $(document).on('change', '#result_office', function (e) {
+        isconsti = $(this).find(':selected').data('isconsti');
+        isstate = $(this).find(':selected').data('isstate');
+
+        if (isstate === 0 && isconsti === 0) {
+            $('#result_consti').hide();
+            $('#result_state').hide();
+        }
+
+        if (isstate === 1 && isconsti === 0) {
+            $('#result_consti').hide();
+            $('#result_state').show();
+        }
+
+        if ((isstate === 0 && isconsti === 1) || (isstate === 1 && isconsti === 1)) {
+            $('#result_consti').show();
+
+            $.ajax({
+                method: 'GET',
+                url: urlGetConstiByStateId,
+                data: {
+                    _token: token,
+                    state_id: $('#result_state').val()
+                }
+            }).done(function (response) {
+                $('#result_consti').empty();
+                response.forEach(consti => {
+                    $('#result_consti').append(`<option value=${consti.id}>${consti.name}</option>`);
+                    $('#result_state').show();
+                });
+                // console.log(response);
+            });
+        }
+    });
+
+    $(document).on('click', '#resultSearch', function(e){
+        e.preventDefault();
+        if (isstate === 0 && isconsti === 0) {
+            $.ajax({
+                method: 'GET',
+                url: getVoteCounts,
+                data: {
+                    _token: token,
+                    office_id: $('#result_office').val(),
+                    isstate: isstate,
+                    isconsti: isconsti
+                }
+            }).done(function(response){
+                let results = response.message;
+                let i = 1;
+
+                results = results.reduce((acc, { acronym, first_name, mid_name, last_name, polls, office, gender }) => acc +=
+                    `<tr class="d-flex">
+                        <td class="col-md-1">${i++}</td>
+                        <td class="col-md-3">${office}</td>
+                        <td class="col-md-2">${acronym}</td>
+                        <td class="col-md-4">${(mid_name) ? first_name + " " + mid_name + " " + last_name: first_name + " " + last_name }</td>
+                        <td class="col-md-1">${gender}</td>
+                        <td class="col-md-1">${polls}</td>
+                    </tr>`, ``);
+
+                $('#resultbody').html(results);
+                console.log(response);
+            });
+        }
+
+        if (isstate === 0 && isconsti === 1) {
+        }
+
+        if (isstate === 1 && isconsti === 0) {
+        }
+    });
+}
+
 //for controlling the multiple voters for a particular party in a particular office
 {
-    $(document).on('change', '#office', function(e){
+    $(document).on('change', '#office', function (e) {
         let isconsti = $(this).find(':selected').data('isconsti');
         let isstate = $(this).find(':selected').data('isstate');
 
-        if(isstate === 0 && isconsti === 0)  //for president 00
+        if (isstate === 0 && isconsti === 0)  //for president 00
         {
             $('#stateholder').hide();
             $('#constituencyholder').hide();
 
-            $.get(getAvailbleParty00 + '?office_id=' + $('#office').val(), function(data) {
+            $.get(getAvailbleParty00 + '?office_id=' + $('#office').val(), function (data) {
                 $('#party').empty();
                 $('#party').selectpicker('refresh');
-                $.each(data, function (index, party){
+                $.each(data, function (index, party) {
                     $('#party').append(`<option value="${party.id}"> ${party.acronym} - ${party.name} </option>`);
                     $('#party').selectpicker('refresh');
                 });
             });
         }
 
-        if(isstate === 1 && isconsti === 0) //for governors 10
+        if (isstate === 1 && isconsti === 0) //for governors 10
         {
             $('#stateholder').show();
             $('#constituencyholder').hide();
 
-            $(document).on('change', '#state', function(e){
-                $.get(getAvailbleParty10 + '?state_id=' + $('#state').val() + '&' + 'office_id=' + $('#office').val(), function(data){
+            $(document).on('change', '#state', function (e) {
+                $.get(getAvailbleParty10 + '?state_id=' + $('#state').val() + '&' + 'office_id=' + $('#office').val(), function (data) {
                     $('#party').empty();
                     $('#party').selectpicker('refresh');
-                    $.each(data, function (index, party){
+                    $.each(data, function (index, party) {
                         $('#party').append(`<option value="${party.id}"> ${party.acronym} - ${party.name} </option>`);
                         $('#party').selectpicker('refresh');
                     });
@@ -714,16 +790,16 @@ $(document).on('click', deletes, function (e) {
             });
         }
 
-        if(isstate === 0 && isconsti === 1) // for senators 01
+        if (isstate === 0 && isconsti === 1) // for senators 01
         {
             $('#stateholder').show();
             $('#constituencyholder').show();
 
-            $(document).on('change', '#constituency', function(e){
-                $.get(getAvailbleParty01 + '?state_id=' + $('#state').val() + '&' + 'office_id=' + $('#office').val() + '&' + 'consti_id' + $('#constituency').val(), function(data){
+            $(document).on('change', '#constituency', function (e) {
+                $.get(getAvailbleParty01 + '?state_id=' + $('#state').val() + '&' + 'office_id=' + $('#office').val() + '&' + 'consti_id' + $('#constituency').val(), function (data) {
                     $('#party').empty();
                     $('#party').selectpicker('refresh');
-                    $.each(data, function (index, party){
+                    $.each(data, function (index, party) {
                         $('#party').append(`<option value="${party.id}"> ${party.acronym} - ${party.name} </option>`);
                         $('#party').selectpicker('refresh');
                     });
@@ -772,11 +848,11 @@ $(document).on('change', '#state, #estate', function (e) {
 //populates constituency when the state is picked
 $(document).on('change', '#state', function (e) {
     state_id = e.target.value;
-    if(state_id){
+    if (state_id) {
         $.get(urlGetConstiByStateId + '?state_id=' + state_id, function (data) {
             $('#constituency').empty();
             $('#constituency').selectpicker('refresh');
-            $.each(data, function(index, consti){
+            $.each(data, function (index, consti) {
                 $('#constituency').append("<option value='" + consti.id + "'>" + consti.name + "</option>");
                 $('#constituency').selectpicker('refresh');
             });
