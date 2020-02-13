@@ -88,7 +88,7 @@ Ballot Box
             <div class="row @if (Auth::user()->isvoted == '0') ballotbox @endif">
                 <div class="jumbotron col-md-8 offset-md-2 mt-2 p-20">
                     @if (Auth::user()->isvoted == '1')
-                        <h3 class='lead text-center'>You have already voted in this election.</p>
+                        <p class='lead text-center'>You have already voted in this election.</p>
                     @else
                         <h3 class='lead text-center'>Please select an election category from the left and cast your vote.</h3>
                     @endif

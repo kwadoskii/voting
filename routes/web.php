@@ -205,10 +205,6 @@ Route::group(['middleware' => 'auth'], function () {
             'uses' => 'ResultController@vote'
         ])->name('vote');
 
-        Route::get('result', [
-            'uses' => 'ResultController@countVotes'
-        ])->name('votecounts');
-
     //     use this for the result API
     //          SELECT offices.name, users.first_name, users.mid_name, users.last_name, parties.acronym, lgas.name as vlga, constituencies.name as vconsti, states.name as vstate
     //          FROM `results`, offices, parties, lgas, constituencies, states, users, candidates
@@ -237,6 +233,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
+Route::get('result', [
+    'uses' => 'ResultController@countVotes'
+])->name('votecounts');
 
 Route::get('signout', [
     'name' => 'adminlogout',

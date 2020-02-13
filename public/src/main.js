@@ -619,38 +619,38 @@ $(document).on('click', deletes, function (e) {
     });
 
     //Credit from http://jsfiddle.net/zscQy/
-    function sortTable(table, col, reverse) {
-        var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
-            tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
-            i;
-        reverse = -((+reverse) || -1);
-        tr = tr.sort(function (a, b) { // sort rows
-            return reverse // `-1 *` if want opposite order
-                * (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
-                    .localeCompare(b.cells[col].textContent.trim())
-                );
-        });
-        for (i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
-    }
+    // function sortTable(table, col, reverse) {
+    //     var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+    //         tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
+    //         i;
+    //     reverse = -((+reverse) || -1);
+    //     tr = tr.sort(function (a, b) { // sort rows
+    //         return reverse // `-1 *` if want opposite order
+    //             * (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
+    //                 .localeCompare(b.cells[col].textContent.trim())
+    //             );
+    //     });
+    //     for (i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
+    // }
 
-    function makeSortable(table) {
-        var th = table.tHead, i;
-        th && (th = th.rows[0]) && (th = th.cells);
-        if (th) i = th.length;
-        else return; // if no `<thead>` then do nothing
-        while (--i >= 0) (function (i) {
-            var dir = 1;
-            th[i].addEventListener('click', function () { sortTable(table, i, (dir = 1 - dir)) });
-        }(i));
-    }
+    // function makeSortable(table) {
+    //     var th = table.tHead, i;
+    //     th && (th = th.rows[0]) && (th = th.cells);
+    //     if (th) i = th.length;
+    //     else return; // if no `<thead>` then do nothing
+    //     while (--i >= 0) (function (i) {
+    //         var dir = 1;
+    //         th[i].addEventListener('click', function () { sortTable(table, i, (dir = 1 - dir)) });
+    //     }(i));
+    // }
 
-    function makeAllSortable(parent) {
-        parent = parent || document.body;
-        var t = parent.getElementsByTagName('table'), i = t.length;
-        while (--i >= 0) makeSortable(t[i]);
-    }
+    // function makeAllSortable(parent) {
+    //     parent = parent || document.body;
+    //     var t = parent.getElementsByTagName('table'), i = t.length;
+    //     while (--i >= 0) makeSortable(t[i]);
+    // }
 
-    window.onload = function () { makeAllSortable(); };
+    // window.onload = function () { makeAllSortable(); };
 }
 
 // candiate search control to hide the state and constituency Dropdowns
@@ -713,9 +713,10 @@ $(document).on('click', deletes, function (e) {
         }
     });
 
-    $(document).on('click', '#resultSearch', function(e){
+    $(document).on('click', '#resultSearch', function (e) {
         e.preventDefault();
         if (isstate === 0 && isconsti === 0) {
+            $('#resultbody').html(loading);
             $.ajax({
                 method: 'GET',
                 url: getVoteCounts,
@@ -725,29 +726,113 @@ $(document).on('click', deletes, function (e) {
                     isstate: isstate,
                     isconsti: isconsti
                 }
-            }).done(function(response){
+            }).done(function (response) {
                 let results = response.message;
-                let i = 1;
+                if(results.length != 0){
+                    let i = 1;
 
-                results = results.reduce((acc, { acronym, first_name, mid_name, last_name, polls, office, gender }) => acc +=
-                    `<tr class="d-flex">
+                    results = results.reduce((acc, { acronym, first_name, mid_name, last_name, polls, office, gender }) => acc +=
+                        `<tr class="d-flex">
+                            <td class="col-md-1">${i++}</td>
+                            <td class="col-md-2">${office}</td>
+                            <td class="col-md-2">${acronym}</td>
+                            <td class="col-md-4">${(mid_name) ? first_name + " " + mid_name + " " + last_name : first_name + " " + last_name}</td>
+                            <td class="col-md-1">${gender}</td>
+                            <td class="col-md-2">${polls}</td>
+                        </tr>`, ``);
+
+                    $('#resultbody').html(results);
+                }
+                else {
+                    $('#resultbody').html(`
+                        <div class="jumbotron col-md-8 offset-md-2 mt-2 p-20">
+                            <h3 class='lead text-center'>No Result for this Category.</h3>
+                        </div>`
+                    );
+                }
+                // console.log(response);
+            });
+        }
+
+        if (isstate === 1 && isconsti === 0) {
+            $('#resultbody').html(loading);
+            $.ajax({
+                method: 'GET',
+                url: getVoteCounts,
+                data: {
+                    _token: token,
+                    office_id: $('#result_office').val(),
+                    isstate: isstate,
+                    isconsti: isconsti,
+                    state_id: $('#result_state').val()
+                }
+            }).done(function (response) {
+                let results = response.message;
+                if (results.length != 0) {
+                    let i = 1;
+
+                    results = results.reduce((acc, { acronym, first_name, mid_name, last_name, polls, office, gender }) => acc +=
+                        `<tr class="d-flex">
                         <td class="col-md-1">${i++}</td>
-                        <td class="col-md-3">${office}</td>
+                        <td class="col-md-2">${office}</td>
                         <td class="col-md-2">${acronym}</td>
-                        <td class="col-md-4">${(mid_name) ? first_name + " " + mid_name + " " + last_name: first_name + " " + last_name }</td>
+                        <td class="col-md-4">${(mid_name) ? first_name + " " + mid_name + " " + last_name : first_name + " " + last_name}</td>
                         <td class="col-md-1">${gender}</td>
-                        <td class="col-md-1">${polls}</td>
+                        <td class="col-md-2">${polls}</td>
                     </tr>`, ``);
 
-                $('#resultbody').html(results);
-                console.log(response);
+                    $('#resultbody').html(results);
+                }
+                else {
+                    $('#resultbody').html(`
+                    <div class="jumbotron col-md-8 offset-md-2 mt-2 p-20">
+                        <h3 class='lead text-center'>No Result for this Category.</h3>
+                    </div>`
+                    );
+                }
+                // console.log(response);
             });
         }
 
         if (isstate === 0 && isconsti === 1) {
-        }
+            $('#resultbody').html(loading);
+            $.ajax({
+                method: 'GET',
+                url: getVoteCounts,
+                data: {
+                    _token: token,
+                    office_id: $('#result_office').val(),
+                    isstate: isstate,
+                    isconsti: isconsti,
+                    state_id: $('#result_state').val(),
+                    consti_id: $('#result_consti').val()
+                }
+            }).done(function (response) {
+                let results = response.message;
+                if (results.length != 0) {
+                    let i = 1;
 
-        if (isstate === 1 && isconsti === 0) {
+                    results = results.reduce((acc, { acronym, first_name, mid_name, last_name, polls, office, gender }) => acc +=
+                        `<tr class="d-flex">
+                        <td class="col-md-1">${i++}</td>
+                        <td class="col-md-2">${office}</td>
+                        <td class="col-md-2">${acronym}</td>
+                        <td class="col-md-4">${(mid_name) ? first_name + " " + mid_name + " " + last_name : first_name + " " + last_name}</td>
+                        <td class="col-md-1">${gender}</td>
+                        <td class="col-md-2">${polls}</td>
+                    </tr>`, ``);
+
+                    $('#resultbody').html(results);
+                }
+                else {
+                    $('#resultbody').html(`
+                    <div class="jumbotron col-md-8 offset-md-2 mt-2 p-20">
+                        <h3 class='lead text-center'>No Result for this Category.</h3>
+                    </div>`
+                    );
+                }
+                // console.log(response);
+            });
         }
     });
 }
@@ -860,7 +945,9 @@ $(document).on('change', '#state', function (e) {
     }
 });
 
+//get a particular page
 function getpage(pagename) {
+    $('#mycontainer').html(loading);
     $.ajax({
         method: 'POST',
         url: 'getdashdisplay',
@@ -869,3 +956,11 @@ function getpage(pagename) {
         $('#mycontainer').html(page);
     });
 }
+
+//loading
+var loading = `
+    <div class="d-flex justify-content-center mt-3" style="top:50%;">
+        <div class="spinner-border" role="status">
+        </div>
+    </div>
+`;

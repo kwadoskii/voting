@@ -35,12 +35,11 @@
             <thead>
                 <tr class="d-flex">
                     <th class="col-md-1">S/N</th>
-                    <th class="col-md-3">Office</th>
+                    <th class="col-md-2">Office</th>
                     <th class="col-md-2">Party</th>
                     <th class="col-md-4">Name</th>
                     <th class="col-md-1">Gender</th>
-                    <th class="col-md-1">Counts</th>
-                    {{-- <th class="col-md-3 table-action">Actions</th> --}}
+                    <th class="col-md-2">Counts</th>
                 </tr>
             </thead>
 
@@ -50,13 +49,6 @@
                     <td class="col-md-3">Presidency</td>
                     <td class="col-md-2">APC</td>
                     <td class="col-md-4">James Charles</td>
-                    <td class="col-md-2">Male</td>
-                </tr>
-                <tr class="d-flex">
-                    <td class="col-md-1">2</td>
-                    <td class="col-md-3">Presidency</td>
-                    <td class="col-md-2">PDP</td>
-                    <td class="col-md-4">Paul Scholes</td>
                     <td class="col-md-2">Male</td>
                 </tr> --}}
             </tbody>

@@ -50,8 +50,40 @@ class ResultController extends Controller
 
     public function countVotes(Request $request)
     {
-        $results = DB::select("SELECT parties.acronym, users.first_name, users.mid_name, users.last_name, count(parties.acronym) as polls, offices.name as office, users.gender as gender FROM results, offices, parties, lgas, constituencies, states, users, candidates where results.office_id = offices.id and parties.id = results.party_id and lgas.id = results.lga_id AND constituencies.id = results.consti_id and states.id = results.state_id AND candidates.id = results.candi_id AND users.id = candidates.user_id and results.office_id = :office_id GROUP by parties.acronym order by polls DESC", ['office_id' => $request->office_id]);
+        $this->validate($request, [
+            'isstate' => 'required',
+            'isconsti' => 'required',
+            'office_id' => 'required'
+        ]);
 
-        return response()->json(['message' => $results], 200);
+        if($request->isstate == 0 && $request->isconsti == 0)
+        {
+            $results = DB::select("SELECT parties.acronym, users.first_name, users.mid_name, users.last_name, count(parties.acronym) as polls, offices.name as office, users.gender as gender FROM results, offices, parties, lgas, constituencies, states, users, candidates where results.office_id = offices.id and parties.id = results.party_id and lgas.id = results.lga_id AND constituencies.id = results.consti_id and states.id = results.state_id AND candidates.id = results.candi_id AND users.id = candidates.user_id and results.office_id = :office_id GROUP by parties.acronym order by polls DESC", ['office_id' => $request->office_id]);
+
+            return response()->json(['message' => $results], 200);
+        }
+
+        if($request->isstate == 1 && $request->isconsti == 0)
+        {
+            $this->validate($request, [
+                'state_id' => 'required'
+            ]);
+
+            $results = DB::select("SELECT parties.acronym, users.first_name, users.mid_name, users.last_name, count(parties.acronym) as polls, offices.name as office, users.gender as gender FROM `results`, offices, parties, lgas, constituencies, states, users, candidates where results.office_id = offices.id and parties.id = results.party_id and lgas.id = results.lga_id AND constituencies.id = results.consti_id and states.id = results.state_id AND candidates.id = results.candi_id AND users.id = candidates.user_id and results.office_id = :office_id and results.state_id = :state_id GROUP by parties.acronym order by 5 DESC", ['office_id' => $request->office_id, 'state_id' => $request->state_id]);
+
+            return response()->json(['message' => $results], 200);
+        }
+
+        if($request->isstate == 0 && $request->isconsti == 1)
+        {
+            $this->validate($request, [
+                'state_id' => 'required',
+                'consti_id' => 'required'
+            ]);
+
+            $results = DB::select("SELECT parties.acronym, users.first_name, users.mid_name, users.last_name, count(parties.acronym) as polls, offices.name as office, users.gender as gender FROM `results`, offices, parties, lgas, constituencies, states, users, candidates where results.office_id = offices.id and parties.id = results.party_id and lgas.id = results.lga_id AND constituencies.id = results.consti_id and states.id = results.state_id AND candidates.id = results.candi_id AND users.id = candidates.user_id and results.office_id = :office_id and results.state_id = :state_id and results.consti_id = :consti_id GROUP by parties.acronym order by 5 DESC", ['office_id' => $request->office_id, 'state_id' => $request->state_id, 'consti_id' => $request->consti_id]);
+
+            return response()->json(['message' => $results], 200);
+        }
     }
 }
