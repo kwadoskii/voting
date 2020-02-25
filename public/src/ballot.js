@@ -1,9 +1,10 @@
 $('.genElec').on('click', function (e) {
     e.preventDefault();
 
+    $('.ballotbox').css({'display': 'block'});
+    $('.ballotbox').html(loading);
     // console.log(e.target.innerHTML, e.target.dataset['office_id']);
     $('#ballotheader').text(e.target.innerHTML);
-
     let office_id = e.target.dataset['office_id'];
     $.ajax({
         method: 'GET',
@@ -26,6 +27,7 @@ $('.genElec').on('click', function (e) {
             </div>
         </div>`, ``);
 
+        $('.ballotbox').css({'display': 'flex'});
         $('.ballotbox').html(candidates);
     });
 });
@@ -33,6 +35,9 @@ $('.genElec').on('click', function (e) {
 
 $('.stateElec').on('click', function (e) {
     e.preventDefault();
+    $('.ballotbox').css({'display': 'block'});
+    $('.ballotbox').html(loading);
+
     $('#ballotheader').text(e.target.innerHTML);
     let office_id = e.target.dataset['office_id'];
     let state_id = e.target.dataset['state_id'];
@@ -57,12 +62,16 @@ $('.stateElec').on('click', function (e) {
             </div>
         </div>`, ``);
 
+        $('.ballotbox').css({'display': 'flex'});
         $('.ballotbox').html(candidates);
     });
 });
 
 $('.constiElec').on('click', function (e) {
     e.preventDefault();
+    $('.ballotbox').css({'display': 'block'});
+    $('.ballotbox').html(loading);
+
     $('#ballotheader').text(e.target.innerHTML);
     let office_id = e.target.dataset['office_id'];
     let state_id = e.target.dataset['state_id'];
@@ -88,6 +97,7 @@ $('.constiElec').on('click', function (e) {
             </div>
         </div>`, ``);
 
+        $('.ballotbox').css({'display': 'flex'});
         $('.ballotbox').html(candidates);
     });
 });
@@ -134,3 +144,11 @@ function displayNotification(msg) {
     $('.lead').text(msg);
     $('#toast').toast('show');
 }
+
+//loading
+var loading = `
+    <div class="d-flex justify-content-center mt-3" style="top:50%;">
+        <div class="spinner-border" role="status">
+        </div>
+    </div>
+`;

@@ -16,9 +16,14 @@ class Lga extends Migration
         Schema::create('lgas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('state_id');
-            $table->integer('constituency_id')->nullable();
+            $table->integer('state_id')->unsigned();
+            $table->integer('constituency_id')->nullable()->unsigned();
             $table->timestamps();
+        });
+
+        Schema::table('lgas', function ($table) {
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('restrict');
+            $table->foreign('constituency_id')->references('id')->on('constituencies')->onDelete('restrict');
         });
     }
 

@@ -13,7 +13,8 @@
                 </form>
             </div>
             <div class="modal-footer mt-4">
-                <button type="button" class="btn btn-dark" id=@yield('editmodalid')>Save Changes</button>
+                <button type="button" class="btn btn-outline-success" id=@yield('editmodalid') style="float: right;">Save Changes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-light" style="float: left;">Close</button>
             </div>
         </div>
     </div>

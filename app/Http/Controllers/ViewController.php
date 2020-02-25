@@ -84,6 +84,21 @@ class ViewController extends Controller
                 return response()->json(['voter' => $data]);
                 break;
 
+            case 'candidate':
+                $data = Candidate::find($id);
+                $rdata = [];
+                $rdata['office'] = $data->office->name;
+                $rdata['first_name'] = $data->user->first_name;
+                $rdata['mid_name'] = $data->user->mid_name;
+                $rdata['last_name'] = $data->user->last_name;
+                $rdata['gender'] = $data->user->gender;
+                // $rdata['state'] = State::find($data->user->state_id)->name;
+                // $rdata['consti'] = Lga::find($data->user->lga_id)->constituency->name;
+                $rdata['age'] = date('Y') - date('Y', strtotime($data->user->DOB)) ;
+                $rdata['party'] = $data->party->acronym;
+                return response()->json(['candidate' => $rdata], 200);
+                break;
+
             default:
                 return response()->json(['message' => 'Data Not Found']);
                 break;

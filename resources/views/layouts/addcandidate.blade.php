@@ -28,9 +28,7 @@
                 </select>
 
                 <select class="custom-select col-md-3 mt-2" name="search_consti" id="search_consti">
-                    <option value="1">Abia North</option>
-                    <option value="2">Abia East</option>
-                    <option value="3">Abia West</option>
+
                 </select>
 
                 <div class="btn btn-dark form-control col-md-2 mt-2" id='candidateSearch'>Search</div>
@@ -140,6 +138,46 @@
 @endsection
 
 @section('link')"modal-save-candidate"@endsection
+
+
+@extends('includes.viewmodal')
+
+@section('viewmodalid')
+    candi-view-modal
+@endsection
+
+@section('viewmodalbody')
+    <div class="form-row">
+        <div class="col-md-6 mb-2">
+            <small><label for="voffice">Office</label></small>
+            <input class="form-control" id="voffice" disabled>
+        </div>
+
+        <div class="col-md-6 mb-2">
+            <small><label for="vcandidate">Candidate Name</label></small>
+            <input class="form-control" id="vcandidate" disabled>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4 mb-2">
+            <small><label for="vparty">Party</label></small>
+            <input class="form-control" id="vparty" disabled>
+        </div>
+
+        <div class="col-md-4 mb-2">
+            <small><label for="vgender">Gender</label></small>
+            <input class="form-control" id="vgender" disabled>
+        </div>
+
+        <div class="col-md-4 mb-2">
+            <small><label for="vage">Age</label></small>
+            <input class="form-control" id="vage" disabled>
+        </div>
+    </div>
+
+@endsection
 
 
 {{-- Delete modal --}}

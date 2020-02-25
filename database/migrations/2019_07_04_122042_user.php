@@ -23,13 +23,18 @@ class User extends Migration
             $table->string('gender');
             $table->date('DOB');
             $table->string('address', 200);
-            $table->integer('lga_id');
-            $table->integer('state_id');
+            $table->integer('lga_id')->unsigned();
+            $table->integer('state_id')->unsigned();
             $table->string('email', 150)->nullable();
             $table->string('password');
             $table->boolean('isvoted')->default(false);
             $table->timestamps();
             $table->rememberToken();
+        });
+
+        Schema::table('users', function($table) {
+            $table->foreign('lga_id')->references('id')->on('lgas')->onDelete('restrict');
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('restrict');
         });
     }
 

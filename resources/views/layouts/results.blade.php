@@ -58,8 +58,9 @@
 
 <script>
     $(function () {
-            $('.picker').selectpicker();
-        });
+        $('.picker').selectpicker();
+    });
+
     //initial all invisible controls to hidden state
     $('#result_consti').hide();
     $('#result_state').hide();

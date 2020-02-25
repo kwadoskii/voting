@@ -10,9 +10,9 @@
             <div class="modal-body">
                 <p class="text-center blk">Want to vote for <span id="mpartyacr"></span>?</p>
             </div>
-            <div class="modal-footer mt-1">
+            <div class="modal-footer mt-2">
                 <button type="button" class="btn btn-success" id=@yield('confirmVotemodalid')>Yes</button>
-                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger" style="float: right;">No</button>
             </div>
         </div>
     </div>

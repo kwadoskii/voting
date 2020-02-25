@@ -22,8 +22,14 @@ class DeleteController extends Controller
 
         switch ($identifier) {
             case 'party':
-                $party = Party::where('id', $id)->first();
-                $party->delete();
+
+                try {
+                    $party = Party::where('id', $id)->first();
+                    $party->delete();
+                } catch (\Throwable $th) {
+                    return response()->json(['message' => 'ERR: '.'Cannot delete party with valid candidates'], 202);
+                }
+
                 break;
 
             case 'admin':
@@ -33,23 +39,40 @@ class DeleteController extends Controller
                     $admin->delete();
                 }
                 else{
-                    return response()->json(['message' => 'Can not delete your own details.'], 200);
+                    return response()->json(['message' => 'Can not delete your own details.'], 202);
                 }
                 break;
 
             case 'office':
-                $office = Office::where('id', $id)->first();
-                $office->delete();
+
+                try {
+                    $office = Office::where('id', $id)->first();
+                    $office->delete();
+                } catch (\Throwable $th) {
+                    return response()->json(['message' => 'ERR: '.'Cannot delete office with registered candidates'], 202);
+                }
+
                 break;
 
             case 'state':
-                $state = State::where('id', $id)->first();
-                $state->delete();
+                try {
+                    $state = State::where('id', $id)->first();
+                    $state->delete();
+                } catch (\Throwable $th) {
+                    return response()->json(['message' => 'ERR: '.'Cannot delete state with LGAs and Constituencies'], 202);
+                }
+
                 break;
 
             case 'lga':
-                $lga = Lga::where('id', $id)->first();
-                $lga->delete();
+
+                try {
+                    $lga = Lga::where('id', $id)->first();
+                    $lga->delete();
+                } catch (\Throwable $th) {
+                    return response()->json(['message' => 'ERR: '.'Cannot delete LGA with registered voters'], 202);
+                }
+
                 break;
 
             case 'candidate':
@@ -58,28 +81,38 @@ class DeleteController extends Controller
                 break;
 
             case 'voter':
-                $voter = User::where('id', $id)->first();
-                $voter->delete();
+                try {
+                    $voter = User::where('id', $id)->first();
+                    $voter->delete();
+                } catch (\Throwable $th) {
+                    return response()->json(['message' => 'ERR: '.'Cannot delete Voter that is a valid candidate'], 202);
+                }
+
                 break;
 
             case 'constituency':
-                $lgas = Lga::where('constituency_id', $id)->get();
+                // $lgas = Lga::where('constituency_id', $id)->get();
 
-                foreach($lgas as $lga)
-                {
-                    $lga->constituency_id = null;
-                    $lga->update();
+                // foreach($lgas as $lga)
+                // {
+                //     $lga->constituency_id = null;
+                //     $lga->update();
+                // }
+
+                try {
+                    $constituency = Constituency::where('id', $id)->first();
+                    $constituency->delete();
+                } catch (\Throwable $th) {
+                    return response()->json(['message' => 'ERR: '.'Cannot delete Constituency with LGAs'], 202);
                 }
 
-                $constituency = Constituency::where('id', $id)->first();
-                $constituency->delete();
                 break;
 
             default:
-                return response()->json(['message' => 'Error - Identifier Error'], 201);
+                return response()->json(['message' => 'Error - Identifier Error'], 202);
                 break;
         }
 
-        return response()->json(['message' => 'Successfully Deleted!'], 200);
+        return response()->json(['message' => 'Successfully Deleted!'], 201);
     }
 }

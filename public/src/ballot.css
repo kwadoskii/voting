@@ -176,3 +176,27 @@ ul ul a {
     font-size: 1.05em !important;
     color: black !important;
 }
+
+
+/* for modal */
+.modal-content {
+    border-radius: 0.95rem !important;
+}
+
+.modal-header, .modal-footer {
+    background-color: rgba(0, 0, 0, .03);
+}
+
+.modal-body{
+    padding: 0.4rem 2rem !important;
+}
+
+.modal-footer{
+    display: block !important;
+    padding: 1rem 2rem !important;
+}
+
+.modal-footer .btn{
+    border-radius: 0.65rem;
+    padding: .375rem 2.45rem;
+}

@@ -16,8 +16,12 @@ class Constituency extends Migration
         Schema::create('constituencies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('state_id');
+            $table->integer('state_id')->unsigned();
             $table->timestamps();
+        });
+
+        Schema::table('constituencies', function ($table) {
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('restrict');
         });
     }
 

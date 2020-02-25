@@ -13,7 +13,7 @@
                 </form>
             </div>
             <div class="modal-footer mt-4">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal" style="float: right;">Close</button>
             </div>
         </div>
     </div>
